@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Medicine</string>
+    <string name="app_name">老友网</string>
 
     <!-- Tab联系人 -->
     <string name="contact_default">选择联系人</string>
