@@ -2,15 +2,15 @@ package org.outing.medicine.fun_tools;
 
 public class CalculatorText {
 	public static final String OFF = "X";
-	public static final String BACKSPACE = "б√";
+	public static final String BACKSPACE = "←";
 	public static final String AC = "C";
-	public static final String PLUS = "гл";
-	public static final String MINUS = "гн";
-	public static final String MULTIPLY = "б┴";
-	public static final String DIV = "б┬";
+	public static final String PLUS = "＋";
+	public static final String MINUS = "－";
+	public static final String MULTIPLY = "×";
+	public static final String DIV = "÷";
 	public static final String DECIMAL_SEP = ".";
-	public static final String SIGN = "б└";
-	public static final String CALCULATE = "г╜";
+	public static final String SIGN = "±";
+	public static final String CALCULATE = "＝";
 	// public static final String CE ="CE";
 	// public static final String ZERO ="0";
 	// public static final String ONE ="1";
