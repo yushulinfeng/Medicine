@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Medicine</string>
+
+    <!-- Tab联系人 -->
+    <string name="contact_default">选择联系人</string>
+    <!-- 可下拉刷新列表 -->
+    <string name="xlistview_header_hint_normal">下拉刷新</string>
+    <string name="xlistview_header_hint_ready">松开刷新数据</string>
+    <string name="xlistview_header_hint_loading">正在加载···</string>
+    <string name="xlistview_header_last_time">上次更新时间：</string>
+    <string name="xlistview_footer_hint_normal">查看更多</string>
+    <string name="xlistview_footer_hint_ready">松开载入更多</string>
+    <!-- 登录界面 -->
+    <string name="user_name_tip">账户：</string>
+    <string name="password_tip_login">密码：</string>
+    <string name="user_name_hint">邮箱/手机号</string>
+    <string name="password_hint">请输入密码</string>
+    <string name="login_bt_text">登录</string>
+    <string name="to_register_bt_text">注册</string>
+    <string name="forget_password_text">忘记密码？</string>
+    <string name="skip_login_bt">我想先看看>>></string>
+    <!-- 注册界面 -->
+    <string name="gain_code">获取验证码</string>
+    <string name="code_hint">验证码</string>
+    <string name="password_tip_register">密　　码:</string>
+    <string name="password_hint_register">请输入您的密码</string>
+    <string name="password_confirm">确认密码:</string>
+    <string name="password_confirm_hint">请确认您的密码</string>
+    <string name="register_bt_text">立即注册</string>
+    <string name="back_to_login_text">返回登录>>></string>
+    <!-- 注册成功界面 -->
+    <string name="register_succeed_tip1">恭喜您，注册成功！</string>
+    <string name="register_succeed_tip2">您是否要使用新注册的账号立即登录?</string>
+    <string name="login_now_text">立即登录 >>></string>
+    <string name="login_otherway_text">使用其他方式登录</string>
+    <!-- 找回密码界面 -->
+    <string name="find_username_hint">请输入邮箱号或手机号</string>
+    <string name="next">下一步</string>
+    <string name="find_password1_text">请输入新密码</string>
+    <string name="find_password2_text">请再输入一次</string>
+    <string name="find_confirm">确定</string>
+
+</resources>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/con_contact_load"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="加载中……\n请稍等10秒"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+        <ListView
+            android:id="@+id/con_contact_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:divider="@color/light_gray"
+            android:dividerHeight="2dp"
+            android:scrollbars="vertical" />
+    </FrameLayout>
+
+</LinearLayout>

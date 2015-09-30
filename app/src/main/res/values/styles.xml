@@ -1,0 +1,36 @@
+<resources>
+
+    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+
+        <!-- 无标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 使用原版风格的Button -->
+        <item name="android:buttonStyle">@android:style/Widget.Button</item>
+        <!-- 使用默认的文本框光标 -->
+        <item name="android:textCursorDrawable">@null</item>
+        <!-- 使用原版风格的EditText -->
+        <item name="android:editTextBackground">@android:drawable/edit_text</item>
+        <!-- 使用淡入淡出动画 -->
+        <item name="android:windowAnimationStyle">@style/fadeActivityTheme</item>
+    </style>
+    <!-- Light theme. -->
+    <style name="LightTheme" parent="AppBaseTheme">
+
+        <!-- 无标题栏 -->
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <!-- Dark theme. -->
+    <style name="DarkTheme" parent="android:Theme.NoTitleBar"></style>
+
+    <!-- 淡入淡出动画 -->
+    <style name="fadeActivityTheme" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
+    </style>
+
+</resources>

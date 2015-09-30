@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <array name="work_type">
+        <item>类型1</item>
+        <item>类型2</item>
+    </array>
+
+</resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tab_center_bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal"
+        android:paddingTop="4dp" >
+
+        <Button
+            android:id="@+id/index_remind"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="用药\n提醒"
+            android:textSize="@dimen/main_btn_text_size" />
+
+        <Button
+            android:id="@+id/index_illness"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="慢病\n管理"
+            android:textSize="@dimen/main_btn_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/index_query"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="用药\n查询"
+            android:textSize="@dimen/main_btn_text_size" />
+
+        <Button
+            android:id="@+id/index_knowledge"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="健康\n知识"
+            android:textSize="@dimen/main_btn_text_size" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/index_tools"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="常用\n工具"
+            android:textSize="@dimen/main_btn_text_size" />
+
+        <Button
+            android:id="@+id/index_my"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="我的\n设置"
+            android:textSize="@dimen/main_btn_text_size" />
+    </LinearLayout>
+
+</LinearLayout>

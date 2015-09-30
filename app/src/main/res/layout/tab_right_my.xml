@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/tab_center_bg" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/contact_rl_contact1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/contact_margin"
+                android:layout_weight="1"
+                android:background="@color/light_gray" >
+
+                <ImageView
+                    android:id="@+id/contact_iv_contact1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_contact1"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/headicon_default" />
+
+                <TextView
+                    android:id="@+id/contact_tv_contact1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/contact_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/contact_text_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contact_rl_contact2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/contact_margin"
+                android:layout_weight="1"
+                android:background="@color/light_gray" >
+
+                <ImageView
+                    android:id="@+id/contact_iv_contact2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_contact2"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/headicon_default" />
+
+                <TextView
+                    android:id="@+id/contact_tv_contact2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/contact_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/contact_text_size" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/contact_rl_contact3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/contact_margin"
+                android:layout_weight="1"
+                android:background="@color/light_gray" >
+
+                <ImageView
+                    android:id="@+id/contact_iv_contact3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_contact3"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/headicon_default" />
+
+                <TextView
+                    android:id="@+id/contact_tv_contact3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/contact_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/contact_text_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contact_rl_contact4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/contact_margin"
+                android:layout_weight="1"
+                android:background="@color/light_gray" >
+
+                <ImageView
+                    android:id="@+id/contact_iv_contact4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_contact4"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/headicon_default" />
+
+                <TextView
+                    android:id="@+id/contact_tv_contact4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/contact_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/contact_text_size" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal" >
+
+            <RelativeLayout
+                android:id="@+id/contact_rl_contact5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/contact_margin"
+                android:layout_weight="1"
+                android:background="@color/light_gray" >
+
+                <ImageView
+                    android:id="@+id/contact_iv_contact5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_contact5"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/headicon_default" />
+
+                <TextView
+                    android:id="@+id/contact_tv_contact5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/contact_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/contact_text_size" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/contact_rl_contact6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="@dimen/contact_margin"
+                android:layout_weight="1"
+                android:background="@color/light_gray" >
+
+                <ImageView
+                    android:id="@+id/contact_iv_contact6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_contact6"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/app_name"
+                    android:scaleType="fitCenter"
+                    android:src="@mipmap/headicon_default" />
+
+                <TextView
+                    android:id="@+id/contact_tv_contact6"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center"
+                    android:text="@string/contact_default"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/contact_text_size" />
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:paddingTop="4dp" >
+
+            <Button
+                android:id="@+id/contact_btn_contact1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_contact_bg"
+                android:paddingBottom="@dimen/contact_btn_bottom_padding"
+                android:text=""
+                android:textSize="@dimen/contact_btn_text_size" />
+
+            <Button
+                android:id="@+id/contact_btn_contact2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_contact_bg"
+                android:paddingBottom="@dimen/contact_btn_bottom_padding"
+                android:text=""
+                android:textSize="@dimen/contact_btn_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/contact_btn_contact3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_contact_bg"
+                android:paddingBottom="@dimen/contact_btn_bottom_padding"
+                android:text=""
+                android:textSize="@dimen/contact_btn_text_size" />
+
+            <Button
+                android:id="@+id/contact_btn_contact4"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_contact_bg"
+                android:paddingBottom="@dimen/contact_btn_bottom_padding"
+                android:text=""
+                android:textSize="@dimen/contact_btn_text_size" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/contact_btn_contact5"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_contact_bg"
+                android:paddingBottom="@dimen/contact_btn_bottom_padding"
+                android:text=""
+                android:textSize="@dimen/contact_btn_text_size" />
+
+            <Button
+                android:id="@+id/contact_btn_contact6"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/btn_contact_bg"
+                android:paddingBottom="@dimen/contact_btn_bottom_padding"
+                android:text=""
+                android:textSize="@dimen/contact_btn_text_size" />
+        </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>

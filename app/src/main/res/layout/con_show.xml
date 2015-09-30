@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/top" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+
+        <!-- 此处图片可能不满，考虑给父组件加背景之类的 -->
+
+        <ImageView
+            android:id="@+id/con_show_iv_head"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/con_show_tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="25dp"
+            android:background="#4FFF"
+            android:gravity="center"
+            android:text="测试姓名"
+            android:textColor="@color/black"
+            android:textSize="40sp" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/con_show_btn_call"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="打电话"
+        android:textSize="50sp" />
+
+    <Button
+        android:id="@+id/con_show_btn_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发短信"
+        android:textSize="50sp" />
+
+</LinearLayout>
