@@ -3,8 +3,11 @@ package org.outing.medicine;
 import org.outing.medicine.contact.ContactAdd;
 import org.outing.medicine.contact.ContactShow;
 import org.outing.medicine.contact.ContactTool;
+import org.outing.medicine.tools.ToDealBitmap;
+import org.outing.medicine.tools.file.FileTool;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -54,6 +57,28 @@ public class MainTabContact extends Fragment implements OnClickListener {
 			names[i] = (TextView) view.findViewById(name_ids[i]);
 			btns[i].setOnClickListener(this);
 			registerForContextMenu(btns[i]);
+
+			//设置姓名
+			try {
+				String name=ContactTool.getAnContact(getActivity(), i).getName();
+				if (name.equals("")){
+					names[i].setText("添加联系人");
+				}else {
+					names[i].setText(name);
+				}
+
+			} catch (Exception e) {
+			}
+			//设置图片
+			String imagePath=ContactTool.getAnContact(getActivity(), i).getIconPath();
+			Bitmap bitmap= null;
+			bitmap=ToDealBitmap.getFromFile(imagePath);
+			if (bitmap==null){
+				heads[i].setImageResource(R.mipmap.headicon_default);
+			}else {
+				heads[i].setImageBitmap(bitmap);
+			}
+
 		}
 	}
 

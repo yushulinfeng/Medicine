@@ -2,7 +2,11 @@ package org.outing.medicine.tools;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -107,6 +111,44 @@ public class ToDealBitmap {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * 将bitmap从文件中读取
+	 *
+	 *
+	 * @param filepath
+	 *            要写入的文件绝对路径
+	 * @return bitmap
+	 */
+	public static Bitmap getFromFile(String filepath) {
+//
+//		Bitmap bitmap=null;
+//		try {
+//			FileInputStream in=new FileInputStream(filepath);
+//			bitmap=in.available();
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//
+//		return bitmap;
+		Bitmap bitmap = null;
+		try
+		{
+			File file = new File(filepath);
+			if(file.exists())
+			{
+				bitmap = BitmapFactory.decodeFile(filepath);
+			}
+		} catch (Exception e)
+		{
+			// TODO: handle exception
+		}
+
+
+		return bitmap;
 	}
 
 	/**
