@@ -6,6 +6,8 @@ import org.outing.medicine.contact.ContactTool;
 import org.outing.medicine.tools.ToDealBitmap;
 import org.outing.medicine.tools.file.FileTool;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -23,6 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainTabContact extends Fragment implements OnClickListener {
+	public Context context;
+	public Activity activity;
 	public static final int CODE_ADD_START = 0;
 	public static final int CODE_ADD_SURE = 1;
 	private final int[] btn_ids = { R.id.contact_btn_contact1,
@@ -44,9 +48,10 @@ public class MainTabContact extends Fragment implements OnClickListener {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
+		context=getActivity();
+		activity=getActivity();
 		View view = inflater.inflate(R.layout.tab_right_my, container, false);
 		initViews(view);
-
 		return view;
 	}
 

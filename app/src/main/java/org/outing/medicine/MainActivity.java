@@ -1,5 +1,6 @@
 package org.outing.medicine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -35,17 +36,24 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
 	private int current_index;
 	// 屏幕的宽度
 	private int screen_width;
-
+	//设置activity,为了以后在其他activity中关闭
+	public static MainActivity instance = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
+		instance=this;
 		initView();
 		initTabLine();
 		initListener();
+		//设置从ContantAdd直接跳转到联系人
+		Intent intent = getIntent();
+		int page = intent.getIntExtra("page",0);
+		viewpager.setCurrentItem(page);
 
 	}
+
 
 	// 根据屏幕的宽度，初始化引导线的宽度
 	private void initTabLine() {

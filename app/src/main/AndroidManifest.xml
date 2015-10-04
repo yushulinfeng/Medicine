@@ -59,6 +59,7 @@
             android:label="@string/app_name"></activity>
         <activity
             android:name=".contact.ContactAdd"
+            android:launchMode="singleInstance"
             android:label="@string/app_name"></activity>
         <activity
             android:name=".contact.ContactSelect"

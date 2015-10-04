@@ -19,10 +19,13 @@ public class ContactShow extends TActivity {
 	private Button btn_call, btn_message;
 	private ImageView iv_head;
 	private TextView tv_name;
+	//设置activity,为了以后在其他activity中关闭
+	public static ContactShow instance = null;
 
 	@Override
 	public void onCreate() {
 		setContentView(R.layout.con_show);
+		instance=this;
 		getMessage();
 		showBackButton();
 		showMenuButton();// 修改联系人按钮
@@ -70,6 +73,7 @@ public class ContactShow extends TActivity {
 				intent.setData(Uri.parse("smsto:" + phone));
 				intent.putExtra("sms_body", "");
 				startActivity(intent);
+				finish();
 			}
 		});
 	}

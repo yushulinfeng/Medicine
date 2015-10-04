@@ -1,6 +1,8 @@
 package org.outing.medicine.contact;
 
 import java.io.File;
+
+import org.outing.medicine.MainActivity;
 import org.outing.medicine.R;
 import org.outing.medicine.logic.AnContact;
 import org.outing.medicine.tools.TActivity;
@@ -126,6 +128,12 @@ public class ContactAdd extends TActivity implements OnClickListener {
 			String phone = et_phone.getText().toString();
 			ContactTool.saveAnContact(this, index, new AnContact(name, phone,
 					icon_path));
+			Intent intent = new Intent(ContactAdd.this,MainActivity.class);
+			intent.putExtra("page",1);
+			startActivity(intent);
+			//删除Mainactivity,ContactShow
+			MainActivity.instance.finish();
+			ContactShow.instance.finish();
 			finish();
 			break;
 		case R.id.con_add_btn_cancel:
