@@ -14,6 +14,7 @@ public class ContactTool {
 				CONTACT_SAVE_PATH + location, Activity.MODE_PRIVATE).edit();
 		prefs.putString("name", contact.getName());
 		prefs.putString("phone", contact.getPhone());
+		prefs.putString("relative",contact.getRelative());
 		prefs.putString("icon_path", contact.getIconPath());
 		prefs.commit();
 	}
@@ -24,6 +25,7 @@ public class ContactTool {
 		AnContact contact = new AnContact();
 		contact.setName(mPref.getString("name", ""));
 		contact.setPhone(mPref.getString("phone", ""));
+		contact.setRelative(mPref.getString("relative",""));
 		contact.setIconPath(mPref.getString("icon_path", ""));
 		return contact;
 	}

@@ -29,7 +29,7 @@ public class ContactAdd extends TActivity implements OnClickListener {
 	private boolean is_add = true;
 	private String icon_path = "";
 	private ImageView iv_head;
-	private EditText et_name, et_phone;
+	private EditText et_name, et_phone,et_relative;
 	private Button btn_contact, btn_camera, btn_album, btn_sure, btn_cancel;
 	private String path = "Contact";
 
@@ -68,6 +68,7 @@ public class ContactAdd extends TActivity implements OnClickListener {
 		iv_head = (ImageView) findViewById(R.id.con_add_iv_head);
 		et_name = (EditText) findViewById(R.id.con_add_et_name);
 		et_phone = (EditText) findViewById(R.id.con_add_et_number);
+		et_relative=(EditText)findViewById(R.id.con_add_et_relative);
 		btn_contact = (Button) findViewById(R.id.con_add_btn_contact);
 		btn_camera = (Button) findViewById(R.id.con_add_btn_camera);
 		btn_album = (Button) findViewById(R.id.con_add_btn_album);
@@ -126,7 +127,8 @@ public class ContactAdd extends TActivity implements OnClickListener {
 		case R.id.con_add_btn_sure:
 			String name = et_name.getText().toString();
 			String phone = et_phone.getText().toString();
-			ContactTool.saveAnContact(this, index, new AnContact(name, phone,
+			String relative=et_relative.getText().toString();
+			ContactTool.saveAnContact(this, index, new AnContact(name, phone,relative,
 					icon_path));
 			Intent intent = new Intent(ContactAdd.this,MainActivity.class);
 			intent.putExtra("page",1);

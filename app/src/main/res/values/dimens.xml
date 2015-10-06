@@ -1,7 +1,8 @@
 <resources>
 
     <dimen name="main_btn_text_size">32sp</dimen>
-    <dimen name="contact_text_size">20sp</dimen>
+    <dimen name="contact_text_size">27sp</dimen>
+    <dimen name="contact_relative_text_size">15sp</dimen>
     <dimen name="contact_margin">5dp</dimen>
     <dimen name="contact_btn_text_size">80sp</dimen>
     <dimen name="contact_btn_bottom_padding">30dp</dimen>

@@ -41,9 +41,14 @@ public class MainTabContact extends Fragment implements OnClickListener {
 			R.id.contact_tv_contact2, R.id.contact_tv_contact3,
 			R.id.contact_tv_contact4, R.id.contact_tv_contact5,
 			R.id.contact_tv_contact6 };
+	private final int[] relative_ids={R.id.contact_tv_relative1,
+			R.id.contact_tv_relative2,R.id.contact_tv_relative3,
+			R.id.contact_tv_relative4,R.id.contact_tv_relative5,
+			R.id.contact_tv_relative6};
 	private Button[] btns = new Button[6];
 	private ImageView[] heads = new ImageView[6];
 	private TextView[] names = new TextView[6];
+	private TextView[] relatives=new TextView[6];
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,6 +65,7 @@ public class MainTabContact extends Fragment implements OnClickListener {
 			btns[i] = (Button) view.findViewById(btn_ids[i]);
 			heads[i] = (ImageView) view.findViewById(head_ids[i]);
 			names[i] = (TextView) view.findViewById(name_ids[i]);
+			relatives[i]=(TextView)view.findViewById(relative_ids[i]);
 			btns[i].setOnClickListener(this);
 			registerForContextMenu(btns[i]);
 
@@ -74,14 +80,27 @@ public class MainTabContact extends Fragment implements OnClickListener {
 
 			} catch (Exception e) {
 			}
+			//设置联系人关系
+			try {
+				String relative=ContactTool.getAnContact(getActivity(), i).getRelative();
+				if (relative.equals("")){
+					relatives[i].setText("");
+				}else {
+					relatives[i].setText(relative);
+				}
+
+			} catch (Exception e) {
+			}
 			//设置图片
-			String imagePath=ContactTool.getAnContact(getActivity(), i).getIconPath();
-			Bitmap bitmap= null;
-			bitmap=ToDealBitmap.getFromFile(imagePath);
-			if (bitmap==null){
-				heads[i].setImageResource(R.mipmap.headicon_default);
-			}else {
-				heads[i].setImageBitmap(bitmap);
+			try {
+				String imagePath=ContactTool.getAnContact(getActivity(), i).getIconPath();
+				Bitmap bitmap= null;
+				bitmap=ToDealBitmap.getFromFile(imagePath);
+				if (bitmap==null){
+					heads[i].setImageResource(R.mipmap.headicon_default);
+				}else {
+					heads[i].setImageBitmap(bitmap);
+				}}catch (Exception e) {
 			}
 
 		}

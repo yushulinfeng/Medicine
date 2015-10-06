@@ -5,6 +5,7 @@
 
     <!-- Tab联系人 -->
     <string name="contact_default">添加联系人</string>
+    <string name="contact_relative"></string>
     <!-- 可下拉刷新列表 -->
     <string name="xlistview_header_hint_normal">下拉刷新</string>
     <string name="xlistview_header_hint_ready">松开刷新数据</string>
