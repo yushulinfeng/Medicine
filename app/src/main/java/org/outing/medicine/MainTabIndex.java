@@ -1,6 +1,7 @@
 package org.outing.medicine;
 
 import org.outing.medicine.fun_tools.ToolsMain;
+import org.outing.medicine.illness_manage.IllnessManageActivity;
 import org.outing.medicine.personal_center.PersonalCenterActivity;
 
 import android.content.Intent;
@@ -43,7 +44,7 @@ public class MainTabIndex extends Fragment implements OnClickListener {
 
 			break;
 		case R.id.index_illness:
-
+			intent = new Intent(getActivity(), IllnessManageActivity.class);
 			break;
 		case R.id.index_query:
 

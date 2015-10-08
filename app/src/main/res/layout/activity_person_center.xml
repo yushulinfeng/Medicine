@@ -291,8 +291,11 @@
                 />
 
             <ToggleButton
+                android:id="@+id/location_button"
                 android:layout_marginLeft="150dp"
                 android:gravity="center"
+                android:textOn="已开启"
+                android:textOff="开启"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_width="60dp"
