@@ -17,6 +17,7 @@ public class IllnessManageActivity extends Activity {
         setContentView(R.layout.activity_illness_manage);
 
         init();
+
     }
 
     private void init() {
