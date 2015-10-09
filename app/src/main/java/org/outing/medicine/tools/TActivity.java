@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public abstract class TActivity extends Activity {
 
@@ -40,6 +41,11 @@ public abstract class TActivity extends Activity {
 				showContextMenu();
 			}
 		});
+	}
+
+	// ////////允许子类调用的方法-辅助
+	public void showToast(String text) {
+		Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
 	}
 
 	// 子类只需要实现即可的方法/////////////////////////////////////////////////////////////

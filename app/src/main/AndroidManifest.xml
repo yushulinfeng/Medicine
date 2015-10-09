@@ -69,26 +69,61 @@
         <activity
             android:name=".contact.ContactShow"
             android:label="@string/app_name"></activity>
-        <!-- fun_tools -->
-        <activity
-            android:name=".fun_tools.ToolsMain"
-            android:label="@string/app_name"></activity>
-        <activity
-            android:name=".fun_tools.Calculator"
-            android:label="@string/app_name"></activity>
-        <activity
-            android:name=".fun_tools.Flashlight"
-            android:label="@string/app_name"></activity>
         <activity
             android:name=".personal_center.PersonalCenterActivity"
             android:label="@string/app_name"></activity>
         <activity
             android:name=".illness_manage.IllnessManageActivity"
             android:label="@string/app_name"></activity>
+        <!-- fun_tools -->
+        <activity
+            android:name=".fun_tools.ToolsMain"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".fun_tools.Calculator"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".fun_tools.Flashlight"
+            android:label="@string/app_name" >
+        </activity>
         <activity
             android:name=".fun_tools.Magnifiter"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".fun_tools.Award"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+        </activity>
+        <!-- fun_drug -->
+        <activity
+            android:name=".fun_drug.DrugMain"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".fun_drug.DrugCollect"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".fun_drug.DrugItem"
+            android:label="@string/app_name" >
+        </activity>
+        <!-- fun_know -->
+        <activity
+            android:name=".fun_know.KnowMain"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".fun_know.KnowList"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".fun_know.KnowSublist"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

@@ -17,6 +17,12 @@
             android:orientation="vertical" >
 
             <Button
+                android:id="@+id/fun_tools_award"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="抽奖啰"
+                android:textSize="@dimen/tools_main_btn_size" />
+            <Button
                 android:id="@+id/fun_tools_calculator"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"

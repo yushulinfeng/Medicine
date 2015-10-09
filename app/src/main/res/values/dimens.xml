@@ -8,5 +8,5 @@
     <dimen name="contact_btn_bottom_padding">30dp</dimen>
     <dimen name="tools_calculator_text_size">50sp</dimen>
     <dimen name="tools_main_btn_size">32dp</dimen>
-
+    <dimen name="know_main_btn_size">32dp</dimen>
 </resources>
