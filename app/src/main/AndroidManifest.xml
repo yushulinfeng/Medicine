@@ -124,6 +124,10 @@
             android:name=".fun_know.KnowSublist"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".fun_know.KnowItem"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

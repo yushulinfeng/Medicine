@@ -1,18 +1,5 @@
 package org.outing.medicine.fun_drug;
 
-import java.io.File;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-import org.outing.medicine.R;
-import org.outing.medicine.tools.NetTActivity;
-
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -26,6 +13,19 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.outing.medicine.R;
+import org.outing.medicine.tools.NetTActivity;
+
+import java.io.File;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class DrugMain extends NetTActivity implements OnClickListener {
 	private static final String catalog_path = "drug/drug_index.xml";
@@ -87,7 +87,7 @@ public class DrugMain extends NetTActivity implements OnClickListener {
 
 		ArrayList<AnDrug> array = DrugTool.getHistory(this);
 		if (array.size() == 0)
-			show.setText("");// 历史记录为空，就不要显示了
+			show.setText("历史记录为空");// 历史记录为空，就不要显示了，还是显示比较人性化
 		is_history = true;
 
 		items = new ArrayList<Map<String, Object>>();
@@ -183,7 +183,7 @@ public class DrugMain extends NetTActivity implements OnClickListener {
 	/** 清空历史 */
 	private void clearHistory() {
 		DrugTool.clearHistory(this);
-		show.setText("");
+		show.setText("历史记录为空");
 		items.clear();
 		adapter.notifyDataSetChanged();
 		showToast("搜索历史已清空");

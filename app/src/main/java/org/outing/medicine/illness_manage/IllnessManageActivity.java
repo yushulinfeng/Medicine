@@ -16,7 +16,7 @@ public class IllnessManageActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_illness_manage);
 
-        init();
+//        init();
 
     }
 

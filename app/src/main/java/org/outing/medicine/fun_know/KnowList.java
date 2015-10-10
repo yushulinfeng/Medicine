@@ -1,10 +1,11 @@
 package org.outing.medicine.fun_know;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import android.content.Intent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -12,12 +13,11 @@ import org.dom4j.io.SAXReader;
 import org.outing.medicine.R;
 import org.outing.medicine.tools.TActivity;
 
-import android.content.Intent;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("unchecked")
 public class KnowList extends TActivity {
@@ -28,7 +28,7 @@ public class KnowList extends TActivity {
 	@Override
 	public void onCreate() {
 		setContentView(R.layout.fun_know_list);
-		 setTitle("知识");
+		 setTitle("健康知识");
 
 		initMessage();
 		initElement();
@@ -59,7 +59,6 @@ public class KnowList extends TActivity {
 				array.add(child.getName());
 			}
 		} catch (Exception e) {
-			 showToast("ERROR");
 		}
 	}
 
