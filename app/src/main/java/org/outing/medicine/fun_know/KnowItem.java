@@ -2,7 +2,6 @@ package org.outing.medicine.fun_know;
 
 import android.content.Intent;
 import android.widget.TextView;
-
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
