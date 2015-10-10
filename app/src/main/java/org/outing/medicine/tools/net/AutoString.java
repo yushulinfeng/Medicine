@@ -7,6 +7,7 @@ public class AutoString {
 
     private String result="";
 
+
     public AutoString(String name, String value) {
         result=result+name+"="+value;
     }
