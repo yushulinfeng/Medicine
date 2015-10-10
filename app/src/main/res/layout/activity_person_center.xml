@@ -34,7 +34,7 @@
 
             <EditText
                 android:id="@+id/edit_name"
-                android:text="某某"
+                android:hint=""
                 android:layout_marginLeft="30dp"
                 android:textColor="#000000"
                 android:background="@null"
