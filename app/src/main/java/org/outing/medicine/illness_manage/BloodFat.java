@@ -18,12 +18,12 @@ import java.util.ArrayList;
 /**
  * Created by apple on 15/10/10.
  */
-public class BloodSuger extends Activity {
+public class BloodFat extends Activity {
     private LineChart mLineChart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blood_suger);
+        setContentView(R.layout.activity_blood_pressure);
 
         init();
         //有关图表

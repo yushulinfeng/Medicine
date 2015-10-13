@@ -1,9 +1,9 @@
 package org.outing.medicine.tools;
 
-import org.outing.medicine.tools.connect.ConnectUser;
-
 import android.content.Context;
 import android.os.AsyncTask;
+
+import org.outing.medicine.tools.connect.ConnectUser;
 
 /**
  * 退出登录

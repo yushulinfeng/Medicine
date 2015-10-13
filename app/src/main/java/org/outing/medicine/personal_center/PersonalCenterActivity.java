@@ -1,13 +1,11 @@
 package org.outing.medicine.personal_center;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.util.Log;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -15,12 +13,25 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.outing.medicine.R;
 import org.outing.medicine.tools.TActivity;
-import org.outing.medicine.tools.net.AutoString;
-import org.outing.medicine.tools.net.NetThread;
+import org.outing.medicine.tools.connect.ConnectTool;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by apple on 15/10/4.
@@ -36,12 +47,14 @@ public class PersonalCenterActivity extends TActivity {
     private double longitude;
     private Handler hanSet;
     private String seturl="http://121.42.27.129/index.php/set_profile";
+    private String geturl="http://121.42.27.129/index.php/get_profile";
 
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_person_center);
         showBackButton();
         showMenuButton();
+        showPersonalInfo();
         //设置完成的图片
         ((ImageButton) findViewById(R.id.top_menu))
                 .setBackgroundResource(R.drawable.yes);
@@ -89,25 +102,132 @@ public class PersonalCenterActivity extends TActivity {
 
     }
 
+    private void showPersonalInfo() {
+        //volley试验
+        RequestQueue mQueue = Volley.newRequestQueue(PersonalCenterActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,geturl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("TAG", response);
+                        //获取JSON对象
+                        JSONObject temp = null;
+                        try {
+                            temp = new JSONObject(response);
+                            //得到数据
+                            String name_in = temp.getString("name");
+                            String sex_in=temp.getString("sex");
+                            String age_in=temp.getString("age");
+                            String ill_in=temp.getString("common_ill");
+                            String contact_in=temp.getString("emer_contact");
+                            String address_in=temp.getString("address");
+                            Log.e("TAG", "name_in    "+name_in);
+                            Log.e("TAG", "sex_in    "+sex_in);
+                            if (name_in!=null){
+                                editName.setText(name_in);
+                            }
+                            if (sex_in!=null){
+                                editSex.setText(sex_in);
+                            }
+                            if (age_in!=null){
+                                editAge.setText(age_in);
+                            }
+                            if (ill_in!=null){
+                                editIll.setText(ill_in);
+                            }
+                            if (contact_in!=null){
+                                editContact.setText(contact_in);
+                            }
+                            if (address_in!=null){
+                                editLocation.setText(address_in
+                                );
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", error.getMessage(), error);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("cookie", ConnectTool.getCookie(PersonalCenterActivity.this));
+                Log.e("TAG", " ConnectTool.getCookie(PersonalCenterActivity.this)    " +  ConnectTool.getCookie(PersonalCenterActivity.this));
+                // MyLog.d(TAG, "headers=" + headers);
+                return headers;
+            }
+        };
+        mQueue.add(stringRequest);
+    }
+
     @Override
     public void showContextMenu() {
+        showToast("按下按钮");
         name=editName.getText().toString();
         sex= editSex.getText().toString();
         age= editAge.getText().toString();
         ill=editIll.getText().toString();
         location=editLocation.getText().toString();
         contact=editContact.getText().toString();
-        AutoString autoString=new AutoString("name",name);
-        autoString.addToResult("age",age);
-        autoString.addToResult("sex",sex);
-        autoString.addToResult("common_ill",ill);
-        autoString.addToResult("emer_contact",contact);
-        autoString.addToResult("position",location);
-        String params=autoString.getResult();
-        NetThread nt=new NetThread(hanSet,seturl,params);
-        nt.start();
+
+//volley试验
+        RequestQueue mQueue = Volley.newRequestQueue(PersonalCenterActivity.this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,geturl,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("TAG", response);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("TAG", error.getMessage(), error);
+            }
+        }) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("cookie", ConnectTool.getCookie(PersonalCenterActivity.this));
+                Log.e("TAG", " ConnectTool.getCookie(PersonalCenterActivity.this)    " +  ConnectTool.getCookie(PersonalCenterActivity.this));
+                // MyLog.d(TAG, "headers=" + headers);
+                return headers;
+            }
+
+                        @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("name", name);
+                params.put("age",age);
+                params.put("sex",sex);
+                params.put("common_ill",ill);
+                params.put("emer_contact",contact);
+                params.put("position",location);
+                return params;
+            }
+        };
+        mQueue.add(stringRequest);
+//            @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("name", name);
+//                params.put("age",age);
+//                params.put("sex",sex);
+//                params.put("common_ill",ill);
+//                params.put("emer_contact",contact);
+//                params.put("position",location);
+//                return params;
+//            }
+
+
 
     }
+
 
     private void init() {
         editName=(EditText)findViewById(R.id.edit_name);
@@ -117,22 +237,6 @@ public class PersonalCenterActivity extends TActivity {
         editLocation= (EditText) findViewById(R.id.edit_location);
         editContact=(EditText)findViewById(R.id.edit_contact);
         locationButton=(ToggleButton)findViewById(R.id.location_button);
-        hanSet = new Handler(){
-            @Override
-            public void handleMessage(Message msg) {
-                String Jsmess = (String) msg.obj;
-                super.handleMessage(msg);
-                if(Jsmess.equals("0")){
-                    showToast("上传成功");
-                }else if (Jsmess.equals("-1")){
-                    showToast("表单数据错误（未获取到phone数据）");
-                }else if (Jsmess.equals("-2")){
-                    showToast("找不到此用户");
-                }
-            }
-
-
-        };
     }
 
 

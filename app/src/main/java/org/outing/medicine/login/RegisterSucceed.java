@@ -6,6 +6,7 @@ import org.outing.medicine.logic.AnStatus;
 import org.outing.medicine.tools.NetActivity;
 import org.outing.medicine.tools.ToDealUser;
 import org.outing.medicine.tools.connect.ConnectUser;
+
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;

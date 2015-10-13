@@ -39,10 +39,10 @@ public class IllnessManageActivity extends Activity implements View.OnClickListe
                 intent = new Intent(this, BloodSuger.class);
                 break;
             case R.id.index_blood_pressure:
-                intent = new Intent(this, ToolsMain.class);
+                intent = new Intent(this, BloodPressure.class);
                 break;
             case R.id.index_blood_fat:
-                intent = new Intent(this, ToolsMain.class);
+                intent = new Intent(this, BloodFat.class);
                 break;
             case R.id.index_search:
                 Toast.makeText(this, "开发中...", Toast.LENGTH_SHORT).show();

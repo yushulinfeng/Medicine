@@ -73,12 +73,19 @@
             android:name=".personal_center.PersonalCenterActivity"
 
             android:label="@string/app_name">
+
         </activity>
         <activity
             android:name=".illness_manage.IllnessManageActivity"
             android:label="@string/app_name"></activity>
         <activity
             android:name=".illness_manage.BloodSuger"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".illness_manage.BloodPressure"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".illness_manage.BloodFat"
             android:label="@string/app_name"></activity>
         <!-- fun_tools -->
         <activity
