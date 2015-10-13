@@ -1,10 +1,4 @@
-package org.outing.medicine;
-
-import org.outing.medicine.contact.ContactAdd;
-import org.outing.medicine.contact.ContactShow;
-import org.outing.medicine.contact.ContactTool;
-import org.outing.medicine.tools.ToDealBitmap;
-import org.outing.medicine.tools.file.FileTool;
+package org.outing.medicine.main_main;
 
 import android.app.Activity;
 import android.content.Context;
@@ -23,6 +17,12 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import org.outing.medicine.R;
+import org.outing.medicine.contact.ContactAdd;
+import org.outing.medicine.contact.ContactShow;
+import org.outing.medicine.contact.ContactTool;
+import org.outing.medicine.tools.ToDealBitmap;
 
 public class MainTabContact extends Fragment implements OnClickListener {
 	public Context context;
@@ -97,7 +97,7 @@ public class MainTabContact extends Fragment implements OnClickListener {
 				Bitmap bitmap= null;
 				bitmap=ToDealBitmap.getFromFile(imagePath);
 				if (bitmap==null){
-					heads[i].setImageResource(R.mipmap.headicon_default);
+					heads[i].setImageResource(R.drawable.headicon_default);
 				}else {
 					heads[i].setImageBitmap(bitmap);
 				}}catch (Exception e) {

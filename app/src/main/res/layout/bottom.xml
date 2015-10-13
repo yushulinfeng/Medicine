@@ -33,7 +33,7 @@
                 android:id="@+id/tab_iv_index"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:src="@mipmap/tab_btn_index_light" />
+                android:src="@drawable/tab_btn_index_light" />
 
             <TextView
                 android:id="@+id/tab_tv_index"
@@ -60,7 +60,7 @@
                 android:id="@+id/tab_iv_my"
                 android:layout_width="wrap_content"
                 android:layout_height="25dp"
-                android:src="@mipmap/tab_btn_my_dark" />
+                android:src="@drawable/tab_btn_my_dark" />
 
             <TextView
                 android:id="@+id/tab_tv_my"

@@ -1,6 +1,5 @@
 package org.outing.medicine.contact;
 
-import org.outing.medicine.logic.AnContact;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;

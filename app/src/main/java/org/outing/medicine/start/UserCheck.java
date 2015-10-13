@@ -1,4 +1,4 @@
-package org.outing.medicine.tools;
+package org.outing.medicine.start;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 import android.content.Context;
 import android.widget.Toast;
 
-public class Check {
+public class UserCheck {
 
 	/**
 	 * 判断是否为电话号码

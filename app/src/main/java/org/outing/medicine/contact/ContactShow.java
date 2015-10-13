@@ -1,7 +1,6 @@
 package org.outing.medicine.contact;
 
 import org.outing.medicine.R;
-import org.outing.medicine.logic.AnContact;
 import org.outing.medicine.tools.TActivity;
 
 import android.content.Intent;

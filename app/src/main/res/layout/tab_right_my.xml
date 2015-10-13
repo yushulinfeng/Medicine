@@ -29,7 +29,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/headicon_default" />
+                    android:src="@drawable/headicon_default" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative1"
@@ -73,7 +73,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/headicon_default" />
+                    android:src="@drawable/headicon_default" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative2"
@@ -123,7 +123,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/headicon_default" />
+                    android:src="@drawable/headicon_default" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative3"
@@ -166,7 +166,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/headicon_default" />
+                    android:src="@drawable/headicon_default" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative4"
@@ -216,7 +216,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/headicon_default" />
+                    android:src="@drawable/headicon_default" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative5"
@@ -259,7 +259,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@mipmap/headicon_default" />
+                    android:src="@drawable/headicon_default" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative6"

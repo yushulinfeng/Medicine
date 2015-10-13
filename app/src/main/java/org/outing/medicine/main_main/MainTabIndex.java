@@ -1,4 +1,4 @@
-package org.outing.medicine;
+package org.outing.medicine.main_main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import org.outing.medicine.R;
 import org.outing.medicine.fun_drug.DrugMain;
 import org.outing.medicine.fun_know.KnowMain;
 import org.outing.medicine.fun_tools.ToolsMain;

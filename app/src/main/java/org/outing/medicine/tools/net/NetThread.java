@@ -43,24 +43,25 @@ public class NetThread extends Thread{
             DataOutputStream out=new DataOutputStream(connection.getOutputStream());
             Log.d("test","params"+"         "+params);
             out.writeBytes(params);
-            InputStream in=connection.getInputStream();
-            Log.d("test","in"+"         "+in);
-            //对获取的输入流进行读取
-            BufferedReader reader=new BufferedReader(new InputStreamReader(in));
-            Log.d("test","reader"+"         "+reader);
-            StringBuilder response= new StringBuilder();
-            Log.d("test","response"+"         "+response);
-            String line;
-            while ((line=reader.readLine())!=null)
-            {
-                result+=line;
+            Log.d("test","connection.getResponseCode()"+"         "+connection.getResponseCode());
+            if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
+                InputStream in = connection.getInputStream();
+                Log.d("test", "in" + "         " + in);
+                //对获取的输入流进行读取
+                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+                Log.d("test", "reader" + "         " + reader);
+                StringBuilder response = new StringBuilder();
+                Log.d("test", "response" + "         " + response);
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    result += line;
+                }
+                Log.d("test", "result" + "................." + result);
+
+                Message mess = new Message();
+                mess.obj = result;
+                han.sendMessage(mess);
             }
-            Log.d("test","result"+"................."+result);
-
-            Message mess=new Message();
-            mess.obj =result;
-            han.sendMessage(mess);
-
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

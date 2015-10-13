@@ -1,12 +1,5 @@
 package org.outing.medicine.contact;
 
-import java.io.File;
-
-import org.outing.medicine.MainActivity;
-import org.outing.medicine.R;
-import org.outing.medicine.logic.AnContact;
-import org.outing.medicine.tools.TActivity;
-import org.outing.medicine.tools.ToDealBitmap;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -18,6 +11,13 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import org.outing.medicine.R;
+import org.outing.medicine.main_main.MainActivity;
+import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.ToDealBitmap;
+
+import java.io.File;
 
 public class ContactAdd extends TActivity implements OnClickListener {
 	public static final int CODE_SELECT_START = 2;

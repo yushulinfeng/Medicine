@@ -16,7 +16,7 @@
     <!-- 登录界面 -->
     <string name="user_name_tip">账户：</string>
     <string name="password_tip_login">密码：</string>
-    <string name="user_name_hint">邮箱/手机号</string>
+    <string name="user_name_hint">手机号</string>
     <string name="password_hint">请输入密码</string>
     <string name="login_bt_text">登录</string>
     <string name="to_register_bt_text">注册</string>
@@ -37,8 +37,7 @@
     <string name="login_now_text">立即登录 >>></string>
     <string name="login_otherway_text">使用其他方式登录</string>
     <!-- 找回密码界面 -->
-    <string name="find_username_hint">请输入邮箱号或手机号</string>
-    <string name="next">下一步</string>
+    <string name="find_username_hint">请输入手机号</string>
     <string name="find_password1_text">请输入新密码</string>
     <string name="find_password2_text">请再输入一次</string>
     <string name="find_confirm">确定</string>
