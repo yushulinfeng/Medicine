@@ -1,10 +1,10 @@
-package org.outing.medicine.tools;
-
-import org.outing.medicine.logic.AnStatus;
-import org.outing.medicine.tools.connect.ConnectUser;
+package org.outing.medicine.start;
 
 import android.content.Context;
 import android.os.AsyncTask;
+
+import org.outing.medicine.tools.connect.AnStatus;
+import org.outing.medicine.tools.connect.ConnectUser;
 
 /**
  * 自动登录，用于掉线后重新登录
@@ -36,11 +36,11 @@ public class AutoLoginTask extends AsyncTask<Void, Void, Boolean> {
 	 * 自动登录判断
 	 */
 	private boolean autoLogin() {
-		name = ToDealUser.getUserName(context);
+		name = UserTool.getUserName(context);
 		if (name.equals("")) {
 			return false;
 		} else {
-			pass = ToDealUser.getUserPass(context);
+			pass = UserTool.getUserPass(context);
 			return startConnect();
 		}
 	}

@@ -1,4 +1,4 @@
-package org.outing.medicine;
+package org.outing.medicine.main_main;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import org.outing.medicine.tools.LogoutTask;
+import org.outing.medicine.R;
+import org.outing.medicine.start.LogoutTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -93,8 +94,8 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         tab_tv_index
                 .setTextColor(getResources().getColor(R.color.tab_btn_dark));
         tab_tv_my.setTextColor(getResources().getColor(R.color.tab_btn_dark));
-        tab_iv_index.setImageResource(R.mipmap.tab_btn_index_dark);
-        tab_iv_my.setImageResource(R.mipmap.tab_btn_my_dark);
+        tab_iv_index.setImageResource(R.drawable.tab_btn_index_dark);
+        tab_iv_my.setImageResource(R.drawable.tab_btn_my_dark);
     }
 
     // 初始化控件，初始化Fragment
@@ -130,12 +131,12 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                         tab_tv_index.setTextColor(getResources().getColor(
                                 R.color.tab_btn_light));
                         tab_iv_index
-                                .setImageResource(R.mipmap.tab_btn_index_light);
+                                .setImageResource(R.drawable.tab_btn_index_light);
                         break;
                     case 1:
                         tab_tv_my.setTextColor(getResources().getColor(
                                 R.color.tab_btn_light));
-                        tab_iv_my.setImageResource(R.mipmap.tab_btn_my_light);
+                        tab_iv_my.setImageResource(R.drawable.tab_btn_my_light);
                         break;
                 }
                 current_index = position;

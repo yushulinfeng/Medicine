@@ -1,29 +1,33 @@
 package org.outing.medicine.tools.file;
 
-import org.outing.medicine.logic.AnContact;
+import android.os.Environment;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
+import java.io.File;
 
+/**
+ * 总的文件管理类
+ */
 public class FileTool {
-	private static final String CONTACT_SAVE_PATH = "contact.info";
-	private static final String CONTACT_IMG_SAVE_PATH = "contact_img";
+    //SharedPreferences注册
 
-	public static void saveContact(Context context, AnContact contact,
-			int location) {
-		String real_path = CONTACT_SAVE_PATH + location;
-		SharedPreferences.Editor prefs = context.getSharedPreferences(
-				real_path, Activity.MODE_PRIVATE).edit();
-		// prefs.putString("filename", filename);
-		prefs.commit();
-	}
+    //
+    private static final String BASE_SD_PATH = "OldFriend";
 
-	public static String getContact(Context context, int location) {
-		String real_path = CONTACT_SAVE_PATH + location;
-		SharedPreferences mPref = context.getSharedPreferences(real_path,
-				Activity.MODE_PRIVATE);
-		String filename = mPref.getString("filename", "");
-		return filename;
-	}
+    /**
+     * 获取本软件在存储卡的基本路径
+     */
+    public static File getBaseSDCardPath() {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            try {
+                File root_path = new File(
+                        Environment.getExternalStorageDirectory(),
+                        BASE_SD_PATH);// 存在无卡、无权风险
+                return root_path;
+            } catch (Exception e) {
+                return null;//禁止权限在此处捕获
+            }
+        }
+        return null;
+    }
 }

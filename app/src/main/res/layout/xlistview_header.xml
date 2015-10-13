@@ -48,7 +48,7 @@
             android:layout_alignLeft="@id/xlistview_header_text"
             android:layout_centerVertical="true"
             android:layout_marginLeft="-35dp"
-            android:src="@mipmap/xlistview_arrow" />
+            android:src="@drawable/xlistview_arrow" />
 
         <ProgressBar
             android:id="@+id/xlistview_header_progressbar"

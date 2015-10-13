@@ -1,4 +1,4 @@
-package org.outing.medicine.logic;
+package org.outing.medicine.tools.connect;
 
 /**
  * 状态信息（如请求通过、失败与原因等）

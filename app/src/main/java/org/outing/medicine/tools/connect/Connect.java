@@ -14,10 +14,7 @@ import org.apache.http.params.CoreConnectionPNames;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * 安卓与后台连接类，本类中所有方法必须在多线程中执行<br>
@@ -109,17 +106,6 @@ public class Connect {
                 }
             }
         }
-    }
-
-    /**
-     * 获取当前系统时间
-     *
-     * @return 当前系统时间
-     */
-    protected String getTime() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.CHINA);
-        String time = sdf.format(new Date());
-        return time;
     }
 
 }

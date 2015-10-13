@@ -1,10 +1,9 @@
-package org.outing.medicine.login;
+package org.outing.medicine.start;
 
-import org.outing.medicine.MainActivity;
+import org.outing.medicine.main_main.MainActivity;
 import org.outing.medicine.R;
-import org.outing.medicine.logic.AnStatus;
+import org.outing.medicine.tools.connect.AnStatus;
 import org.outing.medicine.tools.NetActivity;
-import org.outing.medicine.tools.ToDealUser;
 import org.outing.medicine.tools.connect.ConnectUser;
 
 import android.content.Intent;
@@ -72,7 +71,7 @@ public class RegisterSucceed extends NetActivity implements OnClickListener {
 	public void receiveMessage(String what) {
 		if (what.equals("login_ok")) {
 			Toast.makeText(this, "登录成功", Toast.LENGTH_SHORT).show();
-			ToDealUser.saveUser(this, userName, password);// 保存
+			UserTool.saveUser(this, userName, password);// 保存
 			Intent intent = new Intent(this, MainActivity.class);
 			startActivity(intent);
 			finish();

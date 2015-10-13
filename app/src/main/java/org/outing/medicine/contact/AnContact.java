@@ -1,4 +1,4 @@
-package org.outing.medicine.logic;
+package org.outing.medicine.contact;
 
 public class AnContact {
 	private String name;
