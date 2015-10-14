@@ -1,7 +1,6 @@
 package org.outing.medicine.start;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -10,7 +9,7 @@ import android.widget.Toast;
 
 import org.outing.medicine.R;
 import org.outing.medicine.tools.NetActivity;
-import org.outing.medicine.tools.connect.AnStatus;
+import org.outing.medicine.tools.connect.ConnectStatus;
 import org.outing.medicine.tools.connect.ConnectUser;
 
 public class Register extends NetActivity implements OnClickListener {
@@ -81,10 +80,6 @@ public class Register extends NetActivity implements OnClickListener {
                 if (UserCheck.verifyUsername(this, userName)
                         && UserCheck.verifyCode(this, verifyCode)
                         && UserCheck.verifyPassword(this, password, passwordConfirm)) {
-                    Log.e("username", userName);
-                    Log.e("password", password);
-                    Log.e("passwordConfirm", passwordConfirm);
-                    Log.e("code", verifyCode);
                     register(userName, password);
                 }
                 break;
@@ -180,7 +175,7 @@ public class Register extends NetActivity implements OnClickListener {
 
     @Override
     public void newThread() {
-        AnStatus status = null;
+        ConnectStatus status = null;
         if (is_idcode) {
             status = conn.getIDCode(userName);
 //			if (status.getStatus())

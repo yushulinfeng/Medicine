@@ -7,7 +7,7 @@ import android.os.Handler;
 import org.outing.medicine.R;
 import org.outing.medicine.main_main.MainActivity;
 import org.outing.medicine.tools.NetActivity;
-import org.outing.medicine.tools.connect.AnStatus;
+import org.outing.medicine.tools.connect.ConnectStatus;
 import org.outing.medicine.tools.connect.ConnectUser;
 
 public class Welcome extends NetActivity {
@@ -80,7 +80,7 @@ public class Welcome extends NetActivity {
     @Override
     public void newThread() {
         ConnectUser conn = new ConnectUser(this, true);
-        AnStatus status = conn.autoLogin(name, pass);
+        ConnectStatus status = conn.autoLogin(name, pass);
         if (status.getStatus())
             sendMessage("OK");
         else

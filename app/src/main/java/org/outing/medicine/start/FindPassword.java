@@ -3,7 +3,6 @@ package org.outing.medicine.start;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -13,7 +12,7 @@ import android.widget.Toast;
 import org.outing.medicine.R;
 import org.outing.medicine.main_main.MainActivity;
 import org.outing.medicine.tools.NetActivity;
-import org.outing.medicine.tools.connect.AnStatus;
+import org.outing.medicine.tools.connect.ConnectStatus;
 import org.outing.medicine.tools.connect.ConnectUser;
 
 public class FindPassword extends NetActivity implements OnClickListener {
@@ -29,7 +28,7 @@ public class FindPassword extends NetActivity implements OnClickListener {
     private Button confirmBt = null;
     private String username = null;
     private String code = null;
-    private static boolean hasGainCode = false;
+    private static boolean is_idcode = false;
 
     private ConnectUser conn = null;
     private int wait_time = CDDE_WAIT_TIME;
@@ -55,6 +54,7 @@ public class FindPassword extends NetActivity implements OnClickListener {
         switch (v.getId()) {
             // 获取验证码
             case R.id.find_gain_code:
+                is_idcode=true;
                 username = userNameEdit.getText().toString();
                 if (UserCheck.verifyUsername(this, username)) {
                     gainVerifyCode(username);
@@ -62,22 +62,17 @@ public class FindPassword extends NetActivity implements OnClickListener {
                 }
                 break;
             case R.id.find_confirm_bt:
+                is_idcode=false;
                 code = verifyCodeEidt.getText().toString();
-                if (hasGainCode) {
-                    if (UserCheck.verifyUsername(this, username)
-                            && UserCheck.verifyCode(this, code)) {
-                        Log.e("用户名", username);
-                        Log.e("验证码", code);
-                        password1 = passwordEdit1.getText().toString();
-                        password2 = passwordEdit2.getText().toString();
-                        if (UserCheck.verifyPassword(FindPassword.this, password1,
-                                password2)) {
-                            showProcessDialog("忘记密码", "正在连接后台，请稍候……", false);
-                            startNewThread();
-                        }
+                if (UserCheck.verifyUsername(this, username)
+                        && UserCheck.verifyCode(this, code)) {
+                    password1 = passwordEdit1.getText().toString();
+                    password2 = passwordEdit2.getText().toString();
+                    if (UserCheck.verifyPassword(FindPassword.this, password1,
+                            password2)) {
+                        showProcessDialog("忘记密码", "正在连接后台，请稍候……", false);
+                        startNewThread();
                     }
-                } else {
-                    showToast("未获取验证码");
                 }
                 break;
             case R.id.find_back_to_login:
@@ -165,7 +160,6 @@ public class FindPassword extends NetActivity implements OnClickListener {
             }
         } else if (what.equals("idcode_ok")) {
             showToast("验证码已发送，请查收");
-            hasGainCode = true;
         } else if (what.equals("alter_ok")) {
             alterSuccess();
         } else {
@@ -175,8 +169,8 @@ public class FindPassword extends NetActivity implements OnClickListener {
 
     @Override
     public void newThread() {
-        AnStatus status = null;
-        if (!hasGainCode) {
+        ConnectStatus status = null;
+        if (is_idcode) {
             status = conn.getIDCode(username);
             if (status.getStatus())
                 sendMessage("idcode_ok");

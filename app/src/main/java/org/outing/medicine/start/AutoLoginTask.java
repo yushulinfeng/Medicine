@@ -3,7 +3,7 @@ package org.outing.medicine.start;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import org.outing.medicine.tools.connect.AnStatus;
+import org.outing.medicine.tools.connect.ConnectStatus;
 import org.outing.medicine.tools.connect.ConnectUser;
 
 /**
@@ -50,7 +50,7 @@ public class AutoLoginTask extends AsyncTask<Void, Void, Boolean> {
 	 */
 	private boolean startConnect() {
 		ConnectUser conn = new ConnectUser(context, true);
-		AnStatus status = conn.autoLogin(name, pass);
+		ConnectStatus status = conn.autoLogin(name, pass);
 		return status.getStatus();
 	}
 }
