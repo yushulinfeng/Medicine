@@ -14,4 +14,6 @@ public class ServerURL {
     public static final String LOGOUT = BASE_ADDRESS + "/";
     public static final String REGISTER = BASE_ADDRESS + "/register";
 
+    public static final String SCORE_ADD = BASE_ADDRESS + "/add_score";
+
 }
