@@ -12,10 +12,11 @@ import android.widget.Toast;
 import org.outing.medicine.R;
 import org.outing.medicine.main_main.MainActivity;
 import org.outing.medicine.tools.NetActivity;
-import org.outing.medicine.tools.connect.AnStatus;
-import org.outing.medicine.tools.connect.ConnectEasy;
+import org.outing.medicine.tools.connect.Connect;
+import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
-import org.outing.medicine.tools.connect.ConnectResponseListener;
+import org.outing.medicine.tools.connect.ConnectListener;
+import org.outing.medicine.tools.connect.ConnectStatus;
 import org.outing.medicine.tools.connect.ConnectUser;
 import org.outing.medicine.tools.connect.ServerURL;
 
@@ -126,7 +127,7 @@ public class Login extends NetActivity implements OnClickListener {
 
     @Override
     public void newThread() {
-        AnStatus status = null;
+        ConnectStatus status = null;
         if (tempPassword == null) {
             status = conn.autoLogin(mName, mPassword);
         } else {
@@ -138,15 +139,30 @@ public class Login extends NetActivity implements OnClickListener {
             sendMessage(status.getReason());
     }
 
-    ////////////基于回调的POST封装使用示例，直接在主线程使用即可////////////////
-    private void loginEasy() {
-        ConnectEasy.POST(this, ServerURL.LOGIN,
-                new ConnectList().put("phone", mName).put("password", mPassword),
-                new ConnectResponseListener() {
-                    @Override
-                    public void onResponse(String response) {//if ERROR,response==null
-                        Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
-                    }
-                });
+    //    ////////////基于回调的POST封装使用示例，直接在主线程使用即可////////////////
+    private void loginTest() {
+        Connect.POST(this, ServerURL.LOGIN, new ConnectListener() {
+            @Override
+            public ConnectList setParam(ConnectList list) {
+                list.put("phone", mName);
+                list.put("password", mPassword);
+                return list;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                try {
+                    Thread.sleep(5000);
+                } catch (Exception e) {
+                }
+                Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                dialog.config(Login.this, "标题", "内容", true);
+                return dialog;
+            }
+        });
     }
 }

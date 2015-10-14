@@ -5,7 +5,7 @@ import android.content.Context;
 /**
  * 用户相关的连接（登录注册密码处理等）
  */
-public class ConnectUser extends Connect {
+public class ConnectUser extends ConnectBase {
 
     public ConnectUser(Context context, boolean refresh) {
         super(context, refresh);
@@ -21,15 +21,15 @@ public class ConnectUser extends Connect {
      * @param phone 用户名，已经过筛选处理的
      * @return 状态信息
      */
-    public AnStatus getIDCode(String phone) {
+    public ConnectStatus getIDCode(String phone) {
         ConnectList list = ConnectList.getSimpleList("phone", phone);//////////////////
         String status_str = executePost(ServerURL.ID_CODE, list);
         if (status_str == null)
-            return new AnStatus(false, "连接服务器失败");
+            return new ConnectStatus(false, "连接服务器失败");
         else if (status_str.equals("1"))
-            return new AnStatus(true, "");
+            return new ConnectStatus(true, "");
         else
-            return new AnStatus(false, status_str);
+            return new ConnectStatus(false, status_str);
     }
 
     /**
@@ -40,7 +40,7 @@ public class ConnectUser extends Connect {
      * @param code 验证码
      * @return 状态信息
      */
-    public AnStatus register(String name, String pass, String code) {
+    public ConnectStatus register(String name, String pass, String code) {
         ConnectList list = new ConnectList();
         list.put("phone", name);
         list.put("password", pass);
@@ -56,7 +56,7 @@ public class ConnectUser extends Connect {
      * @param pass 明文密码
      * @return 状态信息
      */
-    public AnStatus login(String name, String pass) {
+    public ConnectStatus login(String name, String pass) {
 //		String md5_pass = DealPass.getMD5(pass);
         String md5_pass = (pass);
         return autoLogin(name, md5_pass);
@@ -69,7 +69,7 @@ public class ConnectUser extends Connect {
      * @param pass 本地读取的密码//（已通过解密）
      * @return 状态信息
      */
-    public AnStatus autoLogin(String name, String pass) {
+    public ConnectStatus autoLogin(String name, String pass) {
         ConnectList list = new ConnectList();
         list.put("phone", name);
         list.put("password", pass);
@@ -93,7 +93,7 @@ public class ConnectUser extends Connect {
      * @param newpass 明文新密码
      * @return 状态信息
      */
-    public AnStatus alterPass(String oldpass, String newpass) {
+    public ConnectStatus alterPass(String oldpass, String newpass) {
         return null;
         //////////////////////////////////////
     }
@@ -106,45 +106,45 @@ public class ConnectUser extends Connect {
      * @param newpass 明文新密码
      * @return 状态信息
      */
-    public AnStatus forgetPass(String name, String code, String newpass) {
+    public ConnectStatus forgetPass(String name, String code, String newpass) {
         return null;
         ///////////////////////////////////////
     }
 
-    private AnStatus dealLoginResult(String postReturn) {
+    private ConnectStatus dealLoginResult(String postReturn) {
         if (postReturn == null)
-            return new AnStatus(false, "连接服务器失败");
+            return new ConnectStatus(false, "连接服务器失败");
         else {
             try {
                 int result = Integer.parseInt(postReturn);
                 if (result > 0)
-                    return new AnStatus(true, "");
+                    return new ConnectStatus(true, "");
                 else if (result == -1)
-                    return new AnStatus(true, "登录失败");
+                    return new ConnectStatus(false, "登录失败");
                 else//-2
-                    return new AnStatus(true, "用户名或密码错误");
+                    return new ConnectStatus(false, "用户名或密码错误");
             } catch (Exception e) {
-                return new AnStatus(false, "系统错误");
+                return new ConnectStatus(false, "系统错误");
             }
         }
     }
 
-    private AnStatus dealRegisterResult(String postReturn) {
+    private ConnectStatus dealRegisterResult(String postReturn) {
         if (postReturn == null)
-            return new AnStatus(false, "连接服务器失败");
+            return new ConnectStatus(false, "连接服务器失败");
         else {
             try {
                 int result = Integer.parseInt(postReturn);
                 if (result > 0)
-                    return new AnStatus(true, "");
+                    return new ConnectStatus(true, "");
                 else if (result == -1) {
-                    return new AnStatus(true, "注册失败");
+                    return new ConnectStatus(false, "注册失败");
                 } else if (result == -2)
-                    return new AnStatus(true, "手机号已被注册");
+                    return new ConnectStatus(false, "手机号已被注册");
                 else//-3
-                    return new AnStatus(true, "密码过短");
+                    return new ConnectStatus(false, "密码过短");
             } catch (Exception e) {
-                return new AnStatus(false, "系统错误");
+                return new ConnectStatus(false, "系统错误");
             }
         }
     }

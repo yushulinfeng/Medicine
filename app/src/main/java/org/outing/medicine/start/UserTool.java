@@ -43,8 +43,8 @@ public class UserTool {
     public static void saveUser(Context context, String name, String pass) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(
                 USER_SAVE_PATH, Activity.MODE_PRIVATE).edit();
-        String md5_pass = DealPass.getMD5(pass);
-        String safe_pass = DealPass.encodePass(md5_pass, name);
+//        String md5_pass = DealPass.getMD5(pass);
+        String safe_pass = DealPass.encodePass(pass, name);
         prefs.putString("name", name);
         prefs.putString("safe_pass", safe_pass);
         prefs.commit();

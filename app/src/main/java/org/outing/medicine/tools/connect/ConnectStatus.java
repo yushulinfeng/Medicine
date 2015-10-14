@@ -2,10 +2,8 @@ package org.outing.medicine.tools.connect;
 
 /**
  * 状态信息（如请求通过、失败与原因等）
- * 
- * @author Sun Yu Lin
  */
-public class AnStatus {
+public class ConnectStatus {
 
 	/**
 	 * 通过(状态，原因)构造AnStatus
@@ -15,7 +13,7 @@ public class AnStatus {
 	 * @param reason
 	 *            相关原因
 	 */
-	public AnStatus(boolean status, String reason) {
+	public ConnectStatus(boolean status, String reason) {
 		this.status = status;
 		this.reason = reason;
 	}

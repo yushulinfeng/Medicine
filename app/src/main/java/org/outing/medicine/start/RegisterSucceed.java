@@ -2,7 +2,7 @@ package org.outing.medicine.start;
 
 import org.outing.medicine.main_main.MainActivity;
 import org.outing.medicine.R;
-import org.outing.medicine.tools.connect.AnStatus;
+import org.outing.medicine.tools.connect.ConnectStatus;
 import org.outing.medicine.tools.NetActivity;
 import org.outing.medicine.tools.connect.ConnectUser;
 
@@ -82,7 +82,7 @@ public class RegisterSucceed extends NetActivity implements OnClickListener {
 
 	@Override
 	public void newThread() {
-		AnStatus status = conn.login(userName, password);
+		ConnectStatus status = conn.login(userName, password);
 		if (status.getStatus())
 			sendMessage("login_ok");
 		else

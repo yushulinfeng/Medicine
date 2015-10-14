@@ -1,111 +1,64 @@
 package org.outing.medicine.tools.connect;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
-import org.apache.http.Header;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.params.CoreConnectionPNames;
+public class Connect extends AsyncTask<Void, Void, String> {
+    private Context context;
+    private String url;
+    private ConnectList list;
+    private ConnectDialog dialog;
+    private ConnectListener listener;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URLDecoder;
-import java.util.List;
-
-/**
- * 安卓与后台连接类，本类中所有方法必须在多线程中执行<br>
- * （静态方法将影响封装与后期拓展，此处用普通方法）
- *
- * @author Sun Yu Lin
- */
-@SuppressWarnings("deprecation")
-public class Connect {
-    private static String PHP_COOKIE = null;// 维持会话的cookie
-    private Context context = null;
-
-    /**
-     * 使用旧cookie
-     */
-    public Connect(Context context) {
+    private Connect(Context context, String url, ConnectListener listener) {
         this.context = context;
-        PHP_COOKIE = ConnectTool.getCookie(context);
+        this.url = url;
+        this.listener = listener;
+        list = new ConnectList();
+        dialog = new ConnectDialog();
+        if (listener != null) {
+            list = listener.setParam(list);
+            dialog = listener.showDialog(dialog);
+        }
+        if (list == null)//防止listener返回错了
+            list = new ConnectList();
+        if (dialog == null)
+            dialog = listener.showDialog(dialog);
     }
 
-    /**
-     * 刷新cookie
-     */
-    public Connect(Context context, boolean refreash) {
-        this.context = context;
-    }
-
-    /**
-     * 以协定方式执行post连接后台，发送head与body并接收后台返回。
-     *
-     * @param url  连接地址
-     * @param list 主体信息
-     * @return 后台返回的字符串信息
-     */
-    public String executePost(String url, ConnectList list) {
-        final int COONECT_TIME_OUT = 15000;// 设定连接超时15秒
-        final int READ_TIME_OUT = 30000;// 设定读取超时为30秒
-        BufferedReader in = null;
-        try {
-            // 定义HttpClient，实例化Post方法
-            HttpClient client = new DefaultHttpClient();
-            HttpPost request = new HttpPost(url);
-            // 设定超时，超时将以异常形式提示
-            client.getParams().setParameter(
-                    CoreConnectionPNames.CONNECTION_TIMEOUT, COONECT_TIME_OUT);// 请求超时
-            client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,
-                    READ_TIME_OUT);// 读取超时
-            // 添加cookie信息
-            if (PHP_COOKIE != null)// 若为null，则不添加，等待服务器返回
-                request.addHeader("Cookie", PHP_COOKIE);
-            // 添加body信息
-            // 添加body信息
-            List<NameValuePair> body = list.getList();
-            UrlEncodedFormEntity formEntiry = new UrlEncodedFormEntity(body);
-            request.setEntity(formEntiry);
-            // 执行请求
-            HttpResponse response = client.execute(request);
-
-            // cookie处理，维护会话
-            Header head = response.getFirstHeader("set-Cookie");
-            if (head != null) {
-                PHP_COOKIE = head.getValue();
-                ConnectTool.saveCookie(context, PHP_COOKIE);
-            }
-
-            // 接收返回
-            in = new BufferedReader(new InputStreamReader(response.getEntity()
-                    .getContent()));
-            StringBuffer sb = new StringBuffer("");
-            String line = "";
-            while ((line = in.readLine()) != null) {
-                sb.append(line + "\n");
-            }
-            in.close();
-            String result = sb.toString();
-            result = URLDecoder.decode(result, "UTF-8");
-            if (result.equals(""))
-                return null;// 后台返回""则返回null。
-            return result.trim();
-        } catch (Exception e) {// 很有可能是请求超时了
-            // e.printStackTrace();
-            return null;
-        } finally {// 这个在finally中很有必要
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (Exception e) {
-                    // e.printStackTrace();
-                }
-            }
+    @Override
+    protected void onPreExecute() {
+        if (dialog != null) {
+            dialog.show();
         }
     }
 
+    @Override
+    protected String doInBackground(Void... params) {
+        ConnectBase con = new ConnectBase(context);
+        return con.executePost(url, list);
+    }
+
+    @Override
+    protected void onPostExecute(String result) {
+        if (listener != null)
+            listener.onResponse(result);
+        if (dialog != null)
+            dialog.hide();
+    }
+
+
+    /////////////////////////基于回调的方法///////////////////////
+
+    /**
+     * 向指定网址发起post请求
+     *
+     * @param context  context
+     * @param url      网址
+     * @param listener 监听回调
+     */
+    public static void POST(Context context, String url, ConnectListener listener) {
+        Connect connect = new Connect(context, url, listener);
+        connect.execute();
+    }
 }
