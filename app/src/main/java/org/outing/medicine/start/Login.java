@@ -153,12 +153,12 @@ public class Login extends NetActivity implements OnClickListener {
             public void onResponse(String response) {
                 try {
                     Thread.sleep(5000);
-                } catch (Exception e) {
-                }
-                Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
-            }
+        } catch (Exception e) {
+        }
+        Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
+    }
 
-            @Override
+    @Override
             public ConnectDialog showDialog(ConnectDialog dialog) {
                 dialog.config(Login.this, "标题", "内容", true);
                 return dialog;

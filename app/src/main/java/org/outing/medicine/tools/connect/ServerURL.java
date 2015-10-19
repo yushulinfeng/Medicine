@@ -16,4 +16,15 @@ public class ServerURL {
 
     public static final String SCORE_ADD = BASE_ADDRESS + "/add_score";
 
+    //健康数据的接口
+    public static final String Get_Body_Message=BASE_ADDRESS+"/get_data";
+    public static final String Post_Body_Message=BASE_ADDRESS+"/post_data";
+
+    //个人中心
+
+
+
+
+
+
 }

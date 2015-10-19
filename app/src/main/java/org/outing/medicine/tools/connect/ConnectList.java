@@ -3,6 +3,7 @@ package org.outing.medicine.tools.connect;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,11 @@ public class ConnectList {
     }
 
     public ConnectList put(String key, String value) {
+        try{
+            value= URLEncoder.encode(value,"UTF-8");
+        }catch (Exception e){
+            return this;
+        }
         NameValuePair item = new BasicNameValuePair(key, value);
         list.add(item);
         return this;

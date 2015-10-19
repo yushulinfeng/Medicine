@@ -1,6 +1,7 @@
 package org.outing.medicine.personal_center;
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,11 +23,19 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.github.mikephil.charting.data.LineData;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.outing.medicine.R;
 import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.chat.Coordinates;
+import org.outing.medicine.tools.chat.ShowChart;
+import org.outing.medicine.tools.connect.Connect;
+import org.outing.medicine.tools.connect.ConnectDialog;
+import org.outing.medicine.tools.connect.ConnectList;
+import org.outing.medicine.tools.connect.ConnectListener;
 import org.outing.medicine.tools.connect.ConnectTool;
 
 import java.util.HashMap;
@@ -103,66 +112,62 @@ public class PersonalCenterActivity extends TActivity {
     }
 
     private void showPersonalInfo() {
-        //volley试验
-        RequestQueue mQueue = Volley.newRequestQueue(PersonalCenterActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,geturl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("TAG", response);
-                        //获取JSON对象
-                        JSONObject temp = null;
-                        try {
-                            temp = new JSONObject(response);
-                            //得到数据
-                            String name_in = temp.getString("name");
-                            String sex_in=temp.getString("sex");
-                            String age_in=temp.getString("age");
-                            String ill_in=temp.getString("common_ill");
-                            String contact_in=temp.getString("emer_contact");
-                            String address_in=temp.getString("address");
-                            Log.e("TAG", "name_in    "+name_in);
-                            Log.e("TAG", "sex_in    "+sex_in);
-                            if (!(name_in .equals("null"))){
-                                editName.setText(name_in);
-                            }
-                            if (!(sex_in.equals("null"))){
-                                editSex.setText(sex_in);
-                            }
-                            if (!age_in.equals("null")){
-                                editAge.setText(age_in);
-                            }
-                            if (!ill_in.equals("null")){
-                                editIll.setText(ill_in);
-                            }
-                            if (!contact_in.equals("null")){
-                                editContact.setText(contact_in);
-                            }
-                            if (!address_in.equals("null")){
-                                editLocation.setText(address_in
-                                );
-                            }
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+        Connect.POST(this,geturl, new ConnectListener() {
+            @Override
+            public ConnectList setParam(ConnectList list) {
+                list.put("type", "3");
+                return list;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                Log.d("TAG", ""+response);
+                JSONObject temp = null;
+                try {
+                    temp = new JSONObject(response);
+                    //得到数据
+                    String name_in = temp.getString("name");
+                    String sex_in=temp.getString("sex");
+                    String age_in=temp.getString("age");
+                    String ill_in=temp.getString("common_ill");
+                    String contact_in=temp.getString("emer_contact");
+                    String address_in=temp.getString("address");
+                    Log.e("TAG", "name_in    "+name_in);
+                    Log.e("TAG", "sex_in    "+sex_in);
+                    if (!(name_in .equals("null"))){
+                        editName.setText(name_in);
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", error.getMessage(), error);
+                    if (!(sex_in.equals("null"))){
+                        editSex.setText(sex_in);
+                    }
+                    if (!age_in.equals("null")){
+                        editAge.setText(age_in);
+                    }
+                    if (!ill_in.equals("null")){
+                        editIll.setText(ill_in);
+                    }
+                    if (!contact_in.equals("null")){
+                        editContact.setText(contact_in);
+                    }
+                    if (!address_in.equals("null")){
+                        editLocation.setText(address_in
+                        );
+                    }
+
+
+                } catch (Exception e) {
+
+                }
+                Toast.makeText(PersonalCenterActivity.this, response, Toast.LENGTH_SHORT).show();
             }
-        }) {
+
             @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("cookie", ConnectTool.getCookie(PersonalCenterActivity.this));
-                Log.e("TAG", " ConnectTool.getCookie(PersonalCenterActivity.this)    " +  ConnectTool.getCookie(PersonalCenterActivity.this));
-                // MyLog.d(TAG, "headers=" + headers);
-                return headers;
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                dialog.config(PersonalCenterActivity.this, "标题", "内容", true);
+                return dialog;
             }
-        };
-        mQueue.add(stringRequest);
+        });
     }
 
     @Override
@@ -175,43 +180,70 @@ public class PersonalCenterActivity extends TActivity {
         location=editLocation.getText().toString();
         contact=editContact.getText().toString();
 
-//volley试验
-        RequestQueue mQueue = Volley.newRequestQueue(PersonalCenterActivity.this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,seturl,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("TAG", response);
+        Connect.POST(this,seturl, new ConnectListener() {
 
-                    }
-                }, new Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.e("TAG", error.getMessage(), error);
-            }
-        }) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("cookie", ConnectTool.getCookie(PersonalCenterActivity.this));
-                Log.e("TAG", " ConnectTool.getCookie(PersonalCenterActivity.this)    " +  ConnectTool.getCookie(PersonalCenterActivity.this));
-                // MyLog.d(TAG, "headers=" + headers);
-                return headers;
+            public ConnectList setParam(ConnectList list) {
+                list.put("name",name);
+                list.put("age",age);
+                list.put("sex",sex);
+                list.put("common_ill",ill);
+                list.put("emer_contact",contact);
+                list.put("position",location);
+                return list;
             }
 
-                        @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("name", name);
-                params.put("age",age);
-                params.put("sex",sex);
-                params.put("common_ill",ill);
-                params.put("emer_contact",contact);
-                params.put("position",location);
-                return params;
+            @Override
+            public void onResponse(String response) {
+                Log.d("TAG", response);
+                Toast.makeText(PersonalCenterActivity.this, response, Toast.LENGTH_SHORT).show();
             }
-        };
-        mQueue.add(stringRequest);
+
+            @Override
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                dialog.config(PersonalCenterActivity.this, "标题", "内容", true);
+                return dialog;
+            }
+        });
+
+////volley试验
+//        RequestQueue mQueue = Volley.newRequestQueue(PersonalCenterActivity.this);
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST,seturl,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        Log.d("TAG", response);
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//                Log.e("TAG", error.getMessage(), error);
+//            }
+//        }) {
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError {
+//                HashMap<String, String> headers = new HashMap<String, String>();
+//                headers.put("cookie", ConnectTool.getCookie(PersonalCenterActivity.this));
+//                Log.e("TAG", " ConnectTool.getCookie(PersonalCenterActivity.this)    " +  ConnectTool.getCookie(PersonalCenterActivity.this));
+//                // MyLog.d(TAG, "headers=" + headers);
+//                return headers;
+//            }
+//
+//                        @Override
+//            protected Map<String, String> getParams() {
+//                Map<String, String> params = new HashMap<String, String>();
+//                params.put("name", name);
+//                params.put("age",age);
+//                params.put("sex",sex);
+//                params.put("common_ill",ill);
+//                params.put("emer_contact",contact);
+//                params.put("position",location);
+//                return params;
+//            }
+//        };
+//        mQueue.add(stringRequest);
 //            @Override
 //            protected Map<String, String> getParams() {
 //                Map<String, String> params = new HashMap<String, String>();
