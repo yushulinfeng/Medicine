@@ -75,6 +75,7 @@
             android:label="@string/app_name">
 
         </activity>
+        //慢病管理
         <activity
             android:name=".illness_manage.IllnessManageActivity"
             android:label="@string/app_name"></activity>
@@ -86,6 +87,9 @@
             android:label="@string/app_name"></activity>
         <activity
             android:name=".illness_manage.BloodFat"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".illness_manage.Questionnaire"
             android:label="@string/app_name"></activity>
         <!-- fun_tools -->
         <activity

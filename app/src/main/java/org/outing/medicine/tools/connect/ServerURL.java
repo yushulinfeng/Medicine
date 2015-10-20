@@ -22,7 +22,8 @@ public class ServerURL {
 
     //个人中心
 
-
+    public static final String Get_Personal_Message=BASE_ADDRESS+"/get_profile";
+    public static final String Set_Personal_Message=BASE_ADDRESS+"/set_profile";
 
 
 

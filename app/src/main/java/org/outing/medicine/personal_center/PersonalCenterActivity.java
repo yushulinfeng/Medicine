@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -37,6 +38,7 @@ import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
 import org.outing.medicine.tools.connect.ConnectListener;
 import org.outing.medicine.tools.connect.ConnectTool;
+import org.outing.medicine.tools.connect.ServerURL;
 
 import java.util.HashMap;
 import java.util.List;
@@ -55,8 +57,6 @@ public class PersonalCenterActivity extends TActivity {
     private double latitude;
     private double longitude;
     private Handler hanSet;
-    private String seturl="http://121.42.27.129/index.php/set_profile";
-    private String geturl="http://121.42.27.129/index.php/get_profile";
 
     @Override
     public void onCreate() {
@@ -113,7 +113,7 @@ public class PersonalCenterActivity extends TActivity {
 
     private void showPersonalInfo() {
 
-        Connect.POST(this,geturl, new ConnectListener() {
+        Connect.POST(this,ServerURL.Get_Personal_Message, new ConnectListener() {
             @Override
             public ConnectList setParam(ConnectList list) {
                 list.put("type", "3");
@@ -180,7 +180,7 @@ public class PersonalCenterActivity extends TActivity {
         location=editLocation.getText().toString();
         contact=editContact.getText().toString();
 
-        Connect.POST(this,seturl, new ConnectListener() {
+        Connect.POST(this, ServerURL.Set_Personal_Message, new ConnectListener() {
 
 
             @Override
@@ -190,7 +190,7 @@ public class PersonalCenterActivity extends TActivity {
                 list.put("sex",sex);
                 list.put("common_ill",ill);
                 list.put("emer_contact",contact);
-                list.put("position",location);
+                list.put("address",location);
                 return list;
             }
 
@@ -198,6 +198,9 @@ public class PersonalCenterActivity extends TActivity {
             public void onResponse(String response) {
                 Log.d("TAG", response);
                 Toast.makeText(PersonalCenterActivity.this, response, Toast.LENGTH_SHORT).show();
+                if (response.equals("0")){
+                    finish();
+                }
             }
 
             @Override
