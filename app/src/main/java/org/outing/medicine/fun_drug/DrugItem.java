@@ -1,9 +1,13 @@
 package org.outing.medicine.fun_drug;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.util.List;
+import android.content.Intent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -18,14 +22,10 @@ import org.jsoup.Jsoup;
 import org.outing.medicine.R;
 import org.outing.medicine.tools.NetTActivity;
 
-import android.content.Intent;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class DrugItem extends NetTActivity {
@@ -139,6 +139,8 @@ public class DrugItem extends NetTActivity {
 		if (str == null || str.trim().equals(""))
 			return "暂无信息";
 		str = str.replace("<br/>", "");// 不必\n
+		str = str.replace("<b>", "");
+		str = str.replace("</b>", "");
 		str = str.substring(0, str.lastIndexOf("。") + 1);
 		if (str.trim().equals(""))
 			return "暂无信息";

@@ -23,6 +23,8 @@ public class FileTool {
                 File root_path = new File(
                         Environment.getExternalStorageDirectory(),
                         BASE_SD_PATH);// 存在无卡、无权风险
+                if (!root_path.exists())
+                    root_path.mkdirs();
                 return root_path;
             } catch (Exception e) {
                 return null;//禁止权限在此处捕获

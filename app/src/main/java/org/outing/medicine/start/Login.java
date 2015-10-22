@@ -20,6 +20,8 @@ import org.outing.medicine.tools.connect.ConnectStatus;
 import org.outing.medicine.tools.connect.ConnectUser;
 import org.outing.medicine.tools.connect.ServerURL;
 
+import java.net.URLEncoder;
+
 public class Login extends NetActivity implements OnClickListener {
 
     private EditText userName = null;
@@ -86,6 +88,7 @@ public class Login extends NetActivity implements OnClickListener {
                 if (UserCheck.verifyUsername(this, mName)) {
                     showProcessDialog("登录", "正在连接服务器，请稍候……", false);
                     startNewThread();
+//                loginTest();///////////////////////////////////
                 } else {
                     Toast.makeText(this, "用户名格式不正确", Toast.LENGTH_SHORT).show();
                 }
@@ -144,17 +147,22 @@ public class Login extends NetActivity implements OnClickListener {
         Connect.POST(this, ServerURL.LOGIN, new ConnectListener() {
             @Override
             public ConnectList setParam(ConnectList list) {
-                list.put("phone", mName);
-                list.put("password", mPassword);
+                try {
+                    list.put("textArea", URLEncoder.encode(mName, "UTF-8"));
+                } catch (Exception e) {
+                }
+//                list.put("phone", mName);
+//                list.put("password", mPassword);
                 return list;
             }
 
             @Override
             public void onResponse(String response) {
-                try {
-                    Thread.sleep(5000);
-                } catch (Exception e) {
-                }
+//                try {
+//                    response=new String(response.getBytes("GBK"),"UTF-8");
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
                 Toast.makeText(Login.this, response, Toast.LENGTH_SHORT).show();
             }
 
