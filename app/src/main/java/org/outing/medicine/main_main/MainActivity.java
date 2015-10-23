@@ -136,7 +136,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                     case 1:
                         tab_tv_my.setTextColor(getResources().getColor(
                                 R.color.tab_btn_light));
-                        tab_iv_my.setImageResource(R.drawable.tab_btn_my_light);
+                        tab_iv_my.setImageResource(R.drawable.tab_btn_index_light);
                         break;
                 }
                 current_index = position;

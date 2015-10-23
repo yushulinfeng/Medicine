@@ -24,7 +24,7 @@
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_marginLeft="10dp"
-                android:text="姓名"
+                android:text="姓名            "
                 android:textSize="15dp"
                 android:textColor="#b0b0b0"
                 android:layout_width="wrap_content"
@@ -40,7 +40,7 @@
                 android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right|center"
+                android:gravity="left|center"
                 android:layout_marginRight="10dp" />
 
 
@@ -65,7 +65,7 @@
             <TextView
                 android:id="@+id/tv_sex"
                 android:layout_marginLeft="10dp"
-                android:text="性别"
+                android:text="性别            "
                 android:textSize="15dp"
                 android:textColor="#b0b0b0"
                 android:layout_width="wrap_content"
@@ -81,7 +81,7 @@
                 android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right|center"
+                android:gravity="left|center"
                 android:layout_marginRight="10dp" />
 
         </LinearLayout>
@@ -116,7 +116,7 @@
             <TextView
                 android:id="@+id/tv_age"
                 android:layout_marginLeft="10dp"
-                android:text="年龄"
+                android:text="年龄            "
                 android:textSize="15dp"
                 android:textColor="#b0b0b0"
                 android:layout_width="wrap_content"
@@ -132,7 +132,7 @@
                 android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right|center"
+                android:gravity="left|center"
                 android:layout_marginRight="10dp" />
 
 
@@ -159,7 +159,7 @@
             <TextView
                 android:id="@+id/tv_ill"
                 android:layout_marginLeft="10dp"
-                android:text="常见病"
+                android:text="常见病        "
                 android:textSize="15dp"
                 android:textColor="#b0b0b0"
                 android:layout_width="wrap_content"
@@ -175,7 +175,7 @@
                 android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right|center"
+                android:gravity="left|center"
                 android:layout_marginRight="10dp" />
 
 
@@ -201,7 +201,7 @@
             <TextView
                 android:id="@+id/tv_location"
                 android:layout_marginLeft="10dp"
-                android:text="家庭住址"
+                android:text="家庭住址    "
                 android:textSize="15dp"
                 android:textColor="#b0b0b0"
                 android:layout_width="wrap_content"
@@ -217,7 +217,7 @@
                 android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right|center"
+                android:gravity="left|center"
                 android:layout_marginRight="10dp" />
 
 
@@ -258,7 +258,7 @@
                 android:background="@null"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="right|center"
+                android:gravity="left|center"
                 android:layout_marginRight="10dp" />
 
 

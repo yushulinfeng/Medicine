@@ -18,6 +18,11 @@ android {
         }
     }
 
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
     }
@@ -30,4 +35,5 @@ dependencies {
     compile files('libs/jsoup.jar')
     compile files('libs/mpandroidchartlibrary-2-1-4.jar')
     compile files('libs/volley.jar')
+    compile files('libs/BaiduLBS_Android.jar')
 }

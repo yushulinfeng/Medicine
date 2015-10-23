@@ -25,6 +25,8 @@ public class ServerURL {
     public static final String Get_Personal_Message=BASE_ADDRESS+"/get_profile";
     public static final String Set_Personal_Message=BASE_ADDRESS+"/set_profile";
 
+    //防丢失
+    public static final String Post_Location=BASE_ADDRESS+"/post_gps";
 
 
 
