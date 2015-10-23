@@ -9,6 +9,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import org.outing.medicine.R;
+import org.outing.medicine.tools.connect.ServerURL;
 
 /**
  * Created by apple on 15/10/19.
@@ -27,7 +28,7 @@ public class Questionnaire extends Activity {
                                        public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
                                            Log.d("test", "url" + url);
-                                           if (url.equals("http://www.wenjuan.com/r/U3m6bee?pid=55c772dcf7405b390dacb29d&vcode=c52529cb4626c70217cee8fd60c3af41")){
+                                           if (url.equals(ServerURL.Questionnaire_Result_Url)){
                                                Log.d("test", "答题成功，积分+3");
                                                Toast.makeText(Questionnaire.this, "答题成功，积分+3",
                                                        Toast.LENGTH_SHORT).show();
@@ -39,7 +40,6 @@ public class Questionnaire extends Activity {
                                        }
                                    }
         );
-//        myWebView.loadUrl("http://www.wenjuan.com/s/JJvUji/");
-        myWebView.loadUrl("http://www.wenjuan.com/s/JbY7rm/");
+        myWebView.loadUrl(ServerURL.Questionnaire_Url);
     }
 }
