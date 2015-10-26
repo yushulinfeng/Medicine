@@ -125,7 +125,7 @@ public class RemindTest extends Activity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(RemindTest.this, ClockDialog.class);
-                intent.putExtra("method", 2);
+                intent.putExtra("method", 3);
                 intent.putExtra("text", "--总计2种药物--\n\n药品：阿莫西林\n备注：可以不填\n提醒：测试闹钟"
                         + "\n\n药品：阿莫西林2\n备注：可以不填2\n提醒：测试闹钟2");
                 startActivity(intent);
