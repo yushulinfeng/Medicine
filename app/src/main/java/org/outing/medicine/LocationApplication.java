@@ -55,8 +55,8 @@ public class LocationApplication extends Application {
 
                 @Override
                 public ConnectList setParam(ConnectList list) {
-                    list.put("latitude", ""+location.getLongitude());
-                    list.put("longitude", ""+location.getLatitude());
+                    list.put("longitude", ""+location.getLongitude());
+                    list.put("latitude", ""+location.getLatitude());
                     return list;
                 }
 

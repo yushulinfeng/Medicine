@@ -220,33 +220,4 @@ public class PersonalCenterActivity extends TActivity {
         mLocationClient.setLocOption(option) ;
     }
 
-
-
-    LocationListener locationListener=new LocationListener() {
-        @Override
-        public void onLocationChanged(Location location) {
-            //更新经纬度
-            latitude=location.getLatitude();
-            longitude=location.getLongitude();
-            Toast.makeText(PersonalCenterActivity.this,"实时监测",Toast.LENGTH_SHORT).show();
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {
-
-        }
-
-        @Override
-        public void onProviderEnabled(String provider) {
-
-        }
-
-        @Override
-        public void onProviderDisabled(String provider) {
-
-        }
-    };
-
-
-
 }

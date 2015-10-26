@@ -21,11 +21,11 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
-        }
-    }
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-    }
+}
+}
+packagingOptions {
+    exclude 'META-INF/LICENSE.txt'
+}
 }
 
 dependencies {
