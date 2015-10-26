@@ -13,11 +13,10 @@
         android:orientation="horizontal" >
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:gravity="start|center_vertical"
             android:layout_height="match_parent"
-            android:text="姓名： "
+            android:text="姓名:  "
             android:textColor="@color/black"
             android:textSize="24sp" />
 
@@ -45,11 +44,10 @@
     android:orientation="horizontal">
 
     <TextView
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
         android:gravity="start|center_vertical"
-        android:text="号码："
+        android:text="号码: "
         android:textColor="@color/black"
         android:textSize="25sp" />
 
@@ -72,11 +70,10 @@
         android:orientation="horizontal">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:gravity="start|center_vertical"
             android:layout_height="match_parent"
-            android:text="关系： "
+            android:text="关系: "
             android:textColor="@color/black"
             android:textSize="24sp" />
 
