@@ -16,6 +16,8 @@ import org.outing.medicine.tools.ToDealBitmap;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 //没用的先留着，不要删除
 //可以写个锁屏，但是……再议。
@@ -97,7 +99,14 @@ public class WidgetImage {
         //这里最好先读取原来的图片
         int text_size = 40;
         int text1_x = bitmap.getWidth() / 2 - text_size * line1.length() / 2;
-        int text2_x = bitmap.getWidth() / 2 - text_size * line2.length() / 2;
+        int text2_x = 0;//数字长度要短些
+        Pattern pattern = Pattern.compile("[0-9]*");
+        Matcher isNum = pattern.matcher(line2);
+        if (!isNum.matches()) {//false
+            text2_x = bitmap.getWidth() / 2 - text_size * line2.length() / 2;
+        } else {
+            text2_x = bitmap.getWidth() / 2 - text_size * line2.length() / 7 * 2;//纯数字
+        }
         int text1_y = bitmap.getHeight() / 4;
         int text2_y = text1_y + text_size;
         Canvas cacheCanvas = new Canvas();
