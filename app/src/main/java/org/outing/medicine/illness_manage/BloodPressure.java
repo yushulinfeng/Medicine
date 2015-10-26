@@ -127,7 +127,6 @@ public class BloodPressure extends Activity implements View.OnClickListener {
 
         // create a data object with the datasets
         LineData lineData = new LineData(xValues, lineDataSets);
-
         return lineData;
     }
 
