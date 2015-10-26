@@ -27,7 +27,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="请输入姓名"
-            android:singleLine="true"
             android:textSize="24sp" />
 
         <Button
@@ -59,7 +58,6 @@
         android:layout_gravity="center"
         android:hint="输入或通讯录选择"
         android:inputType="number"
-        android:singleLine="true"
         android:textSize="24sp" />
 
 </LinearLayout>
@@ -84,7 +82,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="请输入与联系人关系关系"
-            android:singleLine="true"
             android:textSize="24sp" />
     </LinearLayout>
 
