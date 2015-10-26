@@ -16,9 +16,9 @@ public class ConnectList {
     }
 
     public ConnectList put(String key, String value) {
-        try{
-            value= URLEncoder.encode(value,"UTF-8");
-        }catch (Exception e){
+        try {
+            value = URLEncoder.encode(value, "UTF-8");
+        } catch (Exception e) {
             return this;
         }
         NameValuePair item = new BasicNameValuePair(key, value);
@@ -27,10 +27,7 @@ public class ConnectList {
     }
 
     public ConnectList put(String key, int value) {
-        /*不是骗你，PHP后台，post过去键值对String与int收到的结果是相同的*/
-        NameValuePair item = new BasicNameValuePair(key, value + "");
-        list.add(item);
-        return this;
+        return put(key, value + "");
     }
 
     public List<NameValuePair> getList() {

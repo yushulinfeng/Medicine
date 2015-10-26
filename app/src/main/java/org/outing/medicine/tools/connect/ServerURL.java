@@ -16,6 +16,9 @@ public class ServerURL {
 
     public static final String SCORE_ADD = BASE_ADDRESS + "/add_score";
 
+	public static final String KNOW_GET_ESSAYLIST = BASE_ADDRESS + "get_docs_list";
+    public static final String KNOW_GET_ESSAYITEM = BASE_ADDRESS + "get_doc";
+	
     //健康数据的接口
     public static final String Get_Body_Message=BASE_ADDRESS+"/get_data";
     public static final String Post_Body_Message=BASE_ADDRESS+"/post_data";

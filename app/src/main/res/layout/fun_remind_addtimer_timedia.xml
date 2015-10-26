@@ -4,14 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/know_list_item_title"
+    <TimePicker
+        android:id="@+id/fun_remind_addtimer_timepicker"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:text="文章标题"
-        android:textColor="@color/black"
-        android:textSize="32sp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>

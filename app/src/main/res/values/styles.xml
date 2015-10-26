@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="android:Theme.Light"></style>
+    <style name="AppBaseTheme" parent="android:Theme.Holo.Light"></style>
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
@@ -16,14 +16,31 @@
         <!-- 使用淡入淡出动画 -->
         <item name="android:windowAnimationStyle">@style/fadeActivityTheme</item>
     </style>
+
     <!-- Light theme. -->
     <style name="LightTheme" parent="AppBaseTheme">
 
         <!-- 无标题栏 -->
         <item name="android:windowNoTitle">true</item>
     </style>
+
     <!-- Dark theme. -->
     <style name="DarkTheme" parent="android:Theme.NoTitleBar"></style>
+
+    <!-- Dialog theme. -->
+    <style name="MyDialogTheme" parent="android:style/Theme.Dialog">
+
+        <!-- 背景颜色及透明程度 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!-- 是否有标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 是否模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 是否点击外部关闭 -->
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
 
     <!-- 淡入淡出动画 -->
     <style name="fadeActivityTheme" parent="@android:style/Animation.Activity">

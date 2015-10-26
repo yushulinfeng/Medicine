@@ -103,7 +103,7 @@ public class DrugTool {
     public static void addCollect(Context context, AnDrug new_drug) {
         if (new_drug == null || new_drug.getName().equals(""))
             return;
-        ArrayList<AnDrug> array = getHistory(context);
+        ArrayList<AnDrug> array = getCollect(context);
         int count = array.size();
         SharedPreferences.Editor prefs = context.getSharedPreferences(
                 COLLECT_SAVE_PATH, Activity.MODE_PRIVATE).edit();
@@ -139,7 +139,7 @@ public class DrugTool {
      * 是否已经收藏
      */
     public static boolean isCollected(Context context, AnDrug new_drug) {
-        ArrayList<AnDrug> array = getHistory(context);
+        ArrayList<AnDrug> array = getCollect(context);
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i).getName().equals(new_drug.getName())
                     && array.get(i).getCommonName()
@@ -153,7 +153,7 @@ public class DrugTool {
      * 删除收藏
      */
     public static boolean deleteCollect(Context context, AnDrug drug) {
-        ArrayList<AnDrug> array = getHistory(context);
+        ArrayList<AnDrug> array = getCollect(context);
         int index = -1;
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i).getName().equals(drug.getName())

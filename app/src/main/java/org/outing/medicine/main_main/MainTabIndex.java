@@ -12,6 +12,7 @@ import android.widget.Button;
 import org.outing.medicine.R;
 import org.outing.medicine.fun_drug.DrugMain;
 import org.outing.medicine.fun_know.KnowMain;
+import org.outing.medicine.fun_remind.RemindMain;
 import org.outing.medicine.fun_tools.ToolsMain;
 import org.outing.medicine.illness_manage.IllnessManageActivity;
 import org.outing.medicine.personal_center.PersonalCenterActivity;
@@ -44,7 +45,7 @@ public class MainTabIndex extends Fragment implements OnClickListener {
                 intent = new Intent(getActivity(), ToolsMain.class);
                 break;
             case R.id.index_remind:
-
+                intent = new Intent(getActivity(), RemindMain.class);
                 break;
             case R.id.index_illness:
                 intent = new Intent(getActivity(), IllnessManageActivity.class);

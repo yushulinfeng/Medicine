@@ -43,6 +43,12 @@
                 android:layout_height="100dp"
                 android:text="老年健康知识"
                 android:textSize="@dimen/know_main_btn_size" />
+            <Button
+                android:id="@+id/fun_know_net"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:text="-联网获取知识-"
+                android:textSize="@dimen/know_main_btn_size" />
         </LinearLayout>
     </ScrollView>
 

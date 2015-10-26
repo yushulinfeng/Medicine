@@ -216,6 +216,10 @@ public class DrugMain extends NetTActivity implements OnClickListener {
 				edit.setText("");
 				return;
 			}
+			if(search_name.contains("|")){//竖线一般手机不容易输入
+				//到时候，就用这个作为分隔符
+				search_name=search_name.replace("|"," ");
+			}
 			DrugTool.addHistory(this, new AnDrug(search_name, ""));// 第二位就应该为空、、、、、、、、、、、、、、、去重
 			is_history = false;
 			search(search_name);

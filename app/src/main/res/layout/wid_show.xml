@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/open_apk_wid_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_rectf_white"
+    android:gravity="center"
+    android:padding="5dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/wid_show_tv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="老友网"
+        android:background="@drawable/shape_rectf_white_deep"
+        android:textColor="@color/black"
+        android:textSize="24sp" />
+
+</LinearLayout>
