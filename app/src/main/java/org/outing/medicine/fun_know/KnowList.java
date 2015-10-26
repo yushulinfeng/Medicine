@@ -91,17 +91,17 @@ public class KnowList extends TActivity implements XListView.XListViewListener {
         list.setOnItemClickListener(new OnItemClickListener() {// 只添加点击即可
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                clickItem(position);
+                clickItem(position - 1);//XList
             }
         });
     }
 
     private void initLocalView() {
+        list.setPullRefreshEnable(false);
         if (android.os.Build.VERSION.SDK_INT >= 19) {//受到系统版本影响
             list.setFooterDividersEnabled(false);
             list.setSpring();
         } else {
-            list.setPullRefreshEnable(false);
             list.setSpring();
             list.setPullLoadEnable(false);
         }

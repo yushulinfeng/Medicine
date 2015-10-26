@@ -3,7 +3,6 @@ package org.outing.medicine.fun_know;
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.SimpleAdapter;
 
 import org.dom4j.Document;
@@ -64,13 +63,27 @@ public class KnowSublist extends TActivity implements XListViewListener {
             for (Element child : childList) {
                 array.add(child.getName());
             }
-
         } catch (Exception e) {
         }
     }
 
     private void initView() {
         list = (XListView) findViewById(R.id.know_sublist_list);
+        list.setXListViewListener(this);
+        list.setPullRefreshEnable(false);
+        if (android.os.Build.VERSION.SDK_INT >= 19) {//受到系统版本影响
+            list.setFooterDividersEnabled(false);
+            list.setSpring();
+        } else {
+            list.setSpring();
+            //list.setPullLoadEnable(false);//项目多时，注释此行即可（项目过少会出现双线）
+        }
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {// 只添加点击即可
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                clickItem(position - 1);//XList
+            }
+        });
         List<Map<String, Object>> items = new ArrayList<Map<String, Object>>();
         Map<String, Object> item = new HashMap<String, Object>();
         for (int i = 0; i < array.size(); i++) {
@@ -82,21 +95,6 @@ public class KnowSublist extends TActivity implements XListViewListener {
                 R.layout.fun_know_list_item, new String[]{"name"},
                 new int[]{R.id.know_list_item_title});
         list.setAdapter(adapter);
-        list.setXListViewListener(this);
-        list.setPullRefreshEnable(false);
-        if (android.os.Build.VERSION.SDK_INT >= 19) {//受到系统版本影响
-            list.setFooterDividersEnabled(false);
-            list.setSpring();
-        }else{
-            list.setSpring();
-        }
-
-        list.setOnItemClickListener(new OnItemClickListener() {// 只添加点击即可
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                clickItem(position);
-            }
-        });
     }
 
     private void clickItem(int index) {
@@ -104,7 +102,7 @@ public class KnowSublist extends TActivity implements XListViewListener {
         Intent intent = new Intent(this, KnowItem.class);
         intent.putExtra("file_name", file_name);
         intent.putExtra("sub_name", sub_name);
-        intent.putExtra("item_name", array.get(index - 1));
+        intent.putExtra("item_name", array.get(index));
         intent.putExtra("from_net", false);
         startActivity(intent);
     }
