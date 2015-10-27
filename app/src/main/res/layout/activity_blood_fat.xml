@@ -17,7 +17,7 @@
 
         <TextView
             android:layout_marginLeft="10dp"
-            android:text="血糖"
+            android:text="血脂"
             android:textSize="25dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
 
         <EditText
             android:id="@+id/edit_blood_fat"
-            android:hint="请输入您的血压"
+            android:hint="TC,TG,LDL-C,HDL-C"
             android:layout_marginLeft="30dp"
             android:textColor="#000000"
             android:background="@null"

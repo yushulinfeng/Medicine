@@ -139,7 +139,7 @@ public class BloodSuger extends Activity implements View.OnClickListener {
                 final String sugerIn=editIn.getText().toString();
                 try {
                     //报错则说明不是整数
-                    int i=Integer.parseInt(sugerIn);
+                    Double i=Double.parseDouble(sugerIn);
                     if (i<=0){
                         Integer.parseInt("产生错误，转到catch");
                     }if (i<=10||i>=500){
