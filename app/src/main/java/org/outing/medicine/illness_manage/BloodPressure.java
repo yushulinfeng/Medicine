@@ -175,7 +175,7 @@ public class BloodPressure extends Activity implements View.OnClickListener {
                                 Log.d("TAG", response);
                                 JSONArray arr = null;
                                 try {
-                                    Log.d("TAG", response);
+                                    Log.d("TAG",  response);
                                     if (response.equals("0")){
                                         Toast.makeText(BloodPressure.this, "上传成功",
                                                 Toast.LENGTH_SHORT).show();
