@@ -45,7 +45,8 @@ public class IllnessManageActivity extends Activity implements View.OnClickListe
                 intent = new Intent(this, BloodFat.class);
                 break;
             case R.id.index_search:
-                Toast.makeText(this, "开发中...", Toast.LENGTH_SHORT).show();
+                intent = new Intent(this, Questionnaire.class);
+           //     Toast.makeText(this, "开发中...", Toast.LENGTH_SHORT).show();
                 break;
         }
         if (intent != null) {

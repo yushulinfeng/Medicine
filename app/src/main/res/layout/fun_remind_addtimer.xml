@@ -54,8 +54,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:editable="false"
-            android:hint="点击选择提醒方式"
             android:singleLine="true"
+            android:text="声音提醒"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -76,7 +76,7 @@
             android:textSize="24sp" />
 
         <EditText
-            android:id="@+id/remind_adddtimer_et_time"
+            android:id="@+id/remind_addtimer_et_time"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -111,4 +111,19 @@
             android:text="取消"
             android:textSize="24sp" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:tag="占位专用" />
+
+    <Button
+        android:id="@+id/remind_addtimer_btn_del"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="删除闹钟"
+        android:visibility="gone"
+        android:textSize="24sp" />
 </LinearLayout>

@@ -79,6 +79,7 @@ public class ContactAdd extends TActivity implements OnClickListener {
 		btn_album.setOnClickListener(this);
 		btn_sure.setOnClickListener(this);
 		btn_cancel.setOnClickListener(this);
+
 	}
 
 	// 调用系统裁剪

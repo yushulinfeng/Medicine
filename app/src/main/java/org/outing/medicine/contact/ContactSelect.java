@@ -1,13 +1,5 @@
 package org.outing.medicine.contact;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
-
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
@@ -21,6 +13,14 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import org.outing.medicine.R;
+import org.outing.medicine.tools.TActivity;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ContactSelect extends TActivity {
 	private TextView tv_load;

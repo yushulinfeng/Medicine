@@ -120,9 +120,9 @@ public class ConnectUser extends ConnectBase {
                 if (result > 0)
                     return new ConnectStatus(true, "");
                 else if (result == -1)
-                    return new ConnectStatus(true, "登录失败");
+                    return new ConnectStatus(false, "登录失败");
                 else//-2
-                    return new ConnectStatus(true, "用户名或密码错误");
+                    return new ConnectStatus(false, "用户名或密码错误");
             } catch (Exception e) {
                 return new ConnectStatus(false, "系统错误");
             }
@@ -138,11 +138,11 @@ public class ConnectUser extends ConnectBase {
                 if (result > 0)
                     return new ConnectStatus(true, "");
                 else if (result == -1) {
-                    return new ConnectStatus(true, "注册失败");
+                    return new ConnectStatus(false, "注册失败");
                 } else if (result == -2)
-                    return new ConnectStatus(true, "手机号已被注册");
+                    return new ConnectStatus(false, "手机号已被注册");
                 else//-3
-                    return new ConnectStatus(true, "密码过短");
+                    return new ConnectStatus(false, "密码过短");
             } catch (Exception e) {
                 return new ConnectStatus(false, "系统错误");
             }

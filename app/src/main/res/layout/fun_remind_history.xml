@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/top" />
+
+    <TextView
+        android:id="@+id/remind_history_tv_show"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:text="用药提醒历史"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/remind_history_tv_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text=""
+                android:textColor="@color/black"
+                android:textSize="16sp" />
+        </ScrollView>
+
+        <ListView
+            android:id="@+id/remind_history_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/gray"
+            android:dividerHeight="1dp"
+            android:padding="3dp"
+            android:scrollbars="none" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/remind_history_btn_clear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="清空历史"
+        android:textColor="@color/black"
+        android:textSize="32sp" />
+</LinearLayout>

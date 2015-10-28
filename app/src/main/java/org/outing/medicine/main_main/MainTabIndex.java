@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import org.outing.medicine.R;
 import org.outing.medicine.fun_drug.DrugMain;
@@ -23,15 +24,14 @@ public class MainTabIndex extends Fragment implements OnClickListener {
         View view = inflater.inflate(R.layout.tab_center_index, container,
                 false);
 
-        //这是六个button
-        view.findViewById(R.id.index_tools).setOnClickListener(this);
-        view.findViewById(R.id.index_remind).setOnClickListener(this);
-        view.findViewById(R.id.index_illness).setOnClickListener(this);
-        view.findViewById(R.id.index_query)
+        ((Button) view.findViewById(R.id.index_tools)).setOnClickListener(this);
+        ((Button) view.findViewById(R.id.index_remind)).setOnClickListener(this);
+        ((Button) view.findViewById(R.id.index_illness)).setOnClickListener(this);
+        ((Button) view.findViewById(R.id.index_query))
                 .setOnClickListener(this);
-        view.findViewById(R.id.index_knowledge)
+        ((Button) view.findViewById(R.id.index_knowledge))
                 .setOnClickListener(this);
-        view.findViewById(R.id.index_my)
+        ((Button) view.findViewById(R.id.index_my))
                 .setOnClickListener(this);
 
         return view;

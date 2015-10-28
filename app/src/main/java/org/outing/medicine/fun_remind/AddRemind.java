@@ -1,12 +1,15 @@
 package org.outing.medicine.fun_remind;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,14 +20,15 @@ import org.outing.medicine.tools.ToDealBitmap;
 
 import java.io.File;
 
-public class AddDrug extends TActivity implements View.OnClickListener {
+public class AddRemind extends TActivity implements View.OnClickListener {
     private static final int CODE_ALBUM_START = 1;
     private static final int CODE_CAMERA_START = 2;
     private static final int CODE_CROP_START = 3;
     private EditText et_title, et_text;
     private ImageView iv_show;
     private Button btn_default, btn_camera, btn_album, btn_sure, btn_cancel;
-    private String icon_path, drug_id;
+    private String icon_path, drug_id, drug_name, drug_text;
+    private boolean is_alter = false;
 
     @Override
     public void onCreate() {
@@ -32,8 +36,34 @@ public class AddDrug extends TActivity implements View.OnClickListener {
         setTitle("添加用药提醒");
         showBackButton();
 
-        initLogic();
+        initMessage();
         initView();
+        if (is_alter) {//修改
+            setTitle("修改用药提醒");
+        } else {//添加
+            initLogic();
+            showKeyboard();
+        }
+    }
+
+    private void initMessage() {
+        Intent intent = getIntent();
+        try {
+            is_alter = intent.getBooleanExtra("is_alter", false);
+        } catch (Exception e) {
+            is_alter = false;
+        }
+        //不是修改直接返回即可
+        if (!is_alter)
+            return;
+        try {
+            drug_id = intent.getStringExtra("drug_id");
+            drug_name = intent.getStringExtra("drug_name");
+            drug_text = intent.getStringExtra("drug_text");
+            icon_path = intent.getStringExtra("icon_path");
+        } catch (Exception e) {
+            is_alter = false;
+        }
     }
 
     private void initLogic() {
@@ -55,6 +85,29 @@ public class AddDrug extends TActivity implements View.OnClickListener {
         btn_album.setOnClickListener(this);
         btn_sure.setOnClickListener(this);
         btn_cancel.setOnClickListener(this);
+
+        if (is_alter) {
+            et_title.setText(drug_name);
+            et_title.setSelection(drug_name.length());// 定位光标到最后
+            et_text.setText(drug_text);
+            if (icon_path == null || icon_path.equals("") || !new File(icon_path).exists())
+                iv_show.setImageBitmap(BitmapFactory.decodeResource(getResources(),
+                        R.drawable.fun_remind_drug_default));//加载默认图片
+            else
+                iv_show.setImageBitmap(BitmapFactory.decodeFile(icon_path));
+        }
+    }
+
+    private void showKeyboard() {
+        //由于某种原因，它不能自动弹出来，只能在此处调用了
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                et_title.requestFocus();
+                InputMethodManager imm = (InputMethodManager) et_title.getContext()
+                        .getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(0, InputMethodManager.SHOW_FORCED);//弹出键盘
+            }
+        }, 100);
     }
 
     // 调用系统裁剪
@@ -84,8 +137,8 @@ public class AddDrug extends TActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.remind_adddrug_btn_default:
-                Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
-                ///////////////////////////////////更换图片
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),
+                        R.drawable.fun_remind_drug_default);
                 saveBitmap(bitmap);
                 iv_show.setImageBitmap(bitmap);
                 break;
@@ -102,13 +155,20 @@ public class AddDrug extends TActivity implements View.OnClickListener {
                 startActivityForResult(intent1, CODE_ALBUM_START);
                 break;
             case R.id.remind_adddrug_btn_sure:
-                String name = et_title.getText().toString();
-                String text = et_text.getText().toString();
-                if (name.equals("")) {
+                drug_name = et_title.getText().toString();
+                drug_text = et_text.getText().toString();
+                if (drug_name.equals("")) {
                     showToast("药品名称不能为空！");
                     return;
                 }
-                RemindTool.addDrug(this, new AnRemind(drug_id, name, text));
+                AnRemind remind_temp=new AnRemind(drug_id, drug_name, drug_text);
+                if(is_alter){
+                    RemindTool.alterDrug(this, remind_temp);
+                    showToast("修改成功");
+                }else{
+                    RemindTool.addDrug(this, remind_temp);
+                    showToast("添加成功");
+                }
                 finish();
                 break;
             case R.id.remind_adddrug_btn_cancel:

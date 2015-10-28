@@ -25,8 +25,8 @@ public class FirstRunFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        if (text != null) {
-            TextView view = new TextView(getActivity());
+        if(text!=null){
+            TextView view=new TextView(getActivity());
             view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT));
             view.setGravity(Gravity.CENTER);

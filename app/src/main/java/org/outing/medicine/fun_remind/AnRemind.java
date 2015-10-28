@@ -5,8 +5,6 @@ public class AnRemind {
     private String drugName = "";
     private String drugText = "";
 
-    //图片先用默认的，检测SD卡是否有该图片，然后判断是否加载即可
-
     public AnRemind() {
     }
 

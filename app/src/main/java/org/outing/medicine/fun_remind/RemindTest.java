@@ -1,6 +1,9 @@
 package org.outing.medicine.fun_remind;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -8,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,7 +43,11 @@ public class RemindTest extends Activity {
         tv.setGravity(Gravity.CENTER);
         tv.setTextSize(20);
         layout.addView(tv);
-        return layout;
+        ScrollView scroll = new ScrollView(this);
+        scroll.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+                LayoutParams.MATCH_PARENT));
+        scroll.addView(layout);
+        return scroll;
     }
 
     private Button addButton(String text, OnClickListener listener) {
@@ -91,6 +99,48 @@ public class RemindTest extends Activity {
             @Override
             public void onClick(View v) {
                 RemindTool.clearDrug(RemindTest.this);
+            }
+        });
+        addButton("闹钟响铃界面", new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RemindTest.this, ClockDialog.class);
+                intent.putExtra("method", 0);
+                intent.putExtra("text", "--总计2种药物--\n\n药品：阿莫西林\n备注：可以不填\n提醒：测试闹钟"
+                        + "\n\n药品：阿莫西林2\n备注：可以不填2\n提醒：测试闹钟2");
+                startActivity(intent);
+            }
+        });
+        addButton("闹钟震动界面", new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RemindTest.this, ClockDialog.class);
+                intent.putExtra("method", 1);
+                intent.putExtra("text", "--总计2种药物--\n\n药品：阿莫西林\n备注：可以不填\n提醒：测试闹钟"
+                        + "\n\n药品：阿莫西林2\n备注：可以不填2\n提醒：测试闹钟2");
+                startActivity(intent);
+            }
+        });
+        addButton("闹钟通知栏界面（建议自用）", new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RemindTest.this, ClockDialog.class);
+                intent.putExtra("method", 3);
+                intent.putExtra("text", "--总计2种药物--\n\n药品：阿莫西林\n备注：可以不填\n提醒：测试闹钟"
+                        + "\n\n药品：阿莫西林2\n备注：可以不填2\n提醒：测试闹钟2");
+                startActivity(intent);
+            }
+        });
+        addButton("闹钟历史记录", new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(RemindTest.this)
+                        .setPositiveButton("历史记录", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent intent = new Intent(RemindTest.this, RemindHistory.class);
+                                startActivity(intent);
+                            }
+                        }).show();
             }
         });
         addButton("返回", new OnClickListener() {
