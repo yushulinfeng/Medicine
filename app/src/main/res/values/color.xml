@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <color name="btn_1_normal">#2a8ad6</color>
+    <color name="btn_1_pressed">#1d6096</color>
+    <color name="btn_2_normal">#9071bd</color>
+    <color name="btn_2_pressed">#443559</color>
+    <color name="btn_3_normal">#e87a19</color>
+    <color name="btn_3_pressed">#995010</color>
+    <color name="btn_4_normal">#47b226</color>
+    <color name="btn_4_pressed">#2a6916</color>
+    <color name="btn_5_normal">#69788b</color>
+    <color name="btn_5_pressed">#22272d</color>
+    <color name="btn_6_normal">#0fb3b4</color>
+    <color name="btn_6_pressed">#095e5f</color>
+
+    <color name="btn_blue_normal">#00b7ed</color>
+    <color name="btn_blue_pressed">#0583a8</color>
     <color name="topbar_bg">#0b88da</color>
     <color name="tab_center_bg">#fcfcfc</color>
     <color name="tab_line_dark">#eeeeee</color>

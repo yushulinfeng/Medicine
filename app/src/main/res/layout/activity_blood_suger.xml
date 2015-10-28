@@ -41,12 +41,12 @@
 
     <Button
         android:id="@+id/btn_write"
-        android:text="上传"
+        android:text="上 传"
         android:textSize="20dp"
         android:textColor="#ffffff"
-        android:background="@drawable/blue_button"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:background="@drawable/btn_action"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -55,32 +55,34 @@
         />
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
-        android:layout_height="45dp"
+        android:layout_height="40dp"
         android:orientation="horizontal"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="15dp"
-        android:background="@drawable/white_ground">
+        android:layout_marginBottom="10dp"
+        android:background="#f0f0f0">
 
         <Button
             android:text="分时"
-            android:textSize="20dp"
+            android:textSize="18dp"
+            android:layout_marginRight="1dp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/blue_button"/>
+            android:background="@drawable/btn_action"/>
 
         <Button
             android:text="日"
-            android:textSize="20dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="1dp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/blue_button"/>
+            android:background="@drawable/btn_action"/>
 
 
     </LinearLayout>

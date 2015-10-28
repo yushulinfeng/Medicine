@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -66,6 +67,8 @@ public class MainTabContact extends Fragment implements OnClickListener {
 			heads[i] = (ImageView) view.findViewById(head_ids[i]);
 			names[i] = (TextView) view.findViewById(name_ids[i]);
 			relatives[i]=(TextView)view.findViewById(relative_ids[i]);
+//			names[i].setBackgroundColor(Color.argb(255, 0, 255, 0)); //背景透明度
+//			relatives[i].setTextColor(Color.argb(255, 0, 255, 0));   //文字透明度
 			btns[i].setOnClickListener(this);
 			registerForContextMenu(btns[i]);
 
@@ -73,7 +76,7 @@ public class MainTabContact extends Fragment implements OnClickListener {
 			try {
 				String name=ContactTool.getAnContact(getActivity(), i).getName();
 				if (name.equals("")){
-					names[i].setText("添加联系人");
+					names[i].setText("添 加");
 				}else {
 					names[i].setText(name);
 				}
@@ -97,7 +100,7 @@ public class MainTabContact extends Fragment implements OnClickListener {
 				Bitmap bitmap= null;
 				bitmap=ToDealBitmap.getFromFile(imagePath);
 				if (bitmap==null){
-					heads[i].setImageResource(R.drawable.headicon_default);
+					heads[i].setImageResource(R.drawable.contact_back);
 				}else {
 					heads[i].setImageBitmap(bitmap);
 				}}catch (Exception e) {

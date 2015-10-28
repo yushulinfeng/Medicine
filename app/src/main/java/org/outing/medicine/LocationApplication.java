@@ -62,7 +62,7 @@ public class LocationApplication extends Application {
 
                 @Override
                 public void onResponse(String response) {
-                    Log.d("TAG", response);
+
                 }
 
                 @Override

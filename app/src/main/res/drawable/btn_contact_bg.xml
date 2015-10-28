@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@color/contact_btn_light" android:state_pressed="true"/>
-    <item android:drawable="@color/no_color"/>
+    <item android:drawable="@drawable/contact_shape_pressed" android:state_pressed="true"/>
+    <item android:drawable="@drawable/contact_shape_normal"/>
 
 </selector>

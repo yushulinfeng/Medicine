@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 
 import org.outing.medicine.R;
@@ -21,6 +22,7 @@ public class MainTabIndex extends Fragment implements OnClickListener {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.tab_center_index, container,
                 false);
 

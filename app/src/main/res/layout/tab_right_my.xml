@@ -29,20 +29,20 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/headicon_default" />
+                    android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
                     android:layout_alignParentBottom="true"
 
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
                 <TextView
@@ -50,12 +50,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
                     android:layout_above="@+id/contact_tv_relative1"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
 
@@ -73,19 +73,19 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/headicon_default" />
+                    android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
                     android:layout_alignParentBottom="true"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
                 <TextView
@@ -93,12 +93,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
                     android:layout_above="@+id/contact_tv_relative2"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
         </LinearLayout>
@@ -123,19 +123,19 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/headicon_default" />
+                    android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
                     android:layout_alignParentBottom="true"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
                 <TextView
@@ -143,12 +143,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
                     android:layout_above="@+id/contact_tv_relative3"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
 
@@ -166,19 +166,19 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/headicon_default" />
+                    android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
                     android:layout_alignParentBottom="true"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
                 <TextView
@@ -186,12 +186,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
                     android:layout_above="@+id/contact_tv_relative4"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
         </RelativeLayout>
         </LinearLayout>
@@ -216,19 +216,19 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/headicon_default" />
+                    android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
                     android:layout_alignParentBottom="true"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
                 <TextView
@@ -236,12 +236,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
                     android:layout_above="@+id/contact_tv_relative5"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
 
@@ -259,19 +259,19 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/headicon_default" />
+                    android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
                     android:layout_alignParentBottom="true"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
                 <TextView
@@ -279,12 +279,12 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom"
-                    android:background="#4FFF"
+                    android:background="#e08dc6f1"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
                     android:layout_above="@+id/contact_tv_relative6"
-                    android:textColor="@color/black"
+                    android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
         </LinearLayout>

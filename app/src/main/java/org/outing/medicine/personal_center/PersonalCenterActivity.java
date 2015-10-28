@@ -1,6 +1,8 @@
 package org.outing.medicine.personal_center;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
@@ -33,6 +35,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.outing.medicine.LocationApplication;
 import org.outing.medicine.R;
+import org.outing.medicine.contact.AnContact;
+import org.outing.medicine.contact.ContactTool;
+import org.outing.medicine.fun_tools.WidgetImage;
+import org.outing.medicine.fun_tools.WidgetShow;
+import org.outing.medicine.fun_tools.WidgetTool;
 import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.chat.Coordinates;
 import org.outing.medicine.tools.chat.ShowChart;
@@ -52,7 +59,7 @@ import java.util.Map;
  */
 public class PersonalCenterActivity extends TActivity {
     private LocationClient mLocationClient;
-    private ToggleButton locationButton=null;
+    private ToggleButton locationButton=null,contactButton=null;
     private EditText editName,editSex,editAge,
             editIll,editLocation, editContact;
     private String name,age,sex,ill,location,contact;
@@ -60,18 +67,27 @@ public class PersonalCenterActivity extends TActivity {
     private double latitude;
     private double longitude;
     private Handler hanSet;
+    private WidgetImage wid;
 
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_person_center);
         showBackButton();
         showMenuButton();
-        showPersonalInfo();
+        try{
+            showPersonalInfo();
+        }catch (Exception e){
+            showToast("加载个人信息异常，请联网使用");
+        }
         //设置完成的图片
         ((ImageButton) findViewById(R.id.top_menu))
                 .setBackgroundResource(R.drawable.yes);
         init();
         mLocationClient = ((LocationApplication)getApplication()).mLocationClient;
+        SharedPreferences pref=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE);
+        //设置两个按钮初始值
+        locationButton.setChecked( pref.getBoolean("locationButton",false));
+        contactButton.setChecked(pref.getBoolean("contactButton",false));
         //设置地理信息
         locationButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -79,15 +95,52 @@ public class PersonalCenterActivity extends TActivity {
                 Log.d("test", "isChecked" + isChecked);
                 Boolean weatherOn = isChecked;
                 if (weatherOn) {
-                    initLocation();
-                    mLocationClient.start();//定位SDK start之后会默认发起一次定位请求，开发者无须判断isstart并主动调用request
+
+                    try{
+                        initLocation();
+                        mLocationClient.start();//定位SDK start之后会默认发起一次定位请求，开发者无须判断isstart并主动调用request
+                        SharedPreferences.Editor editor=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE).edit();
+                        editor.putBoolean("locationButton", true);
+                        editor.commit();
+                    }catch (Exception e){
+                        showToast("定位功能请联网使用");
+                    }
+
 
                 }else {
                     mLocationClient.stop();
+                    SharedPreferences.Editor editor=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE).edit();
+                    editor.putBoolean("locationButton", false);
+                    editor.commit();
                 }
             }
         });
 
+        //设置地理信息
+        contactButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Log.d("test", "isChecked" + isChecked);
+                Boolean weatherOn = isChecked;
+                AnContact contact = ContactTool.getAnContact(PersonalCenterActivity.this,0 );
+                Log.d("test", "contact" +contact.getName());
+                if (weatherOn) {
+                    WidgetTool.saveWidText(PersonalCenterActivity.this, contact.getName()+"\n"+contact.getPhone());
+                    WidgetShow.updatewidget(PersonalCenterActivity.this);
+                    wid.showTextOnWallPaper(PersonalCenterActivity.this, contact.getName(), contact.getPhone());
+                    SharedPreferences.Editor editor=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE).edit();
+                    editor.putBoolean("contactButton", true);
+                    editor.commit();
+                }else {
+                    WidgetTool.saveWidText(PersonalCenterActivity.this, "老友网");
+                    WidgetShow.updatewidget(PersonalCenterActivity.this);
+                    wid.hideTextOnWallPaper(PersonalCenterActivity.this);
+                    SharedPreferences.Editor editor=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE).edit();
+                    editor.putBoolean("contactButton", false);
+                    editor.commit();
+                }
+            }
+        });
 
     }
 
@@ -202,6 +255,8 @@ public class PersonalCenterActivity extends TActivity {
         editLocation= (EditText) findViewById(R.id.edit_location);
         editContact=(EditText)findViewById(R.id.edit_contact);
         locationButton=(ToggleButton)findViewById(R.id.location_button);
+        contactButton= (ToggleButton) findViewById(R.id.contact_button);
+        wid = new WidgetImage();
     }
 
     private void initLocation(){

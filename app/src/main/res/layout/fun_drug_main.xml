@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <include layout="@layout/top" />
 
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/fun_drug_et_search"
@@ -55,5 +55,6 @@
         android:text="我的收藏"
         android:textColor="@color/black"
         android:textSize="32sp" />
+
 
 </LinearLayout>

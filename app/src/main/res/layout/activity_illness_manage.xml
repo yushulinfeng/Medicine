@@ -19,7 +19,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="血糖"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/btn_4"
+            android:textColor="#ffffff"
+            android:text="血 糖"
             android:textSize="@dimen/ill_btn_text_size" />
 
         <Button
@@ -27,7 +31,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="血压"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/btn_3"
+            android:textColor="#ffffff"
+            android:text="血 压"
             android:textSize="@dimen/ill_btn_text_size" />
     </LinearLayout>
 
@@ -35,6 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="4dp"
         android:orientation="horizontal" >
 
         <Button
@@ -42,7 +52,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="血脂"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="1dp"
+            android:background="@drawable/btn_1"
+            android:textColor="#ffffff"
+            android:text="血 脂"
             android:textSize="@dimen/ill_btn_text_size" />
 
         <Button
@@ -50,7 +64,11 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="问卷"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="1dp"
+            android:background="@drawable/btn_2"
+            android:textColor="#ffffff"
+            android:text="测 试"
             android:textSize="@dimen/ill_btn_text_size" />
     </LinearLayout>
 

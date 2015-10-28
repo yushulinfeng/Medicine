@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tab_center_bg"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
     <LinearLayout
@@ -16,16 +16,30 @@
             android:id="@+id/index_remind"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:text="用药\n提醒"
+            android:textColor="#ffffff"
+            android:paddingTop="30dp"
+            android:drawablePadding="-30dp"
+            android:drawableTop="@drawable/btn1"
+            android:text="用药提醒"
+            android:background="@drawable/btn_1"
             android:textSize="@dimen/main_btn_text_size" />
 
         <Button
             android:id="@+id/index_illness"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:text="慢病\n管理"
+            android:textColor="#ffffff"
+            android:paddingTop="30dp"
+            android:drawablePadding="-30dp"
+            android:drawableTop="@drawable/btn2"
+            android:text="慢病管理"
+            android:background="@drawable/btn_2"
             android:textSize="@dimen/main_btn_text_size" />
     </LinearLayout>
 
@@ -33,14 +47,22 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
+        android:layout_marginTop="3dp"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/index_query"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:text="用药\n查询"
+            android:paddingTop="30dp"
+            android:drawablePadding="-30dp"
+            android:drawableTop="@drawable/btn3"
+            android:text="用药查询"
+            android:textColor="#ffffff"
+            android:background="@drawable/btn_3"
             android:textSize="@dimen/main_btn_text_size" />
 
         <Button
@@ -48,7 +70,14 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="健康\n知识"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="1dp"
+            android:paddingTop="30dp"
+            android:drawablePadding="-30dp"
+            android:drawableTop="@drawable/btn4"
+            android:text="健康知识"
+            android:textColor="#ffffff"
+            android:background="@drawable/btn_4"
             android:textSize="@dimen/main_btn_text_size" />
     </LinearLayout>
 
@@ -56,22 +85,38 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
+        android:layout_marginTop="3dp"
+        android:layout_marginBottom="4dp"
         android:orientation="horizontal" >
 
         <Button
             android:id="@+id/index_tools"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="1dp"
             android:layout_weight="1"
-            android:text="常用\n工具"
+            android:background="@drawable/btn_5"
+            android:paddingTop="30dp"
+            android:drawablePadding="-30dp"
+            android:drawableTop="@drawable/btn5"
+            android:text="常用工具"
+            android:textColor="#ffffff"
             android:textSize="@dimen/main_btn_text_size" />
 
         <Button
             android:id="@+id/index_my"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="1dp"
             android:layout_weight="1"
-            android:text="我的\n设置"
+            android:background="@drawable/btn_6"
+            android:paddingTop="30dp"
+            android:drawablePadding="-30dp"
+            android:drawableTop="@drawable/btn6"
+            android:text="我的设置"
+            android:textColor="#ffffff"
             android:textSize="@dimen/main_btn_text_size" />
     </LinearLayout>
 
