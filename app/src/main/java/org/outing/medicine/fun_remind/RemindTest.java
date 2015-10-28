@@ -135,14 +135,12 @@ public class RemindTest extends Activity {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(RemindTest.this)
-                        .setMessage(ClockTool.getLog(RemindTest.this))
-                        .setPositiveButton("清空", new DialogInterface.OnClickListener() {
+                        .setPositiveButton("历史记录", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                ClockTool.cleanLog(RemindTest.this);
+                                Intent intent = new Intent(RemindTest.this, RemindHistory.class);
+                                startActivity(intent);
                             }
-                        })
-                        .setNegativeButton("返回", null).show();
-
+                        }).show();
             }
         });
         addButton("返回", new OnClickListener() {

@@ -21,7 +21,6 @@ public class ClockRing {
         this.context = context;
     }
 
-
     // 标准提醒
     public void startRing() {
         //声音初始化

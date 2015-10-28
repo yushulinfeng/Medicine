@@ -3,6 +3,8 @@ package org.outing.medicine.fun_know;
 import android.content.Intent;
 import android.widget.TextView;
 
+import com.alibaba.fastjson.JSONObject;
+
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -118,6 +120,10 @@ public class KnowItem extends TActivity {
                     tv_title.setText("获取数据失败");
                 else {
                     tv_title.setText(title);
+                    try {//json自带解析\\u问题(堪称完美)
+                        response = JSONObject.parse(response).toString();
+                    } catch (Exception e) {
+                    }
                     tv_essay.setText(response);
                 }
             }

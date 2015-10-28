@@ -10,11 +10,15 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.CoreConnectionPNames;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URLDecoder;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 安卓与后台连接类，本类中所有方法必须在多线程中执行<br>
@@ -24,6 +28,7 @@ import java.util.List;
  */
 @SuppressWarnings("deprecation")
 public class ConnectBase {
+    private static final String DECODE_UNICODE = "\\\\u([0-9a-zA-Z]{4})";
     private static String PHP_COOKIE = null;// 维持会话的cookie
     private Context context = null;
 
@@ -108,4 +113,27 @@ public class ConnectBase {
         }
     }
 
+
+    // 解决\\u问题
+    public static String decode(String s) {
+        Pattern reUnicode = Pattern.compile(DECODE_UNICODE);
+        Matcher m = reUnicode.matcher(s);
+        StringBuffer sb = new StringBuffer(s.length());
+        while (m.find()) {
+            m.appendReplacement(sb,
+                    Character.toString((char) Integer.parseInt(m.group(1), 16)));
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
+    // 解决\\u问题，简便方法
+    public static String decodeEasy(String s) {
+        try {//json自带解析
+            return new JSONObject(s).toString();
+            //JSONObject.parse(s).toString();//更好，尤其是带引号的
+        } catch (JSONException e) {
+            return s;
+        }
+    }
 }

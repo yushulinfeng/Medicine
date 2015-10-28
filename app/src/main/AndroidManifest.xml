@@ -181,6 +181,9 @@
             android:name=".fun_remind.ClockDialog"
             android:label="@string/app_name"
             android:theme="@style/MyDialogTheme"></activity>
+        <activity
+            android:name=".fun_remind.RemindHistory"
+            android:label="@string/app_name"></activity>
 
         <service android:name=".fun_remind.ClockService" />
 

@@ -17,9 +17,10 @@ import org.outing.medicine.tools.TActivity;
 
 public class AddTimer extends TActivity implements View.OnClickListener {
     public static final String[] context_items =
-            new String[]{"声音提醒", "震动提醒", "声音与振动"
-            //          , "通知栏提醒"
-            };
+            new String[]{"声音提醒", "震动提醒", "声音与振动", "通知栏提醒"};
+    boolean enable_show_note = false;
+    //直接修改这个bool值即可，它是不显示context_items的最后一项。
+    //因为注释掉最后一项影响的东西太多。
     //通知栏这个，后期可以自己用。它的逻辑麻烦一些，而且并不适合老人。（剩下的不必修改）
     private EditText et_title, et_method, et_time;
     private View pickerdialog;
@@ -108,8 +109,16 @@ public class AddTimer extends TActivity implements View.OnClickListener {
                 R.layout.fun_remind_addtimer_timedia, null);
         picker = (TimePicker) pickerdialog
                 .findViewById(R.id.fun_remind_addtimer_timepicker);
+        String[] dialog_item = null;
+        if (enable_show_note) {
+            dialog_item = context_items;//别名
+        } else {
+            dialog_item = new String[context_items.length - 1];
+            for (int i = 0; i < dialog_item.length; i++)
+                dialog_item[i] = context_items[i];
+        }
         method_dialog = new AlertDialog.Builder(this).setTitle("请选择提醒方式")
-                .setItems(context_items, new DialogInterface.OnClickListener() {
+                .setItems(dialog_item, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         refreshMethod(which);
                     }

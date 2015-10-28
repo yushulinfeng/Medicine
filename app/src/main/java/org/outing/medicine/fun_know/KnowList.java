@@ -166,8 +166,7 @@ public class KnowList extends TActivity implements XListView.XListViewListener {
         if (json.equals("") || json.equals("0")) {
             return;
         }
-        JSONObject json_all = JSONObject.parseObject(json);
-        JSONArray json_array = json_all.getJSONArray("essay");/////////////////////
+        JSONArray json_array = JSONArray.parseArray(json);
         for (int i = 0; i < json_array.size(); i++) {
             JSONObject json_item = json_array.getJSONObject(i);
             String id = json_item.getString("id");

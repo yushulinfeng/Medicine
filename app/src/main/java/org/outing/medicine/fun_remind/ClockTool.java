@@ -85,41 +85,6 @@ public class ClockTool {
 
     ////////////////////////////////////////建议直接联网上传数据
 
-    /**
-     * 完成用药
-     */
-    public static void takeMedicine(Context context, ArrayList<AnRing> array) {
-
-//////////////////////////////////////////////////////////////
-        String log = "用户完成用药\n" + getRingLogText(array);
-        saveLog(context, log);
-    }
-
-    /**
-     * 拒绝用药
-     */
-    public static void refuseMedicine(Context context, ArrayList<AnRing> array) {
-
-//////////////////////////////////////////////////////////////
-        String log = "用户拒绝用药\n" + getRingLogText(array);
-        saveLog(context, log);
-    }
-
-    private static String getRingLogText(ArrayList<AnRing> array_now) {
-        if (array_now.size() == 0)
-            return "";
-        String text_temp = "--总计" + array_now.size() + "种药物--";
-        for (int i = 0; i < array_now.size(); i++) {//不要引入ringtemp
-            text_temp += "\n";
-            text_temp += "\n药品：" + array_now.get(i).remind.getDrugName();
-            if (!array_now.get(i).remind.getDrugText().equals(""))//可以没有
-                text_temp += "\n备注：" + array_now.get(i).remind.getDrugText();
-            text_temp += "\n提醒：" + array_now.get(i).timer.getName();
-            text_temp += "\n\n";//好看
-        }
-        return text_temp;
-    }
-
     /////////////////////用药LOG/////////////////////
     private static void saveCardFile(Context context, String filepath,
                                      String string) {

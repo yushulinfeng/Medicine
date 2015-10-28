@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -40,7 +42,10 @@ public class RemindMain extends TActivity {
 
         initDialog();
         initView();
+
+        initTest();//测试专用，最后注释此行即可
     }
+
 
     private void initDialog() {
         method_dialog = new AlertDialog.Builder(this).setTitle("请选择操作")
@@ -177,11 +182,31 @@ public class RemindMain extends TActivity {
     //本地应该可以看用药记录。建议没有本地缓存，直接网络获取。
     @Override
     public void showContextMenu() {
-        startActivityForResult(new Intent(this, RemindTest.class), 0);
+        new AlertDialog.Builder(this)
+                .setPositiveButton("历史记录", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(RemindMain.this, RemindHistory.class);
+                        startActivity(intent);
+                    }
+                }).show();
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         updateList();
+    }
+
+    private void initTest() {
+        ImageButton top_menu = (ImageButton) findViewById(R.id.top_menu);
+        registerForContextMenu(top_menu);
+    }
+
+    // 长按响应：测试界面
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v,
+                                    ContextMenu.ContextMenuInfo menuInfo) {
+        if (v.getId() == R.id.top_menu)
+            startActivityForResult(new Intent(this, RemindTest.class), 0);
+        return;
     }
 }
