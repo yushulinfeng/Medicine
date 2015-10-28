@@ -93,6 +93,7 @@
     <orderEntry type="library" exported="" name="volley" level="project" />
     <orderEntry type="library" exported="" name="mpandroidchartlibrary-2-1-4" level="project" />
     <orderEntry type="library" exported="" name="jsoup" level="project" />
+    <orderEntry type="library" exported="" name="BaiduLBS_Android" level="project" />
     <orderEntry type="library" exported="" name="fastjson-1.2.6" level="project" />
   </component>
 </module>
