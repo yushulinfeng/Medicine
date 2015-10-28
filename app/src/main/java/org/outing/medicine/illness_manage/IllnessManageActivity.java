@@ -13,20 +13,27 @@ import org.outing.medicine.fun_drug.DrugMain;
 import org.outing.medicine.fun_know.KnowMain;
 import org.outing.medicine.fun_tools.ToolsMain;
 import org.outing.medicine.personal_center.PersonalCenterActivity;
+import org.outing.medicine.tools.TActivity;
 
 /**
  * Created by apple on 15/10/6.
  */
-public class IllnessManageActivity extends Activity implements View.OnClickListener {
+public class IllnessManageActivity extends TActivity implements View.OnClickListener {
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate() {
         setContentView(R.layout.activity_illness_manage);
+        setTitle("慢病管理");
 
         ((Button) findViewById(R.id.index_blood_sugar)).setOnClickListener(this);
         ((Button) findViewById(R.id.index_blood_pressure)).setOnClickListener(this);
         ((Button) findViewById(R.id.index_blood_fat)).setOnClickListener(this);
         ((Button) findViewById(R.id.index_search)).setOnClickListener(this);
+    }
+
+    @Override
+    public void showContextMenu() {
 
     }
 

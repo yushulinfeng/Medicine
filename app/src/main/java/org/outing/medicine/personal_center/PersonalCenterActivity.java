@@ -72,6 +72,7 @@ public class PersonalCenterActivity extends TActivity {
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_person_center);
+        setTitle("我的设置");
         showBackButton();
         showMenuButton();
         try{
@@ -192,7 +193,6 @@ public class PersonalCenterActivity extends TActivity {
                 } catch (Exception e) {
 
                 }
-                Toast.makeText(PersonalCenterActivity.this, response, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -230,7 +230,6 @@ public class PersonalCenterActivity extends TActivity {
             @Override
             public void onResponse(String response) {
                 Log.d("TAG", response);
-                Toast.makeText(PersonalCenterActivity.this, response, Toast.LENGTH_SHORT).show();
                 if (response.equals("0")){
                     finish();
                 }
