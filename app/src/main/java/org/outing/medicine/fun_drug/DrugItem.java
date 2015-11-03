@@ -43,6 +43,7 @@ public class DrugItem extends NetTActivity {
     public void onCreate() {
         setContentView(R.layout.fun_drug_item);
         setTitle("药品信息");
+        setTitleBackColor(R.color.btn_3_normal);
         showBackButton();
 
         initMessage();

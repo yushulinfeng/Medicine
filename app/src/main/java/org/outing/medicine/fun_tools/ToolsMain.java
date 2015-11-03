@@ -14,6 +14,7 @@ public class ToolsMain extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_tools_main);
         setTitle("常用工具");
+        setTitleBackColor(R.color.btn_5_normal);
         showBackButton();
 
         initView();

@@ -20,6 +20,10 @@ public abstract class NetTActivity extends NetActivity {
         ((TextView) findViewById(R.id.top_text)).setText(title);
     }
 
+    public void setTitleBackColor(int color) {
+        findViewById(R.id.top_layout).setBackgroundResource(color);
+    }
+
     public void showBackButton() {
         ImageButton top_back = (ImageButton) findViewById(R.id.top_back);
         top_back.setVisibility(ImageButton.VISIBLE);

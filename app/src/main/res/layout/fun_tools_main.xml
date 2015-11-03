@@ -2,45 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/light_gray_deep"
+    android:orientation="vertical">
 
     <include layout="@layout/top" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="5dp" >
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
-            <Button
+            <org.outing.medicine.tools.button.DrawableButton
                 android:id="@+id/fun_tools_award"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_2"
+                android:drawableLeft="@drawable/fun_tools_icon_award"
+                android:drawablePadding="5dp"
+                android:gravity="start|center_vertical"
                 android:text="抽奖啰"
+                android:textColor="@color/white"
                 android:textSize="@dimen/tools_main_btn_size" />
-            <Button
+
+            <org.outing.medicine.tools.button.DrawableButton
                 android:id="@+id/fun_tools_calculator"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_3"
+                android:drawableLeft="@drawable/fun_tools_icon_calculator"
+                android:drawablePadding="5dp"
+                android:gravity="start|center_vertical"
                 android:text="计算器"
+                android:textColor="@color/white"
                 android:textSize="@dimen/tools_main_btn_size" />
 
-            <Button
+            <org.outing.medicine.tools.button.DrawableButton
                 android:id="@+id/fun_tools_flashlight"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_4"
+                android:drawableLeft="@drawable/fun_tools_icon_flashlight"
+                android:drawablePadding="5dp"
+                android:gravity="start|center_vertical"
                 android:text="手电筒"
+                android:textColor="@color/white"
                 android:textSize="@dimen/tools_main_btn_size" />
 
-            <Button
+            <org.outing.medicine.tools.button.DrawableButton
                 android:id="@+id/fun_tools_magnifiter"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_6"
+                android:drawableLeft="@drawable/fun_tools_icon_magnifiter"
+                android:drawablePadding="5dp"
+                android:gravity="start|center_vertical"
                 android:text="放大镜"
+                android:textColor="@color/white"
                 android:textSize="@dimen/tools_main_btn_size" />
         </LinearLayout>
     </ScrollView>

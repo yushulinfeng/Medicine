@@ -1,14 +1,11 @@
 package org.outing.medicine.illness_manage;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -19,6 +16,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.outing.medicine.R;
 import org.outing.medicine.tools.GetStringBetweenComma;
+import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.chat.Coordinates;
 import org.outing.medicine.tools.chat.ShowChart;
 import org.outing.medicine.tools.connect.Connect;
@@ -32,15 +30,18 @@ import java.util.ArrayList;
 /**
  * Created by apple on 15/10/10.
  */
-public class BloodFat extends Activity implements View.OnClickListener {
+public class BloodFat extends TActivity implements View.OnClickListener {
     private LineChart mLineChart;
     private EditText editIn;
     private Button buttonUpWrite;
     ArrayList<Coordinates> coordinatesArrayList = new ArrayList<Coordinates>();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate() {
         setContentView(R.layout.activity_blood_fat);
+        setTitle("血脂");
+        setTitleBackColor(R.color.btn_2_normal);
+        showBackButton();
         init();
 //        //有关图表
 //        LineData mLineData = getLineData(24, 10);
@@ -62,10 +63,10 @@ public class BloodFat extends Activity implements View.OnClickListener {
                     for (int i = 0; i < arr.length(); i++) {
                         JSONObject temp = (JSONObject) arr.getJSONObject(i);
                         String data = temp.getString("data");
-                        String time=temp.getString("time");
-                        Coordinates coordinates=new Coordinates(time,data);
+                        String time = temp.getString("time");
+                        Coordinates coordinates = new Coordinates(time, data);
                         coordinatesArrayList.add(coordinates);
-                        Log.d("test",data+"   "+time);
+                        Log.d("test", data + "   " + time);
                     }
                     //有关图表
                     LineData mLineData = getLineData(coordinatesArrayList);
@@ -84,17 +85,17 @@ public class BloodFat extends Activity implements View.OnClickListener {
     }
 
 
-
     private void init() {
         mLineChart = (LineChart) findViewById(R.id.line_chart);
-        editIn= (EditText) findViewById(R.id.edit_blood_fat);
-        buttonUpWrite= (Button) findViewById(R.id.btn_write);
+        editIn = (EditText) findViewById(R.id.edit_blood_fat);
+        buttonUpWrite = (Button) findViewById(R.id.btn_write);
         buttonUpWrite.setOnClickListener(this);
     }
 
 
     /**
      * 生成一个数据
+     *
      * @return
      */
     private LineData getLineData(ArrayList<Coordinates> messageList) {
@@ -105,17 +106,17 @@ public class BloodFat extends Activity implements View.OnClickListener {
         ArrayList<Entry> yValues4 = new ArrayList<Entry>();
         for (int i = 0; i < messageList.size(); i++) {
             // x轴显示的数据，这里默认使用数字下标显示
-            Coordinates getCoordinates=messageList.get(i);
+            Coordinates getCoordinates = messageList.get(i);
             String xstr = getCoordinates.getX();
-            xstr=xstr.substring(xstr.length() - 8, xstr.length());
+            xstr = xstr.substring(xstr.length() - 8, xstr.length());
             xValues.add(xstr);
             //处理y的数据
-            String apartY=getCoordinates.getY();
-            String y1= GetStringBetweenComma.getStrArr(apartY, 0);
-            String y2=GetStringBetweenComma.getStrArr(apartY,1);
-            String y3=GetStringBetweenComma.getStrArr(apartY,2);
-            String y4=GetStringBetweenComma.getStrArr(apartY,3);
-            Log.d("test","GetStringBetweenComma"+y1+"\n"+y2);
+            String apartY = getCoordinates.getY();
+            String y1 = GetStringBetweenComma.getStrArr(apartY, 0);
+            String y2 = GetStringBetweenComma.getStrArr(apartY, 1);
+            String y3 = GetStringBetweenComma.getStrArr(apartY, 2);
+            String y4 = GetStringBetweenComma.getStrArr(apartY, 3);
+            Log.d("test", "GetStringBetweenComma" + y1 + "\n" + y2);
             // y轴的数据
             yValues.add(new Entry(Float.parseFloat(y1), i));
             yValues2.add(new Entry(Float.parseFloat(y2), i));
@@ -169,42 +170,44 @@ public class BloodFat extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_write:
-                final String pressIn=editIn.getText().toString();
+                final String pressIn = editIn.getText().toString();
                 try {
                     //报错则说明不是整数
-                    Double i=Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn,0));
-                    Double i2=Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn,1));
-                    Double i3=Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn,2));
-                    Double i4=Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn,3));
-                    if (i<=0||i2<=0||i3<=0||i4<=0){
+                    Double i = Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn, 0));
+                    Double i2 = Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn, 1));
+                    Double i3 = Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn, 2));
+                    Double i4 = Double.parseDouble(GetStringBetweenComma.getStrArr(pressIn, 3));
+                    if (i <= 0 || i2 <= 0 || i3 <= 0 || i4 <= 0) {
                         Integer.parseInt("产生错误，转到catch");
-                    }if (i>=10||i2>=10||i3>=10||i4>=10){
+                    }
+                    if (i >= 10 || i2 >= 10 || i3 >= 10 || i4 >= 10) {
                         Toast.makeText(BloodFat.this, "请输入血压正确范围值",
                                 Toast.LENGTH_SHORT).show();
-                    }else {
+                    } else {
 
                         Connect.POST(this, ServerURL.Post_Body_Message, new ConnectListener() {
                             @Override
                             public ConnectList setParam(ConnectList list) {
                                 list.put("type", "2");
-                                list.put("data",GetStringBetweenComma.getStrArr(pressIn,0)+","+GetStringBetweenComma.getStrArr(pressIn, 1 )+
-                                        ","+GetStringBetweenComma.getStrArr(pressIn,2)+","+GetStringBetweenComma.getStrArr(pressIn,3));
+                                list.put("data", GetStringBetweenComma.getStrArr(pressIn, 0) + "," + GetStringBetweenComma.getStrArr(pressIn, 1) +
+                                        "," + GetStringBetweenComma.getStrArr(pressIn, 2) + "," + GetStringBetweenComma.getStrArr(pressIn, 3));
                                 return list;
                             }
+
                             @Override
                             public void onResponse(String response) {
                                 Log.d("TAG", response);
                                 JSONArray arr = null;
                                 try {
                                     Log.d("TAG", response);
-                                    if (response.equals("0")){
+                                    if (response.equals("0")) {
                                         Toast.makeText(BloodFat.this, "上传成功",
                                                 Toast.LENGTH_SHORT).show();
                                         //成功后退出界面
                                         finish();
-                                    }else {
+                                    } else {
                                         Toast.makeText(BloodFat.this, "系统错误",
                                                 Toast.LENGTH_SHORT).show();
                                     }
@@ -221,8 +224,8 @@ public class BloodFat extends Activity implements View.OnClickListener {
                         });
                     }
 
-                }catch (Exception e){
-                    Log.d("test","Exception:"+e);
+                } catch (Exception e) {
+                    Log.d("test", "Exception:" + e);
                     Toast.makeText(BloodFat.this, "请输入正确数据",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -230,6 +233,10 @@ public class BloodFat extends Activity implements View.OnClickListener {
 
 
         }
+    }
+
+    @Override
+    public void showContextMenu() {
     }
 }
 

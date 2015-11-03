@@ -44,6 +44,7 @@ public class DrugMain extends NetTActivity implements OnClickListener {
     public void onCreate() {
         setContentView(R.layout.fun_drug_main);
         setTitle("用药查询");
+        setTitleBackColor(R.color.btn_3_normal);
         showBackButton();
         showMenuButton();
 

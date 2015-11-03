@@ -39,6 +39,7 @@ public class RemindHistory extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_remind_history);
         setTitle("用药提醒历史");
+        setTitleBackColor(R.color.btn_1_normal);
         showBackButton();
 
         initDialog();

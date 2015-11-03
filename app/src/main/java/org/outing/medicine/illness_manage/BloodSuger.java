@@ -1,14 +1,11 @@
 package org.outing.medicine.illness_manage;
 
-import android.app.Activity;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
@@ -18,6 +15,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.outing.medicine.R;
+import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.chat.Coordinates;
 import org.outing.medicine.tools.chat.ShowChart;
 import org.outing.medicine.tools.connect.Connect;
@@ -31,20 +29,23 @@ import java.util.ArrayList;
 /**
  * Created by apple on 15/10/10.
  */
-public class BloodSuger extends Activity implements View.OnClickListener {
+public class BloodSuger extends TActivity implements View.OnClickListener {
     private LineChart mLineChart;
     private EditText editIn;
     private Button buttonUpWrite;
     ArrayList<Coordinates> coordinatesArrayList = new ArrayList<Coordinates>();
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate() {
         setContentView(R.layout.activity_blood_suger);
+        setTitle("血糖");
+        setTitleBackColor(R.color.btn_2_normal);
+        showBackButton();
         init();
 //        //有关图表
 //        LineData mLineData = getLineData(24, 10);
 //        ShowChart.showChart(mLineChart, mLineData, Color.rgb(114, 188, 223));
-            Connect.POST(this, ServerURL.Get_Body_Message, new ConnectListener() {
+        Connect.POST(this, ServerURL.Get_Body_Message, new ConnectListener() {
             @Override
             public ConnectList setParam(ConnectList list) {
                 list.put("type", "3");
@@ -192,5 +193,9 @@ public class BloodSuger extends Activity implements View.OnClickListener {
 
 
         }
+    }
+
+    @Override
+    public void showContextMenu() {
     }
 }

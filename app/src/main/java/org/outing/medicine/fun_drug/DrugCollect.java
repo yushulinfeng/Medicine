@@ -37,6 +37,7 @@ public class DrugCollect extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_drug_collect);
         setTitle("药品收藏");
+        setTitleBackColor(R.color.btn_3_normal);
         showBackButton();
         showMenuButton();
 

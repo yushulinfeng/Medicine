@@ -1,37 +1,16 @@
 package org.outing.medicine.personal_center;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.webkit.WebView;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.github.mikephil.charting.data.LineData;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.outing.medicine.LocationApplication;
 import org.outing.medicine.R;
@@ -41,18 +20,11 @@ import org.outing.medicine.fun_tools.WidgetImage;
 import org.outing.medicine.fun_tools.WidgetShow;
 import org.outing.medicine.fun_tools.WidgetTool;
 import org.outing.medicine.tools.TActivity;
-import org.outing.medicine.tools.chat.Coordinates;
-import org.outing.medicine.tools.chat.ShowChart;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
 import org.outing.medicine.tools.connect.ConnectListener;
-import org.outing.medicine.tools.connect.ConnectTool;
 import org.outing.medicine.tools.connect.ServerURL;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by apple on 15/10/4.
@@ -73,6 +45,7 @@ public class PersonalCenterActivity extends TActivity {
     public void onCreate() {
         setContentView(R.layout.activity_person_center);
         setTitle("我的设置");
+        setTitleBackColor(R.color.btn_6_normal);
         showBackButton();
         showMenuButton();
         try{
@@ -82,7 +55,7 @@ public class PersonalCenterActivity extends TActivity {
         }
         //设置完成的图片
         ((ImageButton) findViewById(R.id.top_menu))
-                .setBackgroundResource(R.drawable.yes);
+                .setBackgroundResource(R.drawable.btn_my_yes_bg);
         init();
         mLocationClient = ((LocationApplication)getApplication()).mLocationClient;
         SharedPreferences pref=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE);

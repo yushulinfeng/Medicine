@@ -89,8 +89,7 @@
             android:label="@string/app_name"></activity>
         <activity
             android:name=".contact.ContactAdd"
-            android:label="@string/app_name"
-            android:launchMode="singleInstance"></activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".contact.ContactSelect"
             android:label="@string/app_name"></activity>

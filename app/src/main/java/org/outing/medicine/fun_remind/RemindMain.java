@@ -37,6 +37,7 @@ public class RemindMain extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_remind_main);
         setTitle("用药提醒");
+        setTitleBackColor(R.color.btn_1_normal);
         showBackButton();
         showMenuButton();//test
 
