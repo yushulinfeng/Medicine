@@ -36,4 +36,5 @@ dependencies {
     compile files('libs/mpandroidchartlibrary-2-1-4.jar')
     compile files('libs/volley.jar')
     compile files('libs/BaiduLBS_Android.jar')
+    compile files('libs/baidumapapi_util_v3_6_0.jar')
 }

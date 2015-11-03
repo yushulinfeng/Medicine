@@ -4,9 +4,18 @@ import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.Poi;
+
+import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.model.LatLng;
+import com.baidu.mapapi.utils.DistanceUtil;
+
 import android.app.Application;
 import android.app.Service;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Vibrator;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,11 +39,20 @@ public class LocationApplication extends Application {
 
     public TextView mLocationResult,logMsg;
     public TextView trigger,exit;
+    private String  radius;
+    private Boolean message,center=false;
+    public void setCenter(Boolean center) {this.center = center;}
     public Vibrator mVibrator;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        SDKInitializer.initialize(getApplicationContext());
+        //是否发了信息
+        message=true;
+        //获得半径
+        SharedPreferences pref=getSharedPreferences("Radius", MODE_PRIVATE);
+        radius=pref.getString("radius","100000000");
         mLocationClient = new LocationClient(this.getApplicationContext());
         mMyLocationListener = new MyLocationListener();
         mLocationClient.registerLocationListener(mMyLocationListener);
@@ -49,14 +67,43 @@ public class LocationApplication extends Application {
 
         @Override
         public void onReceiveLocation(final BDLocation location) {
+            Log.d("test", "center"+center);
+            //设置定位中心
+            if (center){
+                SharedPreferences.Editor editor=getSharedPreferences("Center", MODE_PRIVATE).edit();
+                editor.putString("mLat1",""+location.getLatitude());
+                editor.putString("mLon1",""+location.getLongitude());
+                editor.commit();
+                center=false;
+                Log.d("test", "在设置了");
+            }
+            //获得中心坐标
+            SharedPreferences pref=getSharedPreferences("Center", MODE_PRIVATE);
+            double mLat1=Double.parseDouble(pref.getString("mLat1","39.915291"));
+            double mLon1 = Double.parseDouble(pref.getString("mLon1","116.403857"));
+            Log.d("test","mLat1"+mLat1+"    "+"mLon1"+mLon1);
+            // 现在坐标
+            double mLat2 = location.getLatitude();
+            double mLon2 = location.getLongitude();
+            LatLng pt_start = new LatLng(mLat1, mLon1);
+            LatLng pt_end = new LatLng(mLat2, mLon2);
+            Double distance= DistanceUtil.getDistance(pt_start, pt_end);
+            Log.d("test",""+Double.parseDouble(radius));
+            if (distance>Double.parseDouble(radius)&&message){
+                SmsManager smsManager = SmsManager.getDefault();
+                smsManager.sendTextMessage("17865197355", null, "测试用短信", null, null);
+                Log.d("test","已出地理围栏");
+                message=false;
+            }
+            Log.d("test","DistanceUtil.getDistance(pt_start,pt_end);"+DistanceUtil.getDistance(pt_start,pt_end));
             //上传经纬度
             Connect.POST(getApplicationContext(), ServerURL.Post_Location, new ConnectListener() {
 
 
                 @Override
                 public ConnectList setParam(ConnectList list) {
-                    list.put("longitude", ""+location.getLongitude());
-                    list.put("latitude", ""+location.getLatitude());
+                    list.put("longitude", "" + location.getLongitude());
+                    list.put("latitude", "" + location.getLatitude());
                     return list;
                 }
 

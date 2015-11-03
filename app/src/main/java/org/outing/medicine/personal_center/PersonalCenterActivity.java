@@ -1,37 +1,22 @@
 package org.outing.medicine.personal_center;
 
-import android.app.ProgressDialog;
-import android.content.Context;
+
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
-import android.webkit.WebView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import android.widget.ToggleButton;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+
+import com.baidu.location.BDNotifyListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-import com.github.mikephil.charting.data.LineData;
 
-import org.json.JSONArray;
-import org.json.JSONException;
+
 import org.json.JSONObject;
 import org.outing.medicine.LocationApplication;
 import org.outing.medicine.R;
@@ -41,18 +26,12 @@ import org.outing.medicine.fun_tools.WidgetImage;
 import org.outing.medicine.fun_tools.WidgetShow;
 import org.outing.medicine.fun_tools.WidgetTool;
 import org.outing.medicine.tools.TActivity;
-import org.outing.medicine.tools.chat.Coordinates;
-import org.outing.medicine.tools.chat.ShowChart;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
 import org.outing.medicine.tools.connect.ConnectListener;
-import org.outing.medicine.tools.connect.ConnectTool;
 import org.outing.medicine.tools.connect.ServerURL;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Created by apple on 15/10/4.
@@ -60,19 +39,22 @@ import java.util.Map;
 public class PersonalCenterActivity extends TActivity {
     private LocationClient mLocationClient;
     private ToggleButton locationButton=null,contactButton=null;
+    private Button centerBtn;
     private EditText editName,editSex,editAge,
-            editIll,editLocation, editContact;
-    private String name,age,sex,ill,location,contact;
+            editIll,editLocation, editContact,editradius;
+    private String name,age,sex,ill,location,contact,radius;
     private String provider;
     private double latitude;
     private double longitude;
     private Handler hanSet;
     private WidgetImage wid;
+    private LocationApplication locationApplication;
 
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_person_center);
         setTitle("我的设置");
+        locationApplication= (LocationApplication) getApplication();
         showBackButton();
         showMenuButton();
         try{
@@ -103,6 +85,7 @@ public class PersonalCenterActivity extends TActivity {
                         SharedPreferences.Editor editor=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE).edit();
                         editor.putBoolean("locationButton", true);
                         editor.commit();
+
                     }catch (Exception e){
                         showToast("定位功能请联网使用");
                     }
@@ -117,7 +100,7 @@ public class PersonalCenterActivity extends TActivity {
             }
         });
 
-        //设置地理信息
+        //设置联系人桌面
         contactButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -126,9 +109,9 @@ public class PersonalCenterActivity extends TActivity {
                 AnContact contact = ContactTool.getAnContact(PersonalCenterActivity.this,0 );
                 Log.d("test", "contact" +contact.getName());
                 if (weatherOn) {
-                    WidgetTool.saveWidText(PersonalCenterActivity.this, contact.getName()+"\n"+contact.getPhone());
+                    WidgetTool.saveWidText(PersonalCenterActivity.this, "紧急联系人电话"+"\n"+editContact.getText().toString());
                     WidgetShow.updatewidget(PersonalCenterActivity.this);
-                    wid.showTextOnWallPaper(PersonalCenterActivity.this, contact.getName(), contact.getPhone());
+                    wid.showTextOnWallPaper(PersonalCenterActivity.this,  "紧急联系人电话", editContact.getText().toString());
                     SharedPreferences.Editor editor=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE).edit();
                     editor.putBoolean("contactButton", true);
                     editor.commit();
@@ -167,8 +150,9 @@ public class PersonalCenterActivity extends TActivity {
                     String ill_in = temp.getString("common_ill");
                     String contact_in = temp.getString("emer_contact");
                     String address_in = temp.getString("address");
-                    Log.e("TAG", "name_in    " + name_in);
-                    Log.e("TAG", "sex_in    " + sex_in);
+                    //获得半径
+                    SharedPreferences pref=getSharedPreferences("Radius", MODE_PRIVATE);
+                    radius= pref.getString("radius", "100000000");
                     if (!(name_in.equals("null"))) {
                         editName.setText(name_in);
                     }
@@ -187,6 +171,9 @@ public class PersonalCenterActivity extends TActivity {
                     if (!address_in.equals("null")) {
                         editLocation.setText(address_in
                         );
+                    }
+                    if (!radius.equals("100000000")) {
+                       editradius.setText(radius);
                     }
 
 
@@ -212,6 +199,16 @@ public class PersonalCenterActivity extends TActivity {
         ill=editIll.getText().toString();
         location=editLocation.getText().toString();
         contact=editContact.getText().toString();
+        radius=editradius.getText().toString();
+        try{
+            Double.parseDouble(radius);
+            SharedPreferences.Editor editor=getSharedPreferences("Radius", MODE_PRIVATE).edit();
+            editor.putString("radius", radius);
+        }catch (Exception e){
+            showToast("请输入正确半径");
+        }
+
+
 
         Connect.POST(this, ServerURL.Set_Personal_Message, new ConnectListener() {
 
@@ -253,9 +250,18 @@ public class PersonalCenterActivity extends TActivity {
         editIll= (EditText) findViewById(R.id.edit_ill);
         editLocation= (EditText) findViewById(R.id.edit_location);
         editContact=(EditText)findViewById(R.id.edit_contact);
+        editradius= (EditText) findViewById(R.id.edit_radius);
         locationButton=(ToggleButton)findViewById(R.id.location_button);
         contactButton= (ToggleButton) findViewById(R.id.contact_button);
+        centerBtn= (Button) findViewById(R.id.center_button);
         wid = new WidgetImage();
+        centerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                locationApplication.setCenter(true);
+
+            }
+        });
     }
 
     private void initLocation(){
