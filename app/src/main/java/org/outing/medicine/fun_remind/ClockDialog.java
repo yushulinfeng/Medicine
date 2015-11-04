@@ -18,8 +18,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSONObject;
-
 import org.outing.medicine.R;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
@@ -27,10 +25,7 @@ import org.outing.medicine.tools.connect.ConnectList;
 import org.outing.medicine.tools.connect.ConnectListener;
 import org.outing.medicine.tools.connect.ServerURL;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Locale;
 
 @SuppressWarnings("deprecation")
 public class ClockDialog extends Activity implements OnClickListener {
@@ -227,6 +222,7 @@ public class ClockDialog extends Activity implements OnClickListener {
         uploadMedicineState(context, array, true);
         String log = "用户完成用药\n" + getRingLogText(array);
         ClockTool.saveLog(context, log);
+        finish();///////////
     }
 
     /**
@@ -236,15 +232,16 @@ public class ClockDialog extends Activity implements OnClickListener {
         uploadMedicineState(context, array, false);
         String log = "用户拒绝用药\n" + getRingLogText(array);
         ClockTool.saveLog(context, log);
+        finish();///////////////////////
     }
 
     private void uploadMedicineState(Context context,
                                      ArrayList<AnRing> array, boolean is_finish) {
-        Log.e("EEE","EEE ------"+"start");
+        Log.e("EEE", "EEE ------" + "start");
         for (int i = 0; i < array.size(); i++) {
-            Log.e("EEE","EEE ------"+"for");
+            Log.e("EEE", "EEE ------" + "for");
             con_list = getHistoryPostText(array.get(i), is_finish);
-            Log.e("EEE","EEE ------"+"list");
+            Log.e("EEE", "EEE ------" + "list");
             Connect.POST(context, ServerURL.Post_Body_Message, new ConnectListener() {
                 @Override
                 public ConnectList setParam(ConnectList list) {
@@ -258,7 +255,7 @@ public class ClockDialog extends Activity implements OnClickListener {
 
                 @Override
                 public void onResponse(String response) {
-                    Log.e("EEE","EEE ------"+"response");
+                    Log.e("EEE", "EEE ------" + "response");
                     if (response == null) {//暂不处理
                     } else if (response.equals("-2")) {
                     } else if (response.equals("-1")) {
@@ -273,15 +270,10 @@ public class ClockDialog extends Activity implements OnClickListener {
 
     private ConnectList getHistoryPostText(AnRing ring, boolean is_finish) {
         ConnectList list = new ConnectList();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
-        String date = sdf.format(new Date());
-        JSONObject json = new JSONObject();
-        json.put("time", ring.timer.getTime());
-        json.put("text", ring.remind.getDrugName());
-        json.put("date", date);
-        json.put("state", is_finish);
+        String post_str = ring.remind.getDrugName() + RemindHistory.HIS_SPLITE
+                + (is_finish ? 1 : 0) + RemindHistory.HIS_SPLITE + ring.timer.getTime();
         list.put("type", "4");
-        list.put("data", json.toString());
+        list.put("data", post_str);
         return list;
     }
 

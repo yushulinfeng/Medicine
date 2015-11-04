@@ -40,10 +40,11 @@ public class ConnectUser extends ConnectBase {
      * @param code 验证码
      * @return 状态信息
      */
-    public ConnectStatus register(String name, String pass, String code) {
+    public ConnectStatus register(String name, String pass, String code,String codecode) {
         ConnectList list = new ConnectList();
         list.put("phone", name);
         list.put("password", pass);
+        list.put("coupon", codecode);
         list.put("code", code);
         String status_str = executePost(ServerURL.REGISTER, list);
         return dealRegisterResult(status_str);

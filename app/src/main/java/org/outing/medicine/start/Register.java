@@ -20,6 +20,7 @@ public class Register extends NetActivity implements OnClickListener {
 
     private EditText userNameEdit = null;
     private EditText verifyEdit = null;
+    private EditText codeCode = null;//优惠码
     private EditText passwordEdit = null;
     private EditText passwordConfirmEdit = null;
     private Button gainCode = null;
@@ -47,6 +48,7 @@ public class Register extends NetActivity implements OnClickListener {
     private void init() {
         userNameEdit = (EditText) findViewById(R.id.register_username);
         verifyEdit = (EditText) findViewById(R.id.verify_code);
+        codeCode = (EditText) findViewById(R.id.register_code_code);
         passwordEdit = (EditText) findViewById(R.id.register_password);
         passwordConfirmEdit = (EditText) findViewById(R.id.register_password_confirm);
         gainCode = (Button) findViewById(R.id.gain_code);
@@ -183,7 +185,8 @@ public class Register extends NetActivity implements OnClickListener {
 //			else
 //				sendMessage(status.getReason());
         } else {
-            status = conn.register(userName, password, verifyCode);
+            String code_code=codeCode.getText().toString();
+            status = conn.register(userName, password, verifyCode,code_code);
             if (status.getStatus())
                 sendMessage("register_ok");
             else
