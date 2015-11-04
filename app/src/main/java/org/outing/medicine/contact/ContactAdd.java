@@ -36,6 +36,7 @@ public class ContactAdd extends TActivity implements OnClickListener {
 	@Override
 	public void onCreate() {
 		setContentView(R.layout.con_add);
+		showBackButton();
 		getMessage();
 		initPath();
 		if (is_add)

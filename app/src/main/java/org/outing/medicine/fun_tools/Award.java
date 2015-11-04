@@ -17,6 +17,7 @@ public class Award extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_tools_award);
         setTitle("抽奖啰");
+        setTitleBackColor(R.color.btn_5_normal);
         showBackButton();
 
         initView();

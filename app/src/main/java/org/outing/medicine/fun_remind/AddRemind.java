@@ -161,11 +161,14 @@ public class AddRemind extends TActivity implements View.OnClickListener {
                     showToast("药品名称不能为空！");
                     return;
                 }
-                AnRemind remind_temp=new AnRemind(drug_id, drug_name, drug_text);
-                if(is_alter){
+                if (drug_name.contains(RemindHistory.HIS_SPLITE)) {//闹钟历史的分隔符
+                    drug_name = drug_name.replace(RemindHistory.HIS_SPLITE, " ");
+                }
+                AnRemind remind_temp = new AnRemind(drug_id, drug_name, drug_text);
+                if (is_alter) {
                     RemindTool.alterDrug(this, remind_temp);
                     showToast("修改成功");
-                }else{
+                } else {
                     RemindTool.addDrug(this, remind_temp);
                     showToast("添加成功");
                 }

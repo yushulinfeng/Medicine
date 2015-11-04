@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -44,6 +45,7 @@ public class DrugMain extends NetTActivity implements OnClickListener {
     public void onCreate() {
         setContentView(R.layout.fun_drug_main);
         setTitle("用药查询");
+        setTitleBackColor(R.color.btn_3_normal);
         showBackButton();
         showMenuButton();
 
@@ -85,6 +87,14 @@ public class DrugMain extends NetTActivity implements OnClickListener {
         Button btn_collect = (Button) findViewById(R.id.fun_drug_btn_collect);
         btn_search.setOnClickListener(this);
         btn_collect.setOnClickListener(this);
+        //回车事件（隐藏键盘已在xml中写了）
+        edit.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                prepareAndSearch();
+                return false;
+            }
+        });
 
         ArrayList<AnDrug> array = DrugTool.getHistory(this);
         if (array.size() == 0)
@@ -135,6 +145,22 @@ public class DrugMain extends NetTActivity implements OnClickListener {
             }
             startActivity(intent);
         }
+    }
+
+    private void prepareAndSearch(){
+        search_name = edit.getText().toString();
+        if (search_name.trim().equals("")) {
+            showToast("请输入药品名称");
+            edit.setText("");
+            return;
+        }
+        if (search_name.contains(DRUG_SPLIT)) {//竖线一般手机不容易输入
+            //到时候，就用这个作为分隔符
+            search_name = search_name.replace(DRUG_SPLIT, " ");
+        }
+        DrugTool.addHistory(this, new AnDrug(search_name, ""));// 第二位就应该为空
+        is_history = false;
+        search(search_name);
     }
 
     private void search(String name) {// 想提高用户体验，可以添加忙碌对话框
@@ -213,19 +239,7 @@ public class DrugMain extends NetTActivity implements OnClickListener {
         }
         switch (v.getId()) {
             case R.id.fun_drug_btn_search:
-                search_name = edit.getText().toString();
-                if (search_name.trim().equals("")) {
-                    showToast("请输入药品名称");
-                    edit.setText("");
-                    return;
-                }
-                if (search_name.contains(DRUG_SPLIT)) {//竖线一般手机不容易输入
-                    //到时候，就用这个作为分隔符
-                    search_name = search_name.replace(DRUG_SPLIT, " ");
-                }
-                DrugTool.addHistory(this, new AnDrug(search_name, ""));// 第二位就应该为空、、、、、、、、、、、、、、、去重
-                is_history = false;
-                search(search_name);
+                prepareAndSearch();
                 break;
             case R.id.fun_drug_btn_collect:
                 collect();

@@ -50,4 +50,10 @@
         <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
     </style>
 
+    <!-- Alert Dialog theme. -->
+    <style name="MyAlertDialogTheme" parent="android:Theme.Holo.Light.Dialog">
+        <!-- 字体大小，影响标题与列表，但是不会影响文本与按钮-->
+        <item name="android:textSize">32sp</item>
+    </style>
+
 </resources>

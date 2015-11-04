@@ -2,14 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <include layout="@layout/top" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1" >
+        android:layout_weight="1">
 
         <!-- 此处图片可能不满，考虑给父组件加背景之类的 -->
 
@@ -34,18 +34,22 @@
             android:textSize="40sp" />
     </FrameLayout>
 
-    <Button
+    <org.outing.medicine.tools.button.DrawableButton
         android:id="@+id/con_show_btn_call"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="打电话"
-        android:textSize="50sp" />
+        android:drawableLeft="@drawable/contact_show_phone"
+        android:gravity="start|center_vertical"
+        android:text=" 打电话"
+        android:textSize="42sp" />
 
-    <Button
+    <org.outing.medicine.tools.button.DrawableButton
         android:id="@+id/con_show_btn_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="发短信"
-        android:textSize="50sp" />
+        android:drawableLeft="@drawable/contact_show_message"
+        android:text=" 发短信"
+        android:gravity="start|center_vertical"
+        android:textSize="42sp" />
 
 </LinearLayout>

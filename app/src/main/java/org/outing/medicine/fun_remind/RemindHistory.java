@@ -27,6 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 public class RemindHistory extends TActivity {
+    public static final String HIS_SPLITE=",";
     private ListView list;
     private ArrayList<AnHistory> array;
     private List<Map<String, Object>> items;
@@ -39,6 +40,7 @@ public class RemindHistory extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_remind_history);
         setTitle("用药提醒历史");
+        setTitleBackColor(R.color.btn_1_normal);
         showBackButton();
 
         initDialog();
@@ -179,15 +181,13 @@ public class RemindHistory extends TActivity {
         for (int i = 0; i < json_array.size(); i++) {
             try {
                 item_temp = json_array.getJSONObject(i);
-                Log.e("EEE", "EEE-history-temp1:" + item_temp.toString());
-                str_temp = item_temp.getString("data");//字符串过渡，因为有""不能直接JSONObject
-                Log.e("EEE", "EEE-history-temp-str:" + str_temp);
-                item_temp = JSONObject.parseObject(str_temp);
-                Log.e("EEE", "EEE-history-temp1:" + item_temp.toString());
-                his_temp = new AnHistory(item_temp.getString("time"),
-                        item_temp.getString("date"),
-                        item_temp.getString("text"),
-                        item_temp.getBoolean("state") ? "完成用药" : "拒绝用药");
+                str_temp = item_temp.getString("data");
+                //字符串过渡，因为有""不能直接JSONObject（虽然不用json了，但是保留此句）
+                String[] array_temp=str_temp.split(HIS_SPLITE);
+                his_temp = new AnHistory(array_temp[2],
+                        item_temp.getString("time").substring(0,10),
+                        array_temp[0],
+                        array_temp[1].equals("1") ? "完成用药" : "拒绝用药");
                 array.add(his_temp);
             } catch (Exception e) {
                 Log.e("EEE", "EEE-history-ERROR:" + e.getMessage());

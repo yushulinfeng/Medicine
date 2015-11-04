@@ -1,18 +1,10 @@
 package org.outing.medicine.illness_manage;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.Toast;
 
 import org.outing.medicine.R;
-import org.outing.medicine.fun_drug.DrugMain;
-import org.outing.medicine.fun_know.KnowMain;
-import org.outing.medicine.fun_tools.ToolsMain;
-import org.outing.medicine.personal_center.PersonalCenterActivity;
 import org.outing.medicine.tools.TActivity;
 
 /**
@@ -25,6 +17,8 @@ public class IllnessManageActivity extends TActivity implements View.OnClickList
     public void onCreate() {
         setContentView(R.layout.activity_illness_manage);
         setTitle("慢病管理");
+        setTitleBackColor(R.color.btn_2_normal);
+        showBackButton();
 
         ((Button) findViewById(R.id.index_blood_sugar)).setOnClickListener(this);
         ((Button) findViewById(R.id.index_blood_pressure)).setOnClickListener(this);

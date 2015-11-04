@@ -39,7 +39,7 @@ import org.outing.medicine.tools.connect.ServerURL;
 public class PersonalCenterActivity extends TActivity {
     private LocationClient mLocationClient;
     private ToggleButton locationButton=null,contactButton=null;
-    private Button centerBtn,outBtn;
+    private Button centerBtn;
     private EditText editName,editSex,editAge,
             editIll,editLocation, editContact,editradius;
     private String name,age,sex,ill,location,contact,radius;
@@ -255,18 +255,11 @@ public class PersonalCenterActivity extends TActivity {
         locationButton=(ToggleButton)findViewById(R.id.location_button);
         contactButton= (ToggleButton) findViewById(R.id.contact_button);
         centerBtn= (Button) findViewById(R.id.center_button);
-        outBtn= (Button) findViewById(R.id.out_button);
         wid = new WidgetImage();
         centerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 locationApplication.setCenter(true);
-
-            }
-        });
-        outBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
             }
         });

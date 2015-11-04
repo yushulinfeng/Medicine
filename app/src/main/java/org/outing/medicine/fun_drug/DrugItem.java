@@ -43,6 +43,7 @@ public class DrugItem extends NetTActivity {
     public void onCreate() {
         setContentView(R.layout.fun_drug_item);
         setTitle("药品信息");
+        setTitleBackColor(R.color.btn_3_normal);
         showBackButton();
 
         initMessage();
@@ -159,6 +160,7 @@ public class DrugItem extends NetTActivity {
         if (drug == null) {
             finish();
         } else if (DrugTool.isCollected(this, drug)) {
+            DrugNetTool.deleteNetCollect(this, drug);//删除网络收藏
             DrugTool.deleteCollect(this, drug);
             btn_collect.setText("收藏");
             showToast("已取消收藏");

@@ -10,7 +10,7 @@
     <color name="btn_4_normal">#47b226</color>
     <color name="btn_4_pressed">#2a6916</color>
     <color name="btn_5_normal">#69788b</color>
-    <color name="btn_5_pressed">#22272d</color>
+    <color name="btn_5_pressed">#464748</color>
     <color name="btn_6_normal">#0fb3b4</color>
     <color name="btn_6_pressed">#095e5f</color>
 
@@ -25,10 +25,15 @@
     <color name="tab_btn_bg_dark">#fcfcfc</color>
     <color name="center_bg">#FFF</color>
     <color name="light_gray">#EEE</color>
+    <color name="light_gray_deep">#CCC</color>
     <color name="dark_gray">#444</color>
     <color name="dark_white">#FCFCFC</color>
     <color name="no_color">#0000</color>
     <color name="contact_btn_light">#440b88da</color>
+
+    <color name="dialog_btn_press">#81cfeb</color>
+    <color name="dialog_btn_normal">#ffffff</color>
+    <color name="dialog_divider">#aaaaaa</color>
 
     <!-- 常用颜色 -->
     <color name="white">#FFFFFF</color> <!-- 白色 -->

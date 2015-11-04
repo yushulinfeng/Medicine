@@ -2,51 +2,67 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:background="@color/light_gray_deep"
+    android:orientation="vertical">
 
     <include layout="@layout/top" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="5dp" >
+        android:paddingTop="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/fun_know_gxy"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_6"
                 android:text="高血压知识"
+                android:textColor="@color/white"
                 android:textSize="@dimen/know_main_btn_size" />
 
             <Button
                 android:id="@+id/fun_know_gxz"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_1"
                 android:text="高血脂知识"
+                android:textColor="@color/white"
                 android:textSize="@dimen/know_main_btn_size" />
 
             <Button
                 android:id="@+id/fun_know_gxt"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_3"
                 android:text="高血糖知识"
+                android:textColor="@color/white"
                 android:textSize="@dimen/know_main_btn_size" />
 
             <Button
                 android:id="@+id/fun_know_jk"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_2"
                 android:text="老年健康知识"
+                android:textColor="@color/white"
                 android:textSize="@dimen/know_main_btn_size" />
+
             <Button
                 android:id="@+id/fun_know_net"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_5"
                 android:text="-联网获取知识-"
                 android:textSize="@dimen/know_main_btn_size" />
         </LinearLayout>

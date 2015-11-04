@@ -37,6 +37,7 @@ public class DrugCollect extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_drug_collect);
         setTitle("药品收藏");
+        setTitleBackColor(R.color.btn_3_normal);
         showBackButton();
         showMenuButton();
 
@@ -72,7 +73,7 @@ public class DrugCollect extends TActivity {
                         .setMessage(message)
                         .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                longClickItem(click_position);
+                                longClickItem();
                             }
                         }).setNegativeButton("取消", null);
                 builder.create().show();
@@ -107,16 +108,43 @@ public class DrugCollect extends TActivity {
         }
     }
 
-    private void longClickItem(int index) {
-        DrugTool.deleteCollect(this, new AnDrug(items.get(index).get("name") + "",
-                items.get(index).get("com_name") + ""));
-        items.remove(index);
-        adapter.notifyDataSetChanged();
-        if (items.size() == 0)
-            show.setText("收藏为空");
-        else
-            show.setText("共" + items.size() + "条收藏");
-        showToast("删除成功");
+    private void longClickItem() {
+        Connect.POST(this, ServerURL.DRUG_PUT_COLLECT, new ConnectListener() {
+            @Override
+            public ConnectList setParam(ConnectList list) {
+                list.put("medical", items.get(click_position).get("name") +
+                        DrugMain.DRUG_SPLIT + items.get(click_position).get("com_name"));
+                list.put("act", "1");
+                return list;
+            }
+
+            @Override
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                return null;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                if (response == null) {//暂不处理
+                } else if (response.equals("-4")) {
+                } else if (response.equals("-3")) {
+                } else if (response.equals("-2")) {
+                } else if (response.equals("-1")) {
+                } else if (response.equals("0")) {
+                    //SUCCESS
+                    //        //本地（暂不处理）
+                    //        DrugTool.deleteCollect(this, new AnDrug(items.get(index).get("name") + "",
+                    //        items.get(index).get("com_name") + ""));
+                    items.remove(click_position);
+                    adapter.notifyDataSetChanged();
+                    if (items.size() == 0)
+                        show.setText("收藏为空");
+                    else
+                        show.setText("共" + items.size() + "条收藏");
+                    showToast("删除成功");
+                }
+            }
+        });
     }
 
     private void clickItem(int index) {
@@ -135,11 +163,40 @@ public class DrugCollect extends TActivity {
     }
 
     private void clearCollect() {
-        DrugTool.clearCollect(this);
-        show.setText("收藏为空");
-        items.clear();
-        adapter.notifyDataSetChanged();
-        showToast("收藏已清空");
+        Connect.POST(this, ServerURL.DRUG_CLEAR_COLLECT, new ConnectListener() {
+            @Override
+            public ConnectList setParam(ConnectList list) {
+                return null;
+            }
+
+            @Override
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                dialog.config(DrugCollect.this, "正在处理", "请稍候……", true);
+                return dialog;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                if (response == null) {//暂不处理
+                    showToast("网络错误，清空失败");//这个本地也不能清空
+                } else if (response.equals("-2")) {//身份过期与未登录
+//        //local（弹个对话框就好了）
+//        DrugTool.clearCollect(DrugCollect.this);
+//        show.setText("收藏为空");
+//        items.clear();
+//        adapter.notifyDataSetChanged();
+//        showToast("收藏已清空");
+                } else if (response.equals("-1")) {//不可能
+                } else if (response.equals("0")) {
+                    show.setText("收藏为空");
+                    items.clear();
+                    adapter.notifyDataSetChanged();
+                    showToast("收藏已清空");
+//                    //本地（暂时不要）
+//                    DrugTool.clearCollect(DrugCollect.this);
+                }
+            }
+        });
     }
 
     private void updateList() {
@@ -182,34 +239,34 @@ public class DrugCollect extends TActivity {
         } else if (response.equals("-2")) {
         } else if (response.equals("-1")) {
         } else if (response.equals("0")) {
-        }else {
+        } else {
             JSONArray json_array = JSONArray.parseArray(response);
             String item_temp = "", name_temp = "", com_temp = "";
             String[] all_temp = null;
             AnDrug drug_temp = null;
             for (int i = 0; i < json_array.size(); i++) {
                 item_temp = json_array.getString(i);
-                Log.e("EEE","EEE "+item_temp);
+                Log.e("EEE", "EEE " + item_temp);
                 try {
                     all_temp = item_temp.split(DrugMain.DRUG_SPLIT);
                     name_temp = all_temp[0];
                     com_temp = all_temp[1];
                 } catch (Exception e) {
                     name_temp = item_temp;
-                    com_temp="";
+                    com_temp = "";
                 }
-                Log.e("EEE","EEE-1 "+name_temp);
-                Log.e("EEE","EEE-2 "+com_temp);
+                Log.e("EEE", "EEE-1 " + name_temp);
+                Log.e("EEE", "EEE-2 " + com_temp);
                 drug_temp = new AnDrug(name_temp, com_temp);
                 array.add(drug_temp);
             }
             updateList();
         }
-        /////////////////////////////////////////是否有必要
-        if (array.size() == 0) {
-            initLocalData();
-            show.setText("网络收藏为空，已加载本地收藏");
-        }
+//        /////////////////////////////////////////是否有必要（暂时不要）
+//        if (array.size() == 0) {
+//            initLocalData();
+//            show.setText("网络收藏为空，已加载本地收藏");
+//        }
     }
 
 }

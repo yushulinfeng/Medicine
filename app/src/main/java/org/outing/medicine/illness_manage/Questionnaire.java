@@ -1,24 +1,22 @@
 package org.outing.medicine.illness_manage;
 
-import android.app.Activity;
-import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import org.outing.medicine.R;
+import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.connect.ServerURL;
 
-/**
- * Created by apple on 15/10/19.
- */
-public class Questionnaire extends Activity {
+
+public class Questionnaire extends TActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onCreate() {
         setContentView(R.layout.activity_questionnaire);
+        setTitle("健康测试");
+        setTitleBackColor(R.color.btn_2_normal);
+        showBackButton();
         WebView myWebView = (WebView) findViewById(R.id.webview);
         myWebView.getSettings().setJavaScriptEnabled(true);
         //添加缓存
@@ -35,11 +33,15 @@ public class Questionnaire extends Activity {
                                            }
                                            finish();
                                            //报错退出
-                                          // view.loadUrl("www.baidu.com");
+                                           // view.loadUrl("www.baidu.com");
                                            return true;
                                        }
                                    }
         );
         myWebView.loadUrl(ServerURL.Questionnaire_Url);
+    }
+
+    @Override
+    public void showContextMenu() {
     }
 }
