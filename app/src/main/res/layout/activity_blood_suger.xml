@@ -65,6 +65,7 @@
         android:background="#f0f0f0">
 
         <Button
+            android:id="@+id/time_button"
             android:text="分时"
             android:textSize="18dp"
             android:layout_marginRight="1dp"
@@ -75,6 +76,7 @@
             android:background="@drawable/btn_action"/>
 
         <Button
+            android:id="@+id/day_button"
             android:text="日"
             android:textSize="18dp"
             android:layout_marginLeft="1dp"

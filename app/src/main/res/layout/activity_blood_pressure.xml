@@ -47,12 +47,47 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="20dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_gravity="center"
         android:gravity="center"
         />
+
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="#f0f0f0">
+
+        <Button
+            android:id="@+id/time_button"
+            android:text="分时"
+            android:textSize="18dp"
+            android:layout_marginRight="1dp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_action"/>
+
+        <Button
+            android:id="@+id/day_button"
+            android:text="日"
+            android:textSize="18dp"
+            android:layout_marginLeft="1dp"
+            android:textColor="#ffffff"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/btn_action"/>
+
+
+    </LinearLayout>
 
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/line_chart"

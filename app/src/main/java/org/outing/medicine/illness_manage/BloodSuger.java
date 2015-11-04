@@ -34,7 +34,8 @@ import java.util.ArrayList;
 public class BloodSuger extends Activity implements View.OnClickListener {
     private LineChart mLineChart;
     private EditText editIn;
-    private Button buttonUpWrite;
+    private Button buttonUpWrite,btnDay,btnTime;
+    private int dataType=1;
     ArrayList<Coordinates> coordinatesArrayList = new ArrayList<Coordinates>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +92,10 @@ public class BloodSuger extends Activity implements View.OnClickListener {
         editIn= (EditText) findViewById(R.id.edit_blood_suger);
         buttonUpWrite= (Button) findViewById(R.id.btn_write);
         buttonUpWrite.setOnClickListener(this);
+        btnDay= (Button) findViewById(R.id.time_button);
+        btnDay.setOnClickListener(this);
+        btnTime= (Button) findViewById(R.id.day_button);
+        btnTime.setOnClickListener(this);
     }
 
 
@@ -101,18 +106,47 @@ public class BloodSuger extends Activity implements View.OnClickListener {
     private LineData getLineData(ArrayList<Coordinates> messageList) {
         ArrayList<String> xValues = new ArrayList<String>();
         ArrayList<Entry> yValues = new ArrayList<Entry>();
+        String lastxstr=null;
+        int county=0,count = 0;
+        Float y = 0.0f;
         for (int i = 0; i < messageList.size(); i++) {
             // x轴显示的数据，这里默认使用数字下标显示
             Coordinates getCoordinates=messageList.get(i);
-            String xstr = getCoordinates.getX();
-            xstr=xstr.substring(xstr.length() - 8, xstr.length());
-            xValues.add(xstr);
-            // y轴的数据
-            yValues.add(new Entry(Float.parseFloat(getCoordinates.getY()), i));
+            if (dataType==1) {
+                String xstr = getCoordinates.getX();
+                xstr = xstr.substring(xstr.length() - 8, xstr.length());
+                xValues.add(xstr);
+                // y轴的数据
+                yValues.add(new Entry(Float.parseFloat(getCoordinates.getY()), i));
+            }
+            if (dataType==2) {
+                String xstr = getCoordinates.getX();
+                xstr = xstr.substring(0, 10);
+                if (lastxstr==null){
+                    lastxstr=xstr;
+                }
+                if (!lastxstr.equals(xstr)){
+                    xValues.add(lastxstr);
+                    yValues.add(new Entry(y/county, count));
+                    lastxstr=xstr;
+                    y=0.0f;
+                    county=0;
+                    count++;
+                }
+                if (lastxstr.equals(xstr)){
+                    y=y+Float.parseFloat(getCoordinates.getY());
+                    county++;
+                }
+                if (i==messageList.size()-1){
+                    xValues.add(lastxstr);
+                    yValues.add(new Entry(y/county, count));
+                }
+
+            }
         }
         // create a dataset and give it a type
         // y轴的数据集合
-        LineDataSet lineDataSet = new LineDataSet(yValues, "血糖折线图（日）" /*显示在比例图上*/);
+        LineDataSet lineDataSet = new LineDataSet(yValues, "血糖" /*显示在比例图上*/);
         // mLineDataSet.setFillAlpha(110);
         // mLineDataSet.setFillColor(Color.RED);
 
@@ -188,6 +222,17 @@ public class BloodSuger extends Activity implements View.OnClickListener {
                     Toast.makeText(BloodSuger.this, "请输入正确数据，系统只支持正整数",
                             Toast.LENGTH_SHORT).show();
                 }
+                break;
+
+            case R.id.day_button:
+                dataType=2;
+                LineData mLineData1 = getLineData(coordinatesArrayList);
+                ShowChart.showChart(mLineChart, mLineData1, Color.rgb(114, 188, 223));
+                break;
+            case R.id.time_button:
+                dataType=1;
+                LineData mLineData2 = getLineData(coordinatesArrayList);
+                ShowChart.showChart(mLineChart, mLineData2, Color.rgb(114, 188, 223));
                 break;
 
 
