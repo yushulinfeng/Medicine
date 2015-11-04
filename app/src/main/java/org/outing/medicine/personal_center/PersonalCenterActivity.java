@@ -204,6 +204,7 @@ public class PersonalCenterActivity extends TActivity {
             Double.parseDouble(radius);
             SharedPreferences.Editor editor=getSharedPreferences("Radius", MODE_PRIVATE).edit();
             editor.putString("radius", radius);
+            editor.commit();
         }catch (Exception e){
             showToast("请输入正确半径");
         }
