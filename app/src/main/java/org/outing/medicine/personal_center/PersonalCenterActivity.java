@@ -192,7 +192,7 @@ public class PersonalCenterActivity extends TActivity {
 
     @Override
     public void showContextMenu() {
-        showToast("按下按钮");
+        showToast("按下按钮 ");
         name=editName.getText().toString();
         sex= editSex.getText().toString();
         age= editAge.getText().toString();
