@@ -1,6 +1,7 @@
 package org.outing.medicine.personal_center;
 
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.util.Log;
@@ -25,6 +26,9 @@ import org.outing.medicine.contact.ContactTool;
 import org.outing.medicine.fun_tools.WidgetImage;
 import org.outing.medicine.fun_tools.WidgetShow;
 import org.outing.medicine.fun_tools.WidgetTool;
+import org.outing.medicine.main_main.MainActivity;
+import org.outing.medicine.start.Login;
+import org.outing.medicine.start.LogoutTask;
 import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
@@ -39,7 +43,7 @@ import org.outing.medicine.tools.connect.ServerURL;
 public class PersonalCenterActivity extends TActivity {
     private LocationClient mLocationClient;
     private ToggleButton locationButton=null,contactButton=null;
-    private Button centerBtn;
+    private Button centerBtn,outButton;
     private EditText editName,editSex,editAge,
             editIll,editLocation, editContact,editradius;
     private String name,age,sex,ill,location,contact,radius;
@@ -255,11 +259,23 @@ public class PersonalCenterActivity extends TActivity {
         locationButton=(ToggleButton)findViewById(R.id.location_button);
         contactButton= (ToggleButton) findViewById(R.id.contact_button);
         centerBtn= (Button) findViewById(R.id.center_button);
+        outButton=(Button)findViewById(R.id.out_button);
         wid = new WidgetImage();
         centerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 locationApplication.setCenter(true);
+
+            }
+        });
+        outButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //退出mainActivity
+                Intent intent=new Intent(PersonalCenterActivity.this, Login.class);
+                startActivity(intent);
+                finish();
+                MainActivity.instance.finish();
 
             }
         });
