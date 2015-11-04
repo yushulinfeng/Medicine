@@ -2,13 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-    <Button
+    <ImageButton
         android:id="@+id/tools_flashlight_btn_switch"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="关闭"
-        android:textSize="32sp" />
+        android:scaleType="fitXY"
+        android:padding="0dp"
+        android:src="@drawable/btn_tools_flashlight_bg" />
 
 </LinearLayout>

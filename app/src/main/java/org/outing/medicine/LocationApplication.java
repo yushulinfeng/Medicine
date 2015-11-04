@@ -76,6 +76,7 @@ public class LocationApplication extends Application {
                 editor.commit();
                 center=false;
                 Log.d("test", "在设置了");
+                Toast.makeText(getBaseContext(), "设置成功", Toast.LENGTH_SHORT).show();
             }
             //获得中心坐标
             SharedPreferences pref=getSharedPreferences("Center", MODE_PRIVATE);

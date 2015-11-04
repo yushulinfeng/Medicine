@@ -5,7 +5,8 @@
     android:orientation="vertical">
 
     <include layout="@layout/top" />
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -17,6 +18,7 @@
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"
         android:paddingLeft="3dp"
+        android:background="#8FFF"
         android:paddingRight="3dp"
         android:text="闹钟"
         android:textColor="@color/black"
@@ -27,6 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:background="#8FFF"
         android:divider="@color/gray"
         android:dividerHeight="1dp"
         android:padding="3dp"
@@ -36,8 +39,11 @@
         android:id="@+id/fun_remind_btn_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/btn_1"
+        android:padding="5dp"
+        android:layout_margin="5dp"
         android:text="添加药品"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="32sp" />
 
     </LinearLayout>

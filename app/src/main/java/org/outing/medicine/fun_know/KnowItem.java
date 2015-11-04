@@ -29,6 +29,7 @@ public class KnowItem extends TActivity {
     public void onCreate() {
         setContentView(R.layout.fun_know_item);
         setTitle("健康知识");
+        setTitleBackColor(R.color.btn_4_normal);
         showBackButton();
 
         initMessage();

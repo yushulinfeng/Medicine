@@ -13,6 +13,7 @@ public class KnowMain extends TActivity implements OnClickListener {
     public void onCreate() {
         setContentView(R.layout.fun_know_main);
         setTitle("健康知识");
+        setTitleBackColor(R.color.btn_4_normal);
         showBackButton();
 
         Button btn_gxy = (Button) findViewById(R.id.fun_know_gxy);

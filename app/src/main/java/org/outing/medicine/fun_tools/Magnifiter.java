@@ -1,7 +1,5 @@
 package org.outing.medicine.fun_tools;
 
-import org.outing.medicine.R;
-
 import android.app.Activity;
 import android.graphics.PixelFormat;
 import android.hardware.Camera;
@@ -11,7 +9,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageButton;
+
+import org.outing.medicine.R;
 
 @SuppressWarnings("deprecation")
 public class Magnifiter extends Activity implements SurfaceHolder.Callback {
@@ -24,7 +24,7 @@ public class Magnifiter extends Activity implements SurfaceHolder.Callback {
 	private SurfaceHolder holder;
 	private boolean flag = false;// 用于pause、resume防止重复初始化
 	private int zoom_value, zoom_step;
-	private Button btn_sub, btn_add;
+	private ImageButton btn_sub, btn_add;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -38,8 +38,8 @@ public class Magnifiter extends Activity implements SurfaceHolder.Callback {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 
 		surface = (SurfaceView) findViewById(R.id.tools_magnifiter_surface);
-		btn_sub = (Button) findViewById(R.id.tools_magnifiter_btn_sub);
-		btn_add = (Button) findViewById(R.id.tools_magnifiter_btn_add);
+		btn_sub = (ImageButton) findViewById(R.id.tools_magnifiter_btn_sub);
+		btn_add = (ImageButton) findViewById(R.id.tools_magnifiter_btn_add);
 
 	}
 

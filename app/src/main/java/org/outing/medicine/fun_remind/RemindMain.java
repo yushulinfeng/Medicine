@@ -1,7 +1,5 @@
 package org.outing.medicine.fun_remind;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.view.ContextMenu;
@@ -15,6 +13,7 @@ import android.widget.TextView;
 
 import org.outing.medicine.R;
 import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.dialog.DialogTitleList;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,12 +30,13 @@ public class RemindMain extends TActivity {
     private TextView show;
     private File icon_path;
     private int delete_index;
-    private AlertDialog method_dialog, delete_dialog;
+    private DialogTitleList method_dialog, delete_dialog;
 
     @Override
     public void onCreate() {
         setContentView(R.layout.fun_remind_main);
         setTitle("用药提醒");
+        setTitleBackColor(R.color.btn_1_normal);
         showBackButton();
         showMenuButton();//test
 
@@ -48,28 +48,30 @@ public class RemindMain extends TActivity {
 
 
     private void initDialog() {
-        method_dialog = new AlertDialog.Builder(this).setTitle("请选择操作")
-                .setItems(context_items, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
+        method_dialog = new DialogTitleList(this, "请选择操作")
+                .setListItem(context_items)
+                .setListListener(new DialogTitleList.DialogItemListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        switch (position) {
                             case 0:
                                 alterItem();
                                 break;
                             case 1:
-                                delete_dialog.setMessage("将删除此条提醒：\n" +
+                                delete_dialog.setText("将删除此条提醒：\n" +
                                         array.get(delete_index).getDrugName());
                                 delete_dialog.show();
                                 break;
                         }
                     }
-                }).create();
-        delete_dialog = new AlertDialog.Builder(this)
-                .setTitle("确认删除？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                });
+        delete_dialog = new DialogTitleList(this, "确认删除？")
+                .setPositiveButton("确定", new DialogTitleList.DialogButtonListener() {
+                    @Override
+                    public void onButtonClick() {
                         deleteItem();
                     }
-                }).setNegativeButton("取消", null).create();
+                }).setNegativeButton("取消", null);
     }
 
     private void initView() {
@@ -182,9 +184,11 @@ public class RemindMain extends TActivity {
     //本地应该可以看用药记录。建议没有本地缓存，直接网络获取。
     @Override
     public void showContextMenu() {
-        new AlertDialog.Builder(this)
-                .setPositiveButton("历史记录", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        new DialogTitleList(this)
+                .setListItem(new String[]{"历史记录"})
+                .setListListener(new DialogTitleList.DialogItemListener() {
+                    @Override
+                    public void onItemClick(int position) {
                         Intent intent = new Intent(RemindMain.this, RemindHistory.class);
                         startActivity(intent);
                     }

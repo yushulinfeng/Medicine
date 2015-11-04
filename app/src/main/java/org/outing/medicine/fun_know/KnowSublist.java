@@ -31,6 +31,7 @@ public class KnowSublist extends TActivity implements XListViewListener {
 
         initMessage();
         setTitle("健康知识");
+        setTitleBackColor(R.color.btn_4_normal);
         showBackButton();
 
         initElement();

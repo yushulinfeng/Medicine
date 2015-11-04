@@ -7,7 +7,10 @@
     <uses-sdk
         android:minSdkVersion="12"
         android:targetSdkVersion="21" />
+
     <uses-permission android:name="android.permission.SEND_SMS"></uses-permission>
+
+		
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"></uses-permission>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
@@ -89,8 +92,7 @@
             android:label="@string/app_name"></activity>
         <activity
             android:name=".contact.ContactAdd"
-            android:label="@string/app_name"
-            android:launchMode="singleInstance"></activity>
+            android:label="@string/app_name"></activity>
         <activity
             android:name=".contact.ContactSelect"
             android:label="@string/app_name"></activity>

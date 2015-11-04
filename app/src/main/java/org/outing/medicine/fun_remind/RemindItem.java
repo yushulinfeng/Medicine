@@ -35,6 +35,7 @@ public class RemindItem extends TActivity {
         setContentView(R.layout.fun_remind_drug);
         initMessage();
         setTitle(drug_name);
+        setTitleBackColor(R.color.btn_1_normal);
         showBackButton();
 
         initView();

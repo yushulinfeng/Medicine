@@ -20,6 +20,7 @@ public class ServerURL {
     //收藏药品
     public static final String DRUG_PUT_COLLECT = BASE_ADDRESS + "like_mdc";
 	public static final String DRUG_GET_COLLECT = BASE_ADDRESS + "get_like_mdc";
+	public static final String DRUG_CLEAR_COLLECT = BASE_ADDRESS + "drop_like_mdc";
 
     //文章获取
     public static final String KNOW_GET_ESSAYLIST = BASE_ADDRESS + "get_docs_list";

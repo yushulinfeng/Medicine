@@ -10,7 +10,6 @@ import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -137,7 +136,7 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
                     case 1:
                         tab_tv_my.setTextColor(getResources().getColor(
                                 R.color.tab_btn_light));
-                        tab_iv_my.setImageResource(R.drawable.tab_btn_index_light);
+                        tab_iv_my.setImageResource(R.drawable.tab_btn_my_light);
                         break;
                 }
                 current_index = position;
