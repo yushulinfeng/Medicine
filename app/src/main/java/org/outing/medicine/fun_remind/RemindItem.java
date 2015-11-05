@@ -89,9 +89,9 @@ public class RemindItem extends TActivity {
     private void initListMap() {
         array = RemindTool.getTimer(this, drug_id);
         if (array.size() == 0)
-            show.setText("暂无提醒");
+            show.setText("欢迎\n添加提醒");
         else
-            show.setText("共" + array.size() + "条提醒");
+            show.setText("");
 
         sortArray();
         items.clear();

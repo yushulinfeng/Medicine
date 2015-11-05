@@ -11,7 +11,6 @@ import org.dom4j.io.SAXReader;
 import org.outing.medicine.R;
 import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.xlist.XListView;
-import org.outing.medicine.tools.xlist.XListView.XListViewListener;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class KnowSublist extends TActivity implements XListViewListener {
+public class KnowSublist extends TActivity {
     private String file_name;
     private String sub_name;
     private ArrayList<String> array;
@@ -70,15 +69,7 @@ public class KnowSublist extends TActivity implements XListViewListener {
 
     private void initView() {
         list = (XListView) findViewById(R.id.know_sublist_list);
-        list.setXListViewListener(this);
-        list.setPullRefreshEnable(false);
-        if (android.os.Build.VERSION.SDK_INT >= 19) {//受到系统版本影响
-            list.setFooterDividersEnabled(false);
-            list.setSpring();
-        } else {
-            list.setSpring();
-            //list.setPullLoadEnable(false);//项目多时，注释此行即可（项目过少会出现双线）
-        }
+        list.setSpringOnly(true);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {// 只添加点击即可
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
@@ -110,17 +101,6 @@ public class KnowSublist extends TActivity implements XListViewListener {
 
     @Override
     public void showContextMenu() {
-    }
-
-
-    @Override
-    public void onRefresh() {
-        list.stopRefresh();
-    }
-
-    @Override
-    public void onLoadMore() {
-        list.stopLoadMore();
     }
 
 }

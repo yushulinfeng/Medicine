@@ -6,21 +6,19 @@
 
     <include layout="@layout/top" />
 
-    <TextView
-        android:id="@+id/remind_history_tv_show"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="start|center_vertical"
-        android:paddingLeft="3dp"
-        android:paddingRight="3dp"
-        android:text="用药提醒历史"
-        android:textColor="@color/black"
-        android:textSize="16sp" />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
+        <TextView
+            android:id="@+id/remind_history_tv_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="用药提醒\n历史记录为空"
+            android:textColor="@color/gray"
+            android:textSize="48sp" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -49,7 +47,10 @@
         android:id="@+id/remind_history_btn_clear"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_1"
+        android:padding="5dp"
         android:text="清空历史"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="32sp" />
 </LinearLayout>

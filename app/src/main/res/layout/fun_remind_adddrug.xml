@@ -6,129 +6,62 @@
 
     <include layout="@layout/top" />
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/remind_adddrug_et_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:orientation="horizontal"
-        android:padding="5dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="start|center_vertical"
-            android:text="药品名称："
-            android:textColor="@color/black"
-            android:textSize="24sp" />
-
-        <EditText
-            android:id="@+id/remind_adddrug_et_name"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:hint="请输入药品名称"
-            android:singleLine="true"
-            android:textSize="20sp" />
-    </LinearLayout>
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:hint="药品名称"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textSize="28sp" />
 
 
-    <LinearLayout
+    <EditText
+        android:id="@+id/remind_adddrug_et_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="5dp">
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:hint="备注说明（选填）"
+        android:padding="10dp"
+        android:singleLine="true"
+        android:textSize="28sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="start|center_vertical"
-            android:text="备注说明："
-            android:textColor="@color/black"
-            android:textSize="24sp" />
-
-        <EditText
-            android:id="@+id/remind_adddrug_et_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:hint="输入备注（选填）"
-            android:singleLine="true"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:padding="5dp"
-        android:text="药品图片： "
-        android:textColor="@color/black"
-        android:textSize="24sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <Button
-            android:id="@+id/remind_adddrug_btn_camera"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="拍照"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/remind_adddrug_btn_album"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="相册"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/remind_adddrug_btn_default"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="默认"
-            android:textSize="24sp" />
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/remind_adddrug_iv_drug"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
-        android:scaleType="fitCenter" />
+        android:layout_margin="10dp"
+        android:layout_weight="1">
 
-    <LinearLayout
+        <ImageView
+            android:id="@+id/remind_adddrug_iv_drug"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter" />
+
+        <Button
+            android:id="@+id/remind_adddrug_btn_drug"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/no_color"
+            android:drawableTop="@drawable/btn_camera_bg"
+            android:gravity="top|center_horizontal"
+            android:text="添加药品图片"
+            android:textColor="@color/gray"
+            android:textSize="26sp" />
+    </FrameLayout>
+
+
+    <Button
+        android:id="@+id/remind_adddrug_btn_sure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp">
-
-        <Button
-            android:id="@+id/remind_adddrug_btn_sure"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="确定"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/remind_adddrug_btn_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="取消"
-            android:textSize="24sp" />
-    </LinearLayout>
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_1"
+        android:padding="5dp"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="32sp" />
 </LinearLayout>

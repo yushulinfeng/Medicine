@@ -1,8 +1,6 @@
 package org.outing.medicine.fun_remind;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
 import android.view.MotionEvent;
@@ -14,6 +12,7 @@ import android.widget.TimePicker;
 
 import org.outing.medicine.R;
 import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.dialog.DialogTitleList;
 
 public class AddTimer extends TActivity implements View.OnClickListener {
     public static final String[] context_items =
@@ -22,12 +21,12 @@ public class AddTimer extends TActivity implements View.OnClickListener {
     //直接修改这个bool值即可，它是不显示context_items的最后一项。
     //因为注释掉最后一项影响的东西太多。
     //通知栏这个，后期可以自己用。它的逻辑麻烦一些，而且并不适合老人。（剩下的不必修改）
-    private EditText et_title, et_method, et_time;
+    private EditText et_title, et_method;
     private View pickerdialog;
     private TimePicker picker;
     private int hour = -1, min = -1;
-    private int remind_method = 0;
-    private AlertDialog method_dialog, time_dialog;
+    private int remind_method = 2;
+    private DialogTitleList method_dialog;
     private String drug_id, title, timer_id;
     private boolean is_alter = false;
 
@@ -42,8 +41,8 @@ public class AddTimer extends TActivity implements View.OnClickListener {
         initDialog();
         if (is_alter)
             setTitle("修改闹钟");//修改就不用弹键盘了
-        else
-            showKeyboard();//弹出键盘
+//        else
+//            showKeyboard();//弹出键盘（感觉都不用）
     }
 
     private void initMessage() {
@@ -60,7 +59,7 @@ public class AddTimer extends TActivity implements View.OnClickListener {
         try {
             timer_id = intent.getStringExtra("timer_id");
             title = intent.getStringExtra("title");
-            remind_method = intent.getIntExtra("method", 0);
+            remind_method = intent.getIntExtra("method", 2);
             hour = intent.getIntExtra("hour", -1);
             min = intent.getIntExtra("min", -1);
         } catch (Exception e) {
@@ -69,9 +68,9 @@ public class AddTimer extends TActivity implements View.OnClickListener {
     }
 
     private void initView() {
+        picker = (TimePicker) findViewById(R.id.fun_remind_addtimer_picker);
         et_title = (EditText) findViewById(R.id.remind_addtimer_et_title);
         et_method = (EditText) findViewById(R.id.remind_addtimer_et_method);
-        et_time = (EditText) findViewById(R.id.remind_addtimer_et_time);
         // et_method.setOnClickListener(this);//这样EditText点击两次才能响应
         // et_time.setOnClickListener(this);
         et_method.setOnTouchListener(new View.OnTouchListener() {
@@ -81,18 +80,9 @@ public class AddTimer extends TActivity implements View.OnClickListener {
                 return false;
             }
         });
-        et_time.setOnTouchListener(new View.OnTouchListener() {
-            public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction() == MotionEvent.ACTION_UP)
-                    showTimeDialog();
-                return false;
-            }
-        });
         Button btn_sure = (Button) findViewById(R.id.remind_addtimer_btn_sure);
-        Button btn_cancel = (Button) findViewById(R.id.remind_addtimer_btn_cancel);
         Button btn_del = (Button) findViewById(R.id.remind_addtimer_btn_del);
         btn_sure.setOnClickListener(this);
-        btn_cancel.setOnClickListener(this);
         btn_del.setOnClickListener(this);
 
         if (is_alter) {//如果是修改闹钟
@@ -100,15 +90,12 @@ public class AddTimer extends TActivity implements View.OnClickListener {
             et_title.setText(title);
             et_title.setSelection(title.length());// 定位光标到最后
             et_method.setText(context_items[remind_method]);
-            et_time.setText(AnTimer.formatTime(hour, min));
+            picker.setCurrentHour(hour);
+            picker.setCurrentMinute(min);
         }
     }
 
     private void initDialog() {
-        pickerdialog = getLayoutInflater().inflate(
-                R.layout.fun_remind_addtimer_timedia, null);
-        picker = (TimePicker) pickerdialog
-                .findViewById(R.id.fun_remind_addtimer_timepicker);
         String[] dialog_item = null;
         if (enable_show_note) {
             dialog_item = context_items;//别名
@@ -117,24 +104,14 @@ public class AddTimer extends TActivity implements View.OnClickListener {
             for (int i = 0; i < dialog_item.length; i++)
                 dialog_item[i] = context_items[i];
         }
-        method_dialog = new AlertDialog.Builder(this).setTitle("请选择提醒方式")
-                .setItems(dialog_item, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        refreshMethod(which);
+        method_dialog = new DialogTitleList(this, "提醒方式")
+                .setListItem(dialog_item)
+                .setListListener(new DialogTitleList.DialogItemListener() {
+                    @Override
+                    public void onItemClick(int position) {
+                        refreshMethod(position);
                     }
-                }).create();
-        time_dialog = new AlertDialog.Builder(this)
-                .setTitle("请设定提醒时间")
-                .setView(pickerdialog)
-                .setPositiveButton("确定",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(
-                                    DialogInterface dialog,
-                                    int which) {
-                                refreshTime();
-                            }
-                        })
-                .create();
+                });
     }
 
     private void showKeyboard() {
@@ -154,23 +131,10 @@ public class AddTimer extends TActivity implements View.OnClickListener {
         et_method.setText(context_items[index]);
     }
 
-    private void refreshTime() {
-        hour = picker.getCurrentHour();
-        min = picker.getCurrentMinute();
-        et_time.setText(AnTimer.formatTime(hour, min));
-    }
-
     private void showMethodDialog() {
         method_dialog.show();
     }
 
-    private void showTimeDialog() {
-        if (hour != -1 && min != -1) {
-            picker.setCurrentHour(hour);
-            picker.setCurrentMinute(min);
-        }
-        time_dialog.show();
-    }
 
     private void saveTimer() {
         if (drug_id == null) {
@@ -179,14 +143,8 @@ public class AddTimer extends TActivity implements View.OnClickListener {
             return;
         }
         title = et_title.getText().toString();
-        if (title.equals("")) {
-            showToast("请输入闹钟标题");
-            return;
-        }
-        if (hour == -1 || min == -1) {
-            showToast("请选择提醒时间");
-            return;
-        }
+        hour = picker.getCurrentHour();
+        min = picker.getCurrentMinute();
         //闹钟的text暂时没有用上，列表中也没有显示，以后可以拓展
         if (is_alter) {//修改
             AnTimer timer = new AnTimer(timer_id, title, "", hour, min, remind_method);
@@ -213,9 +171,6 @@ public class AddTimer extends TActivity implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.remind_addtimer_btn_sure:
                 saveTimer();
-                break;
-            case R.id.remind_addtimer_btn_cancel:
-                finish();
                 break;
             case R.id.remind_addtimer_btn_del:
                 deleteTimer();

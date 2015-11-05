@@ -18,7 +18,8 @@
             android:gravity="start"
             android:padding="8dp"
             android:textColor="@color/black"
-            android:textSize="26sp" />
+            android:textSize="26sp"
+            android:visibility="gone" />
 
         <ListView
             android:id="@+id/dialog_title_list_list"
@@ -27,13 +28,16 @@
             android:divider="@color/gray"
             android:dividerHeight="1dp"
             android:padding="3dp"
-            android:scrollbars="none" />
+            android:scrollbars="none"
+            android:visibility="gone" />
     </FrameLayout>
 
     <TextView
+        android:id="@+id/dialog_title_list_divider_h"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/dialog_divider" />
+        android:background="@color/dialog_divider"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/dialog_title_list_bottom"
@@ -53,11 +57,11 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/dialog_title_list_divider"
+            android:id="@+id/dialog_title_list_divider_v"
             android:layout_width="1dp"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:background="@color/dialog_divider" />
+            android:background="@color/dialog_divider"
+            android:visibility="gone" />
 
         <Button
             android:id="@+id/dialog_title_list_cancel"

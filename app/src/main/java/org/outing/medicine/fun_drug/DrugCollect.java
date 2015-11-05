@@ -19,6 +19,7 @@ import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
 import org.outing.medicine.tools.connect.ConnectListener;
 import org.outing.medicine.tools.connect.ServerURL;
+import org.outing.medicine.tools.dialog.DialogTitleList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,9 +96,9 @@ public class DrugCollect extends TActivity {
 
     private void initListMap() {
         if (array.size() == 0)
-            show.setText("收藏为空");
+            show.setText("您尚未\n收藏药品");
         else
-            show.setText("共" + array.size() + "条收藏");
+            show.setText("");
 
         items.clear();
         for (int i = 0; i < array.size(); i++) {
@@ -138,9 +139,9 @@ public class DrugCollect extends TActivity {
                     items.remove(click_position);
                     adapter.notifyDataSetChanged();
                     if (items.size() == 0)
-                        show.setText("收藏为空");
+                        show.setText("您尚未\n收藏药品");
                     else
-                        show.setText("共" + items.size() + "条收藏");
+                        show.setText("");
                     showToast("删除成功");
                 }
             }
@@ -188,7 +189,7 @@ public class DrugCollect extends TActivity {
 //        showToast("收藏已清空");
                 } else if (response.equals("-1")) {//不可能
                 } else if (response.equals("0")) {
-                    show.setText("收藏为空");
+                    show.setText("您尚未\n收藏药品");
                     items.clear();
                     adapter.notifyDataSetChanged();
                     showToast("收藏已清空");
@@ -207,14 +208,14 @@ public class DrugCollect extends TActivity {
     @Override
     public void showContextMenu() {
         // 清空收藏对话框
-        AlertDialog.Builder builder = new AlertDialog.Builder(this)
-                .setTitle("清空收藏？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        new DialogTitleList(this, "清空收藏？")
+                .setPositiveButton("确定", new DialogTitleList.DialogButtonListener() {
+                    @Override
+                    public void onButtonClick() {
                         clearCollect();
                     }
-                }).setNegativeButton("取消", null);
-        builder.create().show();
+                }).setNegativeButton("取消", null)
+                .show();
     }
 
     private void getNetList() {

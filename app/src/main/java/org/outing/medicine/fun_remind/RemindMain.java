@@ -112,9 +112,9 @@ public class RemindMain extends TActivity {
     private void initListMap() {
         array = RemindTool.getDrug(this);
         if (array.size() == 0)
-            show.setText("用药提醒为空");
+            show.setText("欢迎\n添加药品");
         else
-            show.setText("共" + array.size() + "条用药提醒");
+            show.setText("");
         icon_path = RemindTool.getIconSDPath();
 
         items.clear();

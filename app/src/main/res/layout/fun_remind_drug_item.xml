@@ -20,7 +20,6 @@
             android:textColor="@color/black"
             android:textSize="32sp" />
 
-
         <TextView
             android:id="@+id/remind_drug_item_method"
             android:layout_width="match_parent"
@@ -28,8 +27,8 @@
             android:gravity="end|center_vertical"
             android:paddingLeft="5dp"
             android:paddingRight="5dp"
-            android:text="通知栏提醒"
-            android:textColor="@color/black"
+            android:text="声音提醒"
+            android:textColor="@color/gray"
             android:textSize="20sp" />
     </LinearLayout>
 

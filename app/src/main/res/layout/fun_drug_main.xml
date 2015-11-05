@@ -10,22 +10,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="3dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="5dp">
 
         <EditText
             android:id="@+id/fun_drug_et_search"
             android:layout_width="0dp"
-            android:singleLine="true"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:hint="请输入药品名称"
             android:imeOptions="actionDone"
-            android:hint="请输入药品名称" />
+            android:padding="10dp"
+            android:singleLine="true"
+            android:textSize="26sp" />
 
-        <Button
+        <ImageButton
             android:id="@+id/fun_drug_btn_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="搜索" />
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginLeft="5dp"
+            android:padding="5dp"
+            android:background="@drawable/btn_drug_search_outbg"
+            android:layout_gravity="center_vertical"
+            android:scaleType="fitCenter"
+            android:src="@drawable/btn_drug_search_bg" />
     </LinearLayout>
 
     <TextView
@@ -34,10 +42,11 @@
         android:layout_height="wrap_content"
         android:gravity="start|center_vertical"
         android:paddingLeft="3dp"
+        android:singleLine="true"
         android:paddingRight="3dp"
         android:text="历史"
         android:textColor="@color/black"
-        android:textSize="16sp" />
+        android:textSize="22sp" />
 
     <ListView
         android:id="@+id/fun_drug_list"
@@ -47,15 +56,17 @@
         android:divider="@color/gray"
         android:dividerHeight="1dp"
         android:padding="3dp"
-        android:scrollbars="none" >
-    </ListView>
+        android:scrollbars="none"></ListView>
 
     <Button
         android:id="@+id/fun_drug_btn_collect"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@drawable/btn_3"
+        android:padding="5dp"
         android:text="我的收藏"
-        android:textColor="@color/black"
+        android:textColor="@color/white"
         android:textSize="32sp" />
 
 

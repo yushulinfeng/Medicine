@@ -12,11 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ToggleButton;
 
-
-import com.baidu.location.BDNotifyListener;
 import com.baidu.location.LocationClient;
 import com.baidu.location.LocationClientOption;
-
 
 import org.json.JSONObject;
 import org.outing.medicine.LocationApplication;
@@ -26,9 +23,7 @@ import org.outing.medicine.contact.ContactTool;
 import org.outing.medicine.fun_tools.WidgetImage;
 import org.outing.medicine.fun_tools.WidgetShow;
 import org.outing.medicine.fun_tools.WidgetTool;
-import org.outing.medicine.main_main.MainActivity;
 import org.outing.medicine.start.Login;
-import org.outing.medicine.start.LogoutTask;
 import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
@@ -275,8 +270,6 @@ public class PersonalCenterActivity extends TActivity {
                 Intent intent=new Intent(PersonalCenterActivity.this, Login.class);
                 startActivity(intent);
                 finish();
-                MainActivity.instance.finish();
-
             }
         });
     }

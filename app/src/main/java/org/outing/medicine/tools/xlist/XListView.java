@@ -161,7 +161,7 @@ public class XListView extends ListView implements OnScrollListener {
         //尾部处理
         if (mEnablePullLoad)
             return;
-        mEnablePullLoad=true;
+        mEnablePullLoad = true;
         mFooterView.show();
         mFooterView.setFooterSpring();
         //头部处理
@@ -169,6 +169,41 @@ public class XListView extends ListView implements OnScrollListener {
             return;
         mEnablePullRefresh = true;
         mHeaderViewContent.setVisibility(View.GONE);
+    }
+
+    /**
+     * 仅设置为弹性列表
+     * (就是给版本低，项目多的一个单独的优化，项目多必须超过一屏幕)
+     *
+     * @param low_and_more 系统版本低，并且项目多（会启用上滑，否则低版本是禁用上滑的）
+     */
+    public void setSpringOnly(boolean low_and_more) {
+        setPullRefreshEnable(false);
+        if (android.os.Build.VERSION.SDK_INT >= 19) {//受到系统版本影响
+            setFooterDividersEnabled(false);
+            setSpring();
+        } else {
+            setSpring();
+            //项目多时，注释此行即可（项目过少会出现双线），所以通过禁用上滑来隐藏
+            if (!low_and_more)
+                setPullLoadEnable(false);
+        }
+        setXListViewListener(new XListViewListener() {
+            public void onRefresh() {
+                stopRefresh();
+            }
+
+            public void onLoadMore() {
+                stopLoadMore();
+            }
+        });
+    }
+
+    /**
+     * 仅设置为弹性列表（默认）
+     */
+    public void setSpringOnly() {
+        setSpringOnly(false);
     }
 
     /**

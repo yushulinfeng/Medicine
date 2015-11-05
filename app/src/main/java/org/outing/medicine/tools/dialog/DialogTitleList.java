@@ -26,7 +26,7 @@ import java.util.Map;
 public class DialogTitleList extends Dialog {
     private Context context;
     String title = "";
-    TextView tv_text, tv_divider;
+    TextView tv_text, tv_divider_h, tv_divider_v;
     ListView list;
     Button btn_pos, btn_neg;
     String text = "", text_pos = "", text_neg = "";
@@ -60,7 +60,8 @@ public class DialogTitleList extends Dialog {
 
     private void initView() {
         tv_text = (TextView) findViewById(R.id.dialog_title_list_text);
-        tv_divider = (TextView) findViewById(R.id.dialog_title_list_divider);
+        tv_divider_h = (TextView) findViewById(R.id.dialog_title_list_divider_h);
+        tv_divider_v = (TextView) findViewById(R.id.dialog_title_list_divider_v);
         list = (ListView) findViewById(R.id.dialog_title_list_list);
         btn_pos = (Button) findViewById(R.id.dialog_title_list_sure);
         btn_neg = (Button) findViewById(R.id.dialog_title_list_cancel);
@@ -68,6 +69,8 @@ public class DialogTitleList extends Dialog {
 
     private void initViewSet() {
         if (array != null && array.length != 0) {
+            list.setVisibility(View.VISIBLE);
+            tv_divider_h.setVisibility(View.VISIBLE);
             List items = new ArrayList<Map<String, Object>>();
             for (int i = 0; i < array.length; i++) {
                 Map<String, Object> item = new HashMap<String, Object>();
@@ -91,6 +94,8 @@ public class DialogTitleList extends Dialog {
         }
 
         if (!"".equals(text)) {
+            tv_text.setVisibility(View.VISIBLE);
+            tv_divider_h.setVisibility(View.VISIBLE);
             tv_text.setText(text);
             list.setVisibility(View.GONE);//防止显示冲突
         }
@@ -123,7 +128,7 @@ public class DialogTitleList extends Dialog {
 
         if (btn_neg.getVisibility() == View.VISIBLE &&
                 btn_pos.getVisibility() == View.VISIBLE) {
-            tv_divider.setVisibility(View.VISIBLE);
+            tv_divider_v.setVisibility(View.VISIBLE);
         }
     }
 

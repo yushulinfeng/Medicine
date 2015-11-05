@@ -21,20 +21,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="3dp"
+                android:padding="5dp"
                 android:text="标题"
                 android:textColor="@color/black"
-                android:textSize="32sp" />
+                android:textSize="36sp" />
 
             <TextView
                 android:id="@+id/know_item_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:padding="3dp"
+                android:padding="5dp"
                 android:text="内容"
                 android:textColor="@color/black"
-                android:textSize="24sp" />
+                android:textSize="28sp" />
         </LinearLayout>
     </ScrollView>
 

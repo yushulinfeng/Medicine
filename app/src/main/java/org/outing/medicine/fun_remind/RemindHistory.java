@@ -1,7 +1,5 @@
 package org.outing.medicine.fun_remind;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,6 +18,7 @@ import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
 import org.outing.medicine.tools.connect.ConnectListener;
 import org.outing.medicine.tools.connect.ServerURL;
+import org.outing.medicine.tools.dialog.DialogTitleList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,14 +26,14 @@ import java.util.List;
 import java.util.Map;
 
 public class RemindHistory extends TActivity {
-    public static final String HIS_SPLITE=",";
+    public static final String HIS_SPLITE = ",";
     private ListView list;
     private ArrayList<AnHistory> array;
     private List<Map<String, Object>> items;
     private SimpleAdapter adapter;
     private TextView show, back_show;
     private int delete_index;
-    private AlertDialog delete_dialog, clear_dialog;
+    private DialogTitleList delete_dialog, clear_dialog;
 
     @Override
     public void onCreate() {
@@ -49,20 +48,20 @@ public class RemindHistory extends TActivity {
     }
 
     private void initDialog() {
-        delete_dialog = new AlertDialog.Builder(this)
-                .setTitle("确认删除？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        delete_dialog = new DialogTitleList(this, "确认删除？")
+                .setPositiveButton("确定", new DialogTitleList.DialogButtonListener() {
+                    @Override
+                    public void onButtonClick() {
                         deleteItem();
                     }
-                }).setNegativeButton("取消", null).create();
-        clear_dialog = new AlertDialog.Builder(this)
-                .setTitle("清空历史记录？")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+                }).setNegativeButton("取消", null);
+        clear_dialog = new DialogTitleList(this, "清空历史记录？")
+                .setPositiveButton("确定", new DialogTitleList.DialogButtonListener() {
+                    @Override
+                    public void onButtonClick() {
                         ClockTool.cleanLog(RemindHistory.this);
                     }
-                }).setNegativeButton("取消", null).create();
+                }).setNegativeButton("取消", null);
     }
 
     private void initView() {
@@ -107,9 +106,9 @@ public class RemindHistory extends TActivity {
 
     private void initListMap() {
         if (array.size() == 0)
-            show.setText("网络历史记录为空，已加载本地历史");//////////
+            show.setText("用药提醒\n历史记录为空");//////////网络历史记录为空，已加载本地历史
         else
-            show.setText("共" + array.size() + "条历史记录");
+            show.setText("");
 
         items.clear();
         for (int i = 0; i < array.size(); i++) {
@@ -183,9 +182,9 @@ public class RemindHistory extends TActivity {
                 item_temp = json_array.getJSONObject(i);
                 str_temp = item_temp.getString("data");
                 //字符串过渡，因为有""不能直接JSONObject（虽然不用json了，但是保留此句）
-                String[] array_temp=str_temp.split(HIS_SPLITE);
+                String[] array_temp = str_temp.split(HIS_SPLITE);
                 his_temp = new AnHistory(array_temp[2],
-                        item_temp.getString("time").substring(0,10),
+                        item_temp.getString("time").substring(0, 10),
                         array_temp[0],
                         array_temp[1].equals("1") ? "完成用药" : "拒绝用药");
                 array.add(his_temp);
