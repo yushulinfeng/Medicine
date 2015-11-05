@@ -23,6 +23,7 @@ import org.outing.medicine.contact.ContactTool;
 import org.outing.medicine.fun_tools.WidgetImage;
 import org.outing.medicine.fun_tools.WidgetShow;
 import org.outing.medicine.fun_tools.WidgetTool;
+import org.outing.medicine.main_main.MainTabIndex;
 import org.outing.medicine.start.Login;
 import org.outing.medicine.tools.TActivity;
 import org.outing.medicine.tools.connect.Connect;
@@ -48,11 +49,13 @@ public class PersonalCenterActivity extends TActivity {
     private Handler hanSet;
     private WidgetImage wid;
     private LocationApplication locationApplication;
+    MainTabIndex mainTabIndex;
 
     @Override
     public void onCreate() {
         setContentView(R.layout.activity_person_center);
         setTitle("我的设置");
+        mainTabIndex=new MainTabIndex();
         locationApplication= (LocationApplication) getApplication();
         showBackButton();
         showMenuButton();
@@ -266,10 +269,11 @@ public class PersonalCenterActivity extends TActivity {
         outButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //退出mainActivity
-                Intent intent=new Intent(PersonalCenterActivity.this, Login.class);
-                startActivity(intent);
-                finish();
+//                //退出mainActivity
+                 Intent intent=new Intent(PersonalCenterActivity.this, Login.class);
+//                startActivity(intent);
+//                finish();
+                mainTabIndex.onActivityResult(1,1,intent);
             }
         });
     }

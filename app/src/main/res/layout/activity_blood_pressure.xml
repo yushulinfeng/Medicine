@@ -40,8 +40,8 @@
 
     <Button
         android:id="@+id/btn_write"
-        android:text="上传"
-        android:textSize="20dp"
+        android:text="上  传  数  据"
+        android:textSize="30dp"
         android:textColor="#ffffff"
         android:background="@drawable/btn_action"
         android:layout_width="match_parent"
@@ -66,8 +66,8 @@
 
         <Button
             android:id="@+id/time_button"
-            android:text="分时"
-            android:textSize="18dp"
+            android:text="分  时"
+            android:textSize="26dp"
             android:layout_marginRight="1dp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
@@ -78,7 +78,7 @@
         <Button
             android:id="@+id/day_button"
             android:text="日"
-            android:textSize="18dp"
+            android:textSize="26dp"
             android:layout_marginLeft="1dp"
             android:textColor="#ffffff"
             android:layout_width="0dp"
