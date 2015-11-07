@@ -273,7 +273,8 @@ public class PersonalCenterActivity extends TActivity {
                  Intent intent=new Intent(PersonalCenterActivity.this, Login.class);
 //                startActivity(intent);
 //                finish();
-                mainTabIndex.onActivityResult(1,1,intent);
+                setResult(1,intent);
+                finish();
             }
         });
     }

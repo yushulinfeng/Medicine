@@ -38,7 +38,8 @@ public class ServerURL {
     public static final String Post_Location=BASE_ADDRESS+"/post_gps";
 
     //问卷
-    public static final String Questionnaire_Url="http://www.wenjuan.com/s/73a6Rz/";
+//    public static final String Questionnaire_Url="http://www.wenjuan.com/s/73a6Rz/";
+    public static final String Questionnaire_Url="http://www.wenjuan.com/s/JJvUji/";
     public static final String Questionnaire_Result_Url="http://www.wenjuan.com/r/NJZr2q?pid=5629b6def7405b5c4a4b61d4&vcode=ddbe395a03040fe428ca10f73b140510";
 
 
