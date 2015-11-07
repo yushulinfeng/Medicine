@@ -43,11 +43,13 @@ public class DrugTool {
         prefs.putInt("count", count + 1);
         prefs.putString("name" + 0, new_drug.getName());// 最新放在最前面
         prefs.putString("com_name" + 0, new_drug.getCommonName());
+        prefs.putString("id" + 0, new_drug.getID());
         AnDrug old_drug = null;
         for (int i = 0; i < count; i++) {
             old_drug = array.get(i);
             prefs.putString("name" + (i + 1), old_drug.getName());
             prefs.putString("com_name" + (i + 1), old_drug.getCommonName());
+            prefs.putString("id" + (i + 1), old_drug.getID());
         }
         prefs.commit();
     }
@@ -63,7 +65,8 @@ public class DrugTool {
         for (int i = 0; i < count; i++) {
             String name = pref.getString("name" + i, "");
             String com_name = pref.getString("com_name" + i, "");
-            array.add(new AnDrug(name, com_name));
+            String id = pref.getString("id" + i, "");
+            array.add(new AnDrug(name, com_name, id));
         }
         return array;
     }
@@ -93,6 +96,7 @@ public class DrugTool {
             old_drug = array.get(i);
             prefs.putString("name" + i, old_drug.getName());
             prefs.putString("com_name" + i, old_drug.getCommonName());
+            prefs.putString("id" + i, old_drug.getID());
         }
         prefs.commit();
     }
@@ -110,11 +114,13 @@ public class DrugTool {
         prefs.putInt("count", count + 1);
         prefs.putString("name" + 0, new_drug.getName());// 最新放在最前面
         prefs.putString("com_name" + 0, new_drug.getCommonName());
+        prefs.putString("id" + 0, new_drug.getID());
         AnDrug old_drug = null;
         for (int i = 0; i < count; i++) {
             old_drug = array.get(i);
             prefs.putString("name" + (i + 1), old_drug.getName());
             prefs.putString("com_name" + (i + 1), old_drug.getCommonName());
+            prefs.putString("id" + (i + 1), old_drug.getID());
         }
         prefs.commit();
     }
@@ -130,7 +136,8 @@ public class DrugTool {
         for (int i = 0; i < count; i++) {
             String name = pref.getString("name" + i, "");
             String com_name = pref.getString("com_name" + i, "");
-            array.add(new AnDrug(name, com_name));
+            String id = pref.getString("id" + i, "");
+            array.add(new AnDrug(name, com_name, id));
         }
         return array;
     }
@@ -142,8 +149,8 @@ public class DrugTool {
         ArrayList<AnDrug> array = getCollect(context);
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i).getName().equals(new_drug.getName())
-                    && array.get(i).getCommonName()
-                    .equals(new_drug.getCommonName()))
+                    && array.get(i).getCommonName().equals(new_drug.getCommonName())
+                    && array.get(i).getID().equals(new_drug.getID()))
                 return true;
         }
         return false;
@@ -157,8 +164,8 @@ public class DrugTool {
         int index = -1;
         for (int i = 0; i < array.size(); i++) {
             if (array.get(i).getName().equals(drug.getName())
-                    && array.get(i).getCommonName()
-                    .equals(drug.getCommonName()))
+                    && array.get(i).getCommonName().equals(drug.getCommonName())
+                    && array.get(i).getID().equals(drug.getID()))
                 index = i;
         }
         if (index != -1)

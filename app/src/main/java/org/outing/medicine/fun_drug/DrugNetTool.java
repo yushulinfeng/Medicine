@@ -12,6 +12,9 @@ import org.outing.medicine.tools.connect.ServerURL;
 public class DrugNetTool {
     private static String drug_name = "";
     private static String drug_act = "";
+    private static boolean is_del = false;
+    private static AnDrug drug_drug=null;
+    private static Context drug_context=null;
 
     //添加，删除，清空都要写在这里
     //由于需要更新列表，删除、清空在收藏中也有一份
@@ -27,9 +30,13 @@ public class DrugNetTool {
     public static void dealNetCollect(Context context, AnDrug drug, boolean is_delate) {
         String name = drug.getName();
         String com_name = drug.getCommonName();
-        drug_name = name + DrugMain.DRUG_SPLIT + com_name;
+        String id = drug.getID();
+        drug_name = name + DrugMain.DRUG_SPLIT + com_name + DrugMain.DRUG_SPLIT + id;
         if (is_delate) drug_act = "1";
         else drug_act = "0";
+        is_del = is_delate;
+        drug_drug=drug;
+        drug_context=context;
         Connect.POST(context, ServerURL.DRUG_PUT_COLLECT, new ConnectListener() {
             @Override
             public ConnectList setParam(ConnectList list) {
@@ -52,6 +59,11 @@ public class DrugNetTool {
                 } else if (response.equals("-1")) {
                 } else if (response.equals("0")) {
                     //SUCCESS
+                    if (is_del) {
+                        DrugTool.deleteCollect(drug_context, drug_drug);
+                    } else {
+                        DrugTool.addCollect(drug_context, drug_drug);
+                    }
                 }
             }
         });

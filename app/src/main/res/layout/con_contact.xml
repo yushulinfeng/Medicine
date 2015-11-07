@@ -15,7 +15,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="加载中……\n请稍等10秒"
             android:textColor="@color/black"
             android:textSize="30sp" />
 
@@ -25,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:divider="@color/light_gray"
+            android:divider="@color/gray"
             android:dividerHeight="2dp"
             android:scrollbars="vertical" />
     </FrameLayout>

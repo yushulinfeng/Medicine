@@ -186,7 +186,7 @@ public class RemindHistory extends TActivity {
                 his_temp = new AnHistory(array_temp[2],
                         item_temp.getString("time").substring(0, 10),
                         array_temp[0],
-                        array_temp[1].equals("1") ? "完成用药" : "拒绝用药");
+                        array_temp[1].equals("1") ? "完成用药" : "推迟用药");
                 array.add(his_temp);
             } catch (Exception e) {
                 Log.e("EEE", "EEE-history-ERROR:" + e.getMessage());

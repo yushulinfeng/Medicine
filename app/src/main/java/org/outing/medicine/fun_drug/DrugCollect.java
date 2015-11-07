@@ -1,7 +1,5 @@
 package org.outing.medicine.fun_drug;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
@@ -26,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//本地收藏只用于同步判断，不显示给用户
 public class DrugCollect extends TActivity {
     private ListView list;
     private TextView show;
@@ -69,15 +68,14 @@ public class DrugCollect extends TActivity {
                 String message = items.get(position).get("name") + "\n"
                         + items.get(position).get("com_name");
                 // 删除收藏对话框
-                AlertDialog.Builder builder = new AlertDialog.Builder(DrugCollect.this)
-                        .setTitle("删除此条收藏？")
-                        .setMessage(message)
-                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
+                new DialogTitleList(DrugCollect.this, "删除此条收藏？")
+                        .setText(message)
+                        .setPositiveButton("确定", new DialogTitleList.DialogButtonListener() {
+                            @Override
+                            public void onButtonClick() {
                                 longClickItem();
                             }
-                        }).setNegativeButton("取消", null);
-                builder.create().show();
+                        }).setNegativeButton("取消", null).show();
                 return true;
             }
         });
@@ -113,8 +111,9 @@ public class DrugCollect extends TActivity {
         Connect.POST(this, ServerURL.DRUG_PUT_COLLECT, new ConnectListener() {
             @Override
             public ConnectList setParam(ConnectList list) {
-                list.put("medical", items.get(click_position).get("name") +
-                        DrugMain.DRUG_SPLIT + items.get(click_position).get("com_name"));
+                list.put("medical", array.get(click_position).getName() +
+                        DrugMain.DRUG_SPLIT + array.get(click_position).getCommonName() +
+                        DrugMain.DRUG_SPLIT + array.get(click_position).getID());
                 list.put("act", "1");
                 return list;
             }
@@ -133,16 +132,17 @@ public class DrugCollect extends TActivity {
                 } else if (response.equals("-1")) {
                 } else if (response.equals("0")) {
                     //SUCCESS
-                    //        //本地（暂不处理）
-                    //        DrugTool.deleteCollect(this, new AnDrug(items.get(index).get("name") + "",
-                    //        items.get(index).get("com_name") + ""));
                     items.remove(click_position);
                     adapter.notifyDataSetChanged();
-                    if (items.size() == 0)
+                    if (items.size() == 0) {
                         show.setText("您尚未\n收藏药品");
-                    else
+                    } else {
                         show.setText("");
+                    }
                     showToast("删除成功");
+                    //本地
+                    DrugTool.deleteCollect(DrugCollect.this, new AnDrug(array.get(click_position).getName(),
+                            array.get(click_position).getCommonName(), array.get(click_position).getID()));
                 }
             }
         });
@@ -152,9 +152,9 @@ public class DrugCollect extends TActivity {
         // 跳转，返回式子启动，不必去管是否有变化，返回了，就刷新就行了
         Intent intent = new Intent(this, DrugItem.class);
         String com_name_temp = (String) items.get(index).get("com_name");
-        intent.putExtra("drug_name",
-                (String) items.get(index).get("name"));
-        intent.putExtra("com_name", com_name_temp);
+        intent.putExtra("drug_name", array.get(index).getName());
+        intent.putExtra("com_name", array.get(index).getCommonName());
+        intent.putExtra("drug_net_id", array.get(index).getID());
         if (com_name_temp.contains("-网络数据-")) {
             intent.putExtra("from_net", true);
         } else {
@@ -193,8 +193,8 @@ public class DrugCollect extends TActivity {
                     items.clear();
                     adapter.notifyDataSetChanged();
                     showToast("收藏已清空");
-//                    //本地（暂时不要）
-//                    DrugTool.clearCollect(DrugCollect.this);
+                    //本地
+                    DrugTool.clearCollect(DrugCollect.this);
                 }
             }
         });
@@ -242,7 +242,7 @@ public class DrugCollect extends TActivity {
         } else if (response.equals("0")) {
         } else {
             JSONArray json_array = JSONArray.parseArray(response);
-            String item_temp = "", name_temp = "", com_temp = "";
+            String item_temp = "", name_temp = "", com_temp = "", id_temp = "";
             String[] all_temp = null;
             AnDrug drug_temp = null;
             for (int i = 0; i < json_array.size(); i++) {
@@ -252,13 +252,22 @@ public class DrugCollect extends TActivity {
                     all_temp = item_temp.split(DrugMain.DRUG_SPLIT);
                     name_temp = all_temp[0];
                     com_temp = all_temp[1];
+                    if (all_temp.length == 3)
+                        id_temp = all_temp[2];
+                    else
+                        id_temp = "";
                 } catch (Exception e) {
-                    name_temp = item_temp;
+                    int str_end = item_temp.indexOf(DrugMain.DRUG_SPLIT);
+                    if (str_end != -1)
+                        name_temp = item_temp.substring(0, str_end);
+                    else
+                        name_temp = item_temp;
                     com_temp = "";
+                    id_temp = "";
                 }
                 Log.e("EEE", "EEE-1 " + name_temp);
                 Log.e("EEE", "EEE-2 " + com_temp);
-                drug_temp = new AnDrug(name_temp, com_temp);
+                drug_temp = new AnDrug(name_temp, com_temp, id_temp);
                 array.add(drug_temp);
             }
             updateList();

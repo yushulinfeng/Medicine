@@ -49,6 +49,22 @@ public class ToolsMain extends TActivity {
                 startActivity(intent);
             }
         });
+        Button btn_where = (Button) findViewById(R.id.fun_tools_where);
+        btn_where.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+//                Intent intent = new Intent(ToolsMain.this, Magnifiter.class);
+//                startActivity(intent);
+                showToast("开发中……");
+            }
+        });
+        Button btn_sos = (Button) findViewById(R.id.fun_tools_sos);
+        btn_sos.setOnClickListener(new OnClickListener() {
+            public void onClick(View v) {
+//                Intent intent = new Intent(ToolsMain.this, Magnifiter.class);
+//                startActivity(intent);
+                showToast("开发中……");
+            }
+        });
     }
 
     @Override

@@ -16,9 +16,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.outing.medicine.R;
+import org.outing.medicine.tools.ToastTool;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
@@ -105,8 +105,8 @@ public class ClockDialog extends Activity implements OnClickListener {
         stopRemind();
 
         tv_title.setText("请参考列表用药");
-        btn_sure.setText("完成用药");
-        btn_cancel.setText("拒绝用药");
+        btn_sure.setText("吃完了");
+        btn_cancel.setVisibility(View.GONE);
         tv_text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         is_taken = true;
     }
@@ -114,18 +114,12 @@ public class ClockDialog extends Activity implements OnClickListener {
     private void refuseMedicine() {
         stopRemind();
         refuseMedicine(this, array_now);// 记录与上传
-        showToast("已拒绝用药");
+        showToast("将在10分钟后提醒");//已拒绝用药/////////怎么写？////////////////////////
 //        finish();
     }
 
     private void finishTake() {
         takeMedicine(this, array_now);// 完成用药记录与上传
-//        finish();
-    }
-
-    private void stopTake() {
-        refuseMedicine(this, array_now);// 记录与上传
-        showToast("已拒绝用药");
 //        finish();
     }
 
@@ -184,16 +178,13 @@ public class ClockDialog extends Activity implements OnClickListener {
                     takeMedicine();
                 break;
             case R.id.remind_clock_dia_cancel:
-                if (is_taken)
-                    stopTake();
-                else
-                    refuseMedicine();
+                refuseMedicine();
                 break;
         }
     }
 
     private void showToast(String text) {
-        Toast.makeText(this, text, Toast.LENGTH_SHORT).show();
+        ToastTool.showToast(this, text);
     }
 
     // 屏蔽按键
@@ -235,6 +226,7 @@ public class ClockDialog extends Activity implements OnClickListener {
         finish();///////////////////////
     }
 
+    //////////////////////////////////////////用异步任务吧………………或者………………
     private void uploadMedicineState(Context context,
                                      ArrayList<AnRing> array, boolean is_finish) {
         Log.e("EEE", "EEE ------" + "start");

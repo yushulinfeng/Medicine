@@ -6,7 +6,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import org.apache.http.HttpResponse;
@@ -29,12 +28,12 @@ import java.util.List;
 
 @SuppressWarnings("deprecation")
 public class DrugItem extends NetTActivity {
-    private static final String MEDICINE_SEARCH_URL = "http://a.apix.cn/yi18/drug/search";
+    protected static final String MEDICINE_API_KEY = "3e49661943e74cb87ef2c71d2c2fd9a9";
     private static final String MEDICINE_SHOW_URL = "http://a.apix.cn/yi18/drug/show";
     private File drug_file;
-    private String drug_name, com_name;
     private boolean from_net;
-    private String drug_title, drug_text;
+    private String drug_name, com_name;
+    private String drug_title, drug_text, drug_net_id;
     private TextView tv_title, tv_text;
     private Button btn_collect;
     private AnDrug drug;
@@ -62,9 +61,15 @@ public class DrugItem extends NetTActivity {
             drug_name = intent.getStringExtra("drug_name");
             com_name = intent.getStringExtra("com_name");
             from_net = intent.getBooleanExtra("from_net", false);
-            if (from_net)
+            if (from_net) {
                 com_name = "-网络数据-";
-            drug = new AnDrug(drug_name, com_name);
+                drug_net_id = intent.getStringExtra("drug_net_id");
+                if (drug_net_id == null || drug_net_id.equals(""))
+                    from_net = false;
+            } else {
+                drug_net_id = "";
+            }
+            drug = new AnDrug(drug_name, com_name, drug_net_id);
         } catch (Exception e) {
             drug = null;
         }
@@ -98,7 +103,6 @@ public class DrugItem extends NetTActivity {
             drug_title = "暂无数据";
             drug_text = "";
             drug = null;
-            btn_collect.setText("返回");
             return;
         }
         Element root = document.getRootElement(); // 获取根元素
@@ -111,6 +115,11 @@ public class DrugItem extends NetTActivity {
                 drug_text = getShowText(child);
                 break;
             }
+        }
+        if (drug_title == null || drug_title.equals("")) {
+            drug_title = "未找到数据";
+            drug_text = "";
+            drug = null;
         }
     }
 
@@ -161,12 +170,10 @@ public class DrugItem extends NetTActivity {
             finish();
         } else if (DrugTool.isCollected(this, drug)) {
             DrugNetTool.deleteNetCollect(this, drug);//删除网络收藏
-            DrugTool.deleteCollect(this, drug);
             btn_collect.setText("收藏");
             showToast("已取消收藏");
         } else {
             DrugNetTool.addNetCollect(this, drug);//添加到网络收藏
-            DrugTool.addCollect(this, drug);
             btn_collect.setText("取消收藏");
             showToast("已加入我的收藏");
         }
@@ -182,7 +189,7 @@ public class DrugItem extends NetTActivity {
                     CoreConnectionPNames.CONNECTION_TIMEOUT, COONECT_TIME_OUT);
             client.getParams().setParameter(CoreConnectionPNames.SO_TIMEOUT,
                     READ_TIME_OUT);
-            request.addHeader("apix-key", "3e49661943e74cb87ef2c71d2c2fd9a9");
+            request.addHeader("apix-key", MEDICINE_API_KEY);
             HttpResponse response = client.execute(request);
             // 接收返回
             BufferedReader in = new BufferedReader(new InputStreamReader(
@@ -196,20 +203,6 @@ public class DrugItem extends NetTActivity {
             return sb.toString();
         } catch (Exception e) {// 很有可能是请求超时了
             return null;
-        }
-    }
-
-    private int decodeID(String json_str) {
-        try {// json_str是null让它抛出异常即可
-            JSONObject json_all = JSONObject.parseObject(json_str);
-            JSONArray json_array = json_all.getJSONArray("yi18");
-            if (json_array.size() == 0)
-                return -1;
-            drug_title = json_array.getJSONObject(0).getString("title");
-            drug_title = Jsoup.parse(drug_title).text();// jsoup处理
-            return json_array.getJSONObject(0).getInteger("id");
-        } catch (Exception e) {
-            return -1;
         }
     }
 
@@ -230,10 +223,11 @@ public class DrugItem extends NetTActivity {
     }
 
     private void getDrugFromNet() {
-        String url = MEDICINE_SEARCH_URL + "?page=1&limit=1&keyword="
-                + drug_name;
-        url = MEDICINE_SHOW_URL + "?id=" + decodeID(doGet(url));
+        drug_title = drug_name;
+        String url = MEDICINE_SHOW_URL + "?id=" + drug_net_id;
         drug_text = decodeText(doGet(url));
+        if (drug_text.equals(""))
+            drug_text = "未找到数据";
     }
 
     @Override

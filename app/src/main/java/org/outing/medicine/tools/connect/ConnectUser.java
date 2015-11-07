@@ -108,10 +108,29 @@ public class ConnectUser extends ConnectBase {
      * @return 状态信息
      */
     public ConnectStatus forgetPass(String name, String code, String newpass) {
-        return null;
-        ///////////////////////////////////////
+        ConnectList list = new ConnectList();
+        list.put("phone", name);
+        list.put("code", code);
+        list.put("password", newpass);
+        String status_str = executePost(ServerURL.FORGET_PASS, list);
+        return dealDorgetResult(status_str);
     }
 
+    private ConnectStatus dealDorgetResult(String postReturn) {
+        if (postReturn == null)
+            return new ConnectStatus(false, "连接服务器失败");
+        else {
+            try {
+                int result = Integer.parseInt(postReturn);
+                if (result > 0)
+                    return new ConnectStatus(true, "");
+                else
+                    return new ConnectStatus(false, "找回密码失败");
+            } catch (Exception e) {
+                return new ConnectStatus(false, "系统错误");
+            }
+        }
+    }
     private ConnectStatus dealLoginResult(String postReturn) {
         if (postReturn == null)
             return new ConnectStatus(false, "连接服务器失败");

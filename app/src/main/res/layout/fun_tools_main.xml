@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
- 
+
             <org.outing.medicine.tools.button.DrawableButton
                 android:id="@+id/fun_tools_award"
                 android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_margin="5dp"
-                android:background="@drawable/btn_3"
+                android:background="@drawable/btn_1"
                 android:drawableLeft="@drawable/fun_tools_icon_calculator"
                 android:drawablePadding="5dp"
                 android:gravity="start|center_vertical"
@@ -66,6 +66,32 @@
                 android:drawablePadding="5dp"
                 android:gravity="start|center_vertical"
                 android:text="放大镜"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tools_main_btn_size" />
+
+            <org.outing.medicine.tools.button.DrawableButton
+                android:id="@+id/fun_tools_where"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_5"
+                android:drawableLeft="@drawable/fun_tools_icon_where"
+                android:drawablePadding="5dp"
+                android:gravity="start|center_vertical"
+                android:text="我在哪"
+                android:textColor="@color/white"
+                android:textSize="@dimen/tools_main_btn_size" />
+
+            <org.outing.medicine.tools.button.DrawableButton
+                android:id="@+id/fun_tools_sos"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/btn_3"
+                android:drawableLeft="@drawable/fun_tools_icon_sos"
+                android:drawablePadding="5dp"
+                android:gravity="start|center_vertical"
+                android:text=" S O S "
                 android:textColor="@color/white"
                 android:textSize="@dimen/tools_main_btn_size" />
         </LinearLayout>

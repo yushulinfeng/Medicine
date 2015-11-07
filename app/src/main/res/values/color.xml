@@ -33,7 +33,7 @@
 
     <color name="dialog_btn_press">#81cfeb</color>
     <color name="dialog_btn_normal">#ffffff</color>
-    <color name="dialog_divider">#aaaaaa</color>
+    <color name="dialog_divider">#bbbbbb</color>
 
     <!-- 常用颜色 -->
     <color name="white">#FFFFFF</color> <!-- 白色 -->
