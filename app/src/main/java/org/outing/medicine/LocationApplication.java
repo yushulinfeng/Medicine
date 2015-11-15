@@ -40,9 +40,35 @@ public class LocationApplication extends Application {
     public TextView mLocationResult,logMsg;
     public TextView trigger,exit;
     private String  radius;
-    private Boolean message,center=false;
+    private Boolean message,center=false,mylocation=false,mylocationok=false;
+
+    public Boolean getMylocation() {
+        return mylocation;
+    }
+
+    public Boolean getMylocationok() {
+        return mylocationok;
+    }
+
+    public void setMylocationok(Boolean mylocationok) {
+        this.mylocationok = mylocationok;
+    }
+
+    public void setMylocation(Boolean mylocation) {
+        this.mylocation = mylocation;
+    }
+
+    private String usualContact="";
     public void setCenter(Boolean center) {this.center = center;}
     public Vibrator mVibrator;
+
+    public Boolean getMessage() {
+        return message;
+    }
+
+    public void setMessage(Boolean message) {
+        this.message = message;
+    }
 
     @Override
     public void onCreate() {
@@ -50,6 +76,9 @@ public class LocationApplication extends Application {
         SDKInitializer.initialize(getApplicationContext());
         //是否发了信息
         message=true;
+        //获得联系人
+        SharedPreferences pref1=getSharedPreferences("PersonalCenter", MODE_PRIVATE);
+        usualContact=pref1.getString("contact","");
         //获得半径
         SharedPreferences pref=getSharedPreferences("Radius", MODE_PRIVATE);
         radius=pref.getString("radius","100000000");
@@ -76,7 +105,7 @@ public class LocationApplication extends Application {
                 editor.commit();
                 center=false;
                 Log.d("test", "在设置了");
-                Toast.makeText(getBaseContext(), "设置成功", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "围栏中心设置成功", Toast.LENGTH_SHORT).show();
             }
             //获得中心坐标
             SharedPreferences pref=getSharedPreferences("Center", MODE_PRIVATE);
@@ -91,10 +120,16 @@ public class LocationApplication extends Application {
             Double distance= DistanceUtil.getDistance(pt_start, pt_end);
             Log.d("test",""+Double.parseDouble(radius));
             if (distance>Double.parseDouble(radius)&&message){
-                SmsManager smsManager = SmsManager.getDefault();
-                smsManager.sendTextMessage("17865197355", null, "测试用短信", null, null);
-                Log.d("test","已出地理围栏");
-                message=false;
+                if (usualContact.equals("")){
+                    Toast.makeText(getApplicationContext(), "请设置紧急联系人", Toast.LENGTH_SHORT).show();
+                }else{
+                    SmsManager smsManager = SmsManager.getDefault();
+                    smsManager.sendTextMessage(usualContact, null, "测试用短信", null, null);
+                    Toast.makeText(getApplicationContext(), "已发送提醒短信", Toast.LENGTH_SHORT).show();
+                    Log.d("test","已出地理围栏");
+                    message=false;
+                }
+
             }
             Log.d("test","DistanceUtil.getDistance(pt_start,pt_end);"+DistanceUtil.getDistance(pt_start,pt_end));
             //上传经纬度
@@ -105,6 +140,16 @@ public class LocationApplication extends Application {
                 public ConnectList setParam(ConnectList list) {
                     list.put("longitude", "" + location.getLongitude());
                     list.put("latitude", "" + location.getLatitude());
+                    //保存到Share
+                    if (mylocation){
+                        SharedPreferences.Editor editor=getSharedPreferences("MyLocation", MODE_PRIVATE).edit();
+                        editor.putString("mLat1",""+location.getLatitude());
+                        editor.putString("mLon1", "" + location.getLongitude());
+                        editor.commit();
+                        mylocationok=true;
+                        mylocation=false;
+                        Log.d("test", "在设置了");
+                    }
                     return list;
                 }
 

@@ -38,7 +38,7 @@ import org.outing.medicine.tools.connect.ServerURL;
  */
 public class PersonalCenterActivity extends TActivity {
     private LocationClient mLocationClient;
-    private ToggleButton locationButton=null,contactButton=null;
+    public ToggleButton locationButton=null,contactButton=null;
     private Button centerBtn,outButton;
     private EditText editName,editSex,editAge,
             editIll,editLocation, editContact,editradius;
@@ -78,6 +78,7 @@ public class PersonalCenterActivity extends TActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 Log.d("test", "isChecked" + isChecked);
+                Log.d("test", "定位按钮这是按了吗！" );
                 Boolean weatherOn = isChecked;
                 if (weatherOn) {
 
@@ -87,6 +88,7 @@ public class PersonalCenterActivity extends TActivity {
                         SharedPreferences.Editor editor=getSharedPreferences("JudgeTwoToggle", MODE_PRIVATE).edit();
                         editor.putBoolean("locationButton", true);
                         editor.commit();
+
 
                     }catch (Exception e){
                         showToast("定位功能请联网使用");
@@ -168,6 +170,10 @@ public class PersonalCenterActivity extends TActivity {
                         editIll.setText(ill_in);
                     }
                     if (!contact_in.equals("null")) {
+                        //保存紧急联系人
+                        SharedPreferences.Editor editor=getSharedPreferences("PersonalCenter", MODE_PRIVATE).edit();
+                        editor.putString("contact", contact_in);
+                        editor.commit();
                         editContact.setText(contact_in);
                     }
                     if (!address_in.equals("null")) {
@@ -231,6 +237,10 @@ public class PersonalCenterActivity extends TActivity {
             public void onResponse(String response) {
                 Log.d("TAG", response);
                 if (response.equals("0")){
+                    //保存紧急联系人
+                    SharedPreferences.Editor editor1=getSharedPreferences("PersonalCenter", MODE_PRIVATE).edit();
+                    editor1.putString("contact", contact);
+                    editor1.commit();
                     finish();
                 }
             }
@@ -262,6 +272,7 @@ public class PersonalCenterActivity extends TActivity {
         centerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                locationButton.performClick();
                 locationApplication.setCenter(true);
 
             }
