@@ -37,4 +37,5 @@ dependencies {
     compile files('libs/volley.jar')
     compile files('libs/BaiduLBS_Android.jar')
     compile files('libs/baidumapapi_util_v3_6_0.jar')
+    compile files('libs/umeng-update-v2.6.0.1.jar')
 }

@@ -6,7 +6,7 @@ import android.webkit.WebViewClient;
 import android.widget.Toast;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.connect.ServerURL;
 
 

@@ -3,27 +3,34 @@
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:background="@drawable/shape_rectf_white_deep"
-    android:orientation="vertical"
-    android:paddingBottom="5dp"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="5dp">
+    android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/remind_clock_dia_title"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="用药提醒"
-        android:textColor="@color/black"
-        android:textSize="24sp" />
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:background="@drawable/btn_1" />
+
+        <TextView
+            android:id="@+id/remind_clock_dia_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:background="@color/btn_1_normal"
+            android:gravity="center"
+            android:text="用药提醒"
+            android:textColor="@color/white"
+            android:textSize="30sp" />
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="2dp"
         android:layout_weight="1"
-        android:background="@drawable/shape_rectf_white"
         android:fillViewport="true">
 
         <TextView
@@ -35,33 +42,45 @@
             android:paddingRight="5dp"
             android:text="闹钟内容"
             android:textColor="@color/black"
-            android:textSize="20sp" />
+            android:textSize="24sp" />
     </ScrollView>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:background="@color/dialog_divider" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/remind_clock_dia_sure"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="吃药"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:background="@drawable/btn_4"
+            android:padding="5dp"
+            android:text="开始"
+            android:textColor="@color/white"
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/remind_clock_dia_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:background="@drawable/btn_3"
+            android:padding="5dp"
             android:text="推迟"
-            android:textColor="@color/black"
-            android:textSize="24sp" />
+            android:textColor="@color/white"
+            android:textSize="26sp" />
     </LinearLayout>
 
 </LinearLayout>

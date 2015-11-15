@@ -9,7 +9,7 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;

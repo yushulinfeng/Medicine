@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.Toast;
 
 import org.outing.medicine.R;
+import org.outing.medicine.tools.utils.ToastTool;
 
 @SuppressWarnings("deprecation")
 public class Flashlight extends Activity {
@@ -35,10 +35,10 @@ public class Flashlight extends Activity {
     private void switchFlashlight() {
         if (statusFlag) {
             try {
-                camera = Camera.open();
+                camera = Camera.open(0);//后置摄像头
             } catch (Exception e) {// 没有硬件
                 camera = null;
-                Toast.makeText(this, "您的手机不支持手电筒", Toast.LENGTH_SHORT).show();
+                ToastTool.showToast(this,"您的手机不支持手电筒");
                 finish();
                 return;
             }
@@ -46,9 +46,11 @@ public class Flashlight extends Activity {
                 parameters = camera.getParameters();
                 parameters.setFlashMode(Parameters.FLASH_MODE_TORCH);// 开启
                 camera.setParameters(parameters);
-            } catch (Exception e) {// 不给授权
+                //尝试初始化摄像头(未开启过摄像头时，必须这样初始化，否则不能打开闪光灯)
+                camera.startPreview();
+            } catch (Exception e1) {// 不给授权
                 camera = null;
-                Toast.makeText(this, "需要给手电筒授权", Toast.LENGTH_SHORT).show();
+                ToastTool.showToast(this,"需要给手电筒授权");
                 finish();
                 return;
             }
@@ -58,6 +60,7 @@ public class Flashlight extends Activity {
             parameters.setFlashMode(Parameters.FLASH_MODE_OFF);// 关闭
             camera.setParameters(parameters);
             statusFlag = true;
+            camera.stopPreview();//终止预览
             camera.release();
             btn_switch.setBackgroundResource(R.drawable.tools_flashlight_off);
         }

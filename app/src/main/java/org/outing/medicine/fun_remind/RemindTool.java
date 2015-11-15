@@ -186,6 +186,7 @@ public class RemindTool {
             prefs.putInt("min" + i, old_timer.getMinute());
             prefs.putInt("method" + i, old_timer.getMethod());
             prefs.putBoolean("enable" + i, old_timer.isEnable());
+            prefs.putString("times" + i, old_timer.getTimes());
         }
         prefs.commit();
     }
@@ -208,6 +209,7 @@ public class RemindTool {
         prefs.putInt("min" + 0, new_timer.getMinute());
         prefs.putInt("method" + 0, new_timer.getMethod());
         prefs.putBoolean("enable" + 0, new_timer.isEnable());
+        prefs.putString("times" + 0, new_timer.getTimes());
         AnTimer old_timer = null;
         for (int i = 0; i < count; i++) {
             old_timer = array.get(i);
@@ -218,6 +220,7 @@ public class RemindTool {
             prefs.putInt("min" + (i + 1), old_timer.getMinute());
             prefs.putInt("method" + (i + 1), old_timer.getMethod());
             prefs.putBoolean("enable" + (i + 1), old_timer.isEnable());
+            prefs.putString("times" + (i + 1), old_timer.getTimes());
         }
         prefs.commit();
     }
@@ -237,8 +240,10 @@ public class RemindTool {
             int hour = pref.getInt("hour" + i, -1);
             int min = pref.getInt("min" + i, -1);
             int method = pref.getInt("method" + i, 0);
+            String times=pref.getString("times"+i,"0");
             AnTimer timer = new AnTimer(id, name, text, hour, min, method);
             timer.setEnable(pref.getBoolean("enable" + i, true));//默认可用
+            timer.setTimes(times);
             array.add(timer);
         }
         return array;
@@ -279,6 +284,7 @@ public class RemindTool {
             prefs.putInt("min" + index, timer.getMinute());
             prefs.putInt("method" + index, timer.getMethod());
             prefs.putBoolean("enable" + index, timer.isEnable());
+            prefs.putString("times" + index, timer.getTimes());
             prefs.commit();
         }
     }

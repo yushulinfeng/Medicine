@@ -5,7 +5,7 @@ import android.view.View;
 import android.widget.Button;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 
 /**
  * Created by apple on 15/10/6.

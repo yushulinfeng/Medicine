@@ -9,8 +9,8 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
-import org.outing.medicine.tools.xlist.XListView;
+import org.outing.medicine.tools.base.TActivity;
+import org.outing.medicine.tools.view.xlist.XListView;
 
 import java.io.InputStream;
 import java.util.ArrayList;

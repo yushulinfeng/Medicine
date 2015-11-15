@@ -49,7 +49,7 @@
             android:drawableTop="@drawable/btn_camera_bg"
             android:gravity="top|center_horizontal"
             android:text="添加药品图片"
-            android:textColor="@color/gray"
+            android:textColor="@drawable/btn_text_black_bg"
             android:textSize="26sp" />
     </FrameLayout>
 

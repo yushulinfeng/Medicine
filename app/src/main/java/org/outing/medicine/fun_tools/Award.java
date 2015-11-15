@@ -8,7 +8,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 
 public class Award extends TActivity {
     private EditText edit;

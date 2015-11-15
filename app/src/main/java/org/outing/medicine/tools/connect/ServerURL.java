@@ -29,6 +29,8 @@ public class ServerURL {
     //健康数据的接口
     public static final String Get_Body_Message=BASE_ADDRESS+"/get_data";
     public static final String Post_Body_Message=BASE_ADDRESS+"/post_data";
+    public static final String Drop_Body_Message=BASE_ADDRESS+"/drop_data";
+    public static final String Drop_All_Body_Message=BASE_ADDRESS+"/drop_all_data";
 
     //个人中心
     public static final String Get_Personal_Message=BASE_ADDRESS+"/get_profile";

@@ -19,7 +19,12 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.jsoup.Jsoup;
 import org.outing.medicine.R;
-import org.outing.medicine.tools.NetTActivity;
+import org.outing.medicine.tools.thread.NetTActivity;
+import org.outing.medicine.tools.connect.Connect;
+import org.outing.medicine.tools.connect.ConnectDialog;
+import org.outing.medicine.tools.connect.ConnectList;
+import org.outing.medicine.tools.connect.ConnectListener;
+import org.outing.medicine.tools.connect.ServerURL;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,11 +37,12 @@ public class DrugItem extends NetTActivity {
     private static final String MEDICINE_SHOW_URL = "http://a.apix.cn/yi18/drug/show";
     private File drug_file;
     private boolean from_net;
-    private String drug_name, com_name;
+    private String drug_name, com_name, drug_net_name;
     private String drug_title, drug_text, drug_net_id;
     private TextView tv_title, tv_text;
     private Button btn_collect;
     private AnDrug drug;
+    private boolean is_collect = false;
 
     @Override
     public void onCreate() {
@@ -168,15 +174,57 @@ public class DrugItem extends NetTActivity {
     private void collectItem() {
         if (drug == null) {
             finish();
-        } else if (DrugTool.isCollected(this, drug)) {
-            DrugNetTool.deleteNetCollect(this, drug);//删除网络收藏
-            btn_collect.setText("收藏");
-            showToast("已取消收藏");
         } else {
-            DrugNetTool.addNetCollect(this, drug);//添加到网络收藏
-            btn_collect.setText("取消收藏");
-            showToast("已加入我的收藏");
+            is_collect = DrugTool.isCollected(this, drug);
+            dealNetCollect();
         }
+    }
+
+    private void dealNetCollect() {
+        String name = drug.getName();
+        String com_name = drug.getCommonName();
+        String id = drug.getID();
+        drug_net_name = name + DrugMain.DRUG_SPLIT + com_name + DrugMain.DRUG_SPLIT + id;////////
+        Connect.POST(this, ServerURL.DRUG_PUT_COLLECT, new ConnectListener() {
+            @Override
+            public ConnectList setParam(ConnectList list) {
+                list.put("medical", drug_net_name);
+                if (is_collect)
+                    list.put("act", "1");//删除（无此参数是添加）
+                return list;
+            }
+
+            @Override
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                dialog.config(DrugItem.this, "正在处理", "处理中，请稍候……", true);
+                return dialog;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                if (response == null) {//暂不处理
+                    showToast("网络错误");
+                } else if (response.equals("0")) {//SUCCESS
+                    //本地同步
+                    if (is_collect) {
+                        DrugTool.deleteCollect(DrugItem.this, drug);
+                        btn_collect.setText("收藏");
+                        showToast("已取消收藏");
+                    } else {
+                        DrugTool.addCollect(DrugItem.this, drug);
+                        btn_collect.setText("取消收藏");
+                        showToast("已加入我的收藏");
+                    }
+                } else {
+                    showToast("操作失败");
+//                    if (response.equals("-4")) {
+//                    } else if (response.equals("-3")) {
+//                    } else if (response.equals("-2")) {
+//                    } else if (response.equals("-1")) {
+//                    }
+                }
+            }
+        });
     }
 
     private String doGet(String url) {

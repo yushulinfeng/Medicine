@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f0f0f0">
+    android:background="#f0f0f0"
+    android:orientation="vertical">
+
     <include layout="@layout/top" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -20,34 +23,33 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_name"
-                        android:layout_marginLeft="10dp"
-                        android:text="姓名            "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="姓名            "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/edit_name"
-                        android:hint="请输入姓名"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="#000000"
-                        android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
                         android:gravity="left|center"
-                        android:layout_marginRight="10dp" />
+                        android:hint="请输入姓名"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
@@ -62,29 +64,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tv_sex"
-                        android:layout_marginLeft="10dp"
-                        android:text="性别            "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="性别            "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/edit_sex"
-                        android:hint="请输入性别"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="#000000"
-                        android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
                         android:gravity="left|center"
-                        android:layout_marginRight="10dp" />
+                        android:hint="请输入性别"
+                        android:textColor="#000000" />
 
                 </LinearLayout>
 
@@ -100,39 +102,38 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="7"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="7"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_age"
-                        android:layout_marginLeft="10dp"
-                        android:text="年龄            "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="年龄            "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/edit_age"
-                        android:hint="请输入年龄"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="#000000"
-                        android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
                         android:gravity="left|center"
-                        android:layout_marginRight="10dp" />
+                        android:hint="请输入年龄"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
@@ -148,30 +149,29 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_ill"
-                        android:layout_marginLeft="10dp"
-                        android:text="常见病        "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="常见病        "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/edit_ill"
-                        android:hint="请输入常见病"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="#000000"
-                        android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
                         android:gravity="left|center"
-                        android:layout_marginRight="10dp" />
+                        android:hint="请输入常见病"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
@@ -187,30 +187,29 @@
                     android:layout_height="0dp"
                     android:layout_marginTop="20dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_location"
-                        android:layout_marginLeft="10dp"
-                        android:text="家庭住址    "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="家庭住址    "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/edit_location"
-                        android:hint="请输入家庭住址"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="#000000"
-                        android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
                         android:gravity="left|center"
-                        android:layout_marginRight="10dp" />
+                        android:hint="请输入家庭住址"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
@@ -225,32 +224,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tv_contact"
-                        android:layout_marginLeft="10dp"
-                        android:text="常用联系人"
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="紧急联系人"
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/edit_contact"
-                        android:hint="请输入联系人电话"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="#000000"
-                        android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:inputType="number"
+                        android:background="@null"
                         android:gravity="left|center"
-                        android:layout_marginRight="10dp" />
+                        android:hint="请输入联系人电话"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -261,35 +262,32 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_radius"
-                        android:layout_marginLeft="10dp"
-                        android:text="电子围栏    "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="电子围栏    "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/edit_radius"
-                        android:hint=" 请输入围栏半径（米）"
-                        android:layout_marginLeft="30dp"
-                        android:textColor="#000000"
-                        android:background="@null"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@null"
                         android:gravity="left|center"
-                        android:layout_marginRight="10dp" />
-
+                        android:hint=" 请输入围栏半径（米）"
+                        android:textColor="#000000" />
 
 
                 </LinearLayout>
-
 
 
             </LinearLayout>
@@ -297,40 +295,39 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="4"
+                android:layout_marginBottom="100dp"
                 android:layout_marginTop="20dp"
-                android:orientation="vertical"
-                android:layout_marginBottom="100dp">
-
+                android:layout_weight="4"
+                android:orientation="vertical">
 
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tv_center"
-                        android:layout_marginLeft="10dp"
-                        android:text="围栏中心    "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="围栏中心    "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
 
                     <Button
                         android:id="@+id/center_button"
-                        android:layout_marginLeft="30dp"
-                        android:gravity="center"
-                        android:text="  设为当前位置  "
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/btn_4"/>
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/btn_4"
+                        android:gravity="center"
+                        android:text="  设为当前位置  " />
 
 
                 </LinearLayout>
@@ -345,34 +342,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
+
                     <TextView
                         android:id="@+id/tv_screem"
-                        android:layout_marginLeft="10dp"
-                        android:text="联系人桌面"
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="联系人桌面"
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
 
                     <ToggleButton
                         android:id="@+id/contact_button"
-                        android:layout_marginLeft="30dp"
-                        android:gravity="center"
-                        android:textOn="  已开启  "
-                        android:textOff="  开启桌面  "
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/btn_4"/>
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/btn_4"
+                        android:gravity="center"
+                        android:textOff="  开启桌面  "
+                        android:textOn="  已开启  " />
 
 
                 </LinearLayout>
-
 
 
                 <TextView
@@ -385,56 +381,52 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:orientation="horizontal"
-                    android:background="@drawable/white_ground">
+                    android:background="@drawable/white_ground"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/tv_location_now"
-                        android:layout_marginLeft="10dp"
-                        android:text="防丢失        "
-                        android:textSize="15dp"
-                        android:textColor="#b0b0b0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        />
+                        android:layout_marginLeft="10dp"
+                        android:text="防丢失        "
+                        android:textColor="#b0b0b0"
+                        android:textSize="15dp" />
 
                     <ToggleButton
                         android:id="@+id/location_button"
-                        android:gravity="center"
-                        android:textOn="  已开启  "
-                        android:textOff="  开启定位  "
-                        android:layout_marginLeft="30dp"
-                        android:layout_gravity="center"
                         android:layout_width="wrap_content"
                         android:layout_height="40dp"
-                        android:background="@drawable/btn_4"/>
-
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="30dp"
+                        android:background="@drawable/btn_4"
+                        android:gravity="center"
+                        android:textOff="  开启定位  "
+                        android:textOn="  已开启  " />
 
 
                 </LinearLayout>
 
                 <Button
                     android:id="@+id/out_button"
-                    android:layout_marginTop="10dp"
-                    android:gravity="center"
-                    android:text="  退 出 登 录  "
-                    android:textSize="30dp"
-                    android:textColor="#ffffff"
-                    android:layout_gravity="center"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
-                    android:background="@drawable/btn_3"/>
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/btn_3"
+                    android:gravity="center"
+                    android:text="  退 出 登 录  "
+                    android:textColor="#ffffff"
+                    android:textSize="30dp" />
 
 
             </LinearLayout>
 
 
-
         </LinearLayout>
-
-
-
 
 
     </ScrollView>

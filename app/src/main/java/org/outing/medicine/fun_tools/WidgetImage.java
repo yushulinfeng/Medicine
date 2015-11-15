@@ -12,7 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import org.outing.medicine.tools.ToDealBitmap;
+import org.outing.medicine.tools.utils.ToDealBitmap;
 
 import java.io.File;
 import java.lang.reflect.Method;

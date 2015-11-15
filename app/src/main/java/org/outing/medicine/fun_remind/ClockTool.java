@@ -13,6 +13,7 @@ import java.util.Locale;
 
 public class ClockTool {
     private static final String RING_SAVE_PATH = "remind.ring";// 就用这个名字
+    private static final String TEMP_SAVE_PATH = "remind.temp";
     private static final String STATE_SAVE_PATH = "remind.state";
     private static final String LOG_SAVE_PATH = "remind.log";//程序内部存储
     //记录可能较多，建议只是临时存储，正式存储还是SD卡（建议本地只存储log即可）
@@ -31,9 +32,9 @@ public class ClockTool {
         AnRing old_drug = null;
         for (int i = 0; i < count; i++) {
             old_drug = array.get(i);
-            prefs.putString("id" + i, old_drug.remind.getDrugId());
-            prefs.putString("name" + i, old_drug.remind.getDrugName());
-            prefs.putString("text" + i, old_drug.remind.getDrugText());
+            prefs.putString("id_remind" + i, old_drug.remind.getDrugId());
+            prefs.putString("name_remind" + i, old_drug.remind.getDrugName());
+            prefs.putString("text_remind" + i, old_drug.remind.getDrugText());
             prefs.putString("id" + i, old_drug.timer.getId());
             prefs.putString("name" + i, old_drug.timer.getName());
             prefs.putString("text" + i, old_drug.timer.getText());
@@ -41,6 +42,7 @@ public class ClockTool {
             prefs.putInt("min" + i, old_drug.timer.getMinute());
             prefs.putInt("method" + i, old_drug.timer.getMethod());
             prefs.putBoolean("enable" + i, old_drug.timer.isEnable());
+            prefs.putString("times" + i, old_drug.timer.getTimes());
         }
         prefs.commit();
     }
@@ -54,18 +56,20 @@ public class ClockTool {
                 RING_SAVE_PATH, Activity.MODE_PRIVATE);
         int count = pref.getInt("count", 0);
         for (int i = 0; i < count; i++) {
-            String id = pref.getString("id" + i, "");
-            String name = pref.getString("name" + i, "");
-            String text = pref.getString("text" + i, "");
+            String id = pref.getString("id_remind" + i, "");
+            String name = pref.getString("name_remind" + i, "");
+            String text = pref.getString("text_remind" + i, "");
             AnRemind remind = new AnRemind(id, name, text);
             String id0 = pref.getString("id" + i, "");
             String name0 = pref.getString("name" + i, "");
             String text0 = pref.getString("text" + i, "");
             int hour = pref.getInt("hour" + i, -1);
             int min = pref.getInt("min" + i, -1);
-            int method = pref.getInt("method" + i, 0);
+            int method = pref.getInt("method" + i, AddTimer.REMIND_DEFAULT);
+            String times = pref.getString("times" + i, "0");
             AnTimer timer = new AnTimer(id0, name0, text0, hour, min, method);
             timer.setEnable(pref.getBoolean("enable" + i, true));//默认可用
+            timer.setTimes(times);
             array.add(new AnRing(remind, timer));
         }
         return array;
@@ -81,11 +85,83 @@ public class ClockTool {
         prefs.commit();
     }
 
-    /////////////////////是否用药/////////////////////
 
-    ////////////////////////////////////////建议直接联网上传数据
+    /////////////////////10分钟后提醒/////////////////////
+
+    public static void writeTempRing(Context context, ArrayList<AnRing> array) {
+        int count = array.size();
+        SharedPreferences.Editor prefs = context.getSharedPreferences(
+                TEMP_SAVE_PATH, Activity.MODE_PRIVATE).edit();
+        prefs.putInt("count", count);
+        AnRing old_drug = null;
+        for (int i = 0; i < count; i++) {
+            old_drug = array.get(i);
+            prefs.putString("id_remind" + i, old_drug.remind.getDrugId());
+            prefs.putString("name_remind" + i, old_drug.remind.getDrugName());
+            prefs.putString("text_remind" + i, old_drug.remind.getDrugText());
+            prefs.putString("id" + i, old_drug.timer.getId());
+            prefs.putString("name" + i, old_drug.timer.getName());
+            prefs.putString("text" + i, old_drug.timer.getText());
+            prefs.putInt("hour" + i, old_drug.timer.getHour());
+            prefs.putInt("min" + i, old_drug.timer.getMinute());
+            prefs.putInt("method" + i, old_drug.timer.getMethod());
+            prefs.putBoolean("enable" + i, old_drug.timer.isEnable());
+            prefs.putString("times" + i, old_drug.timer.getTimes());
+        }
+        prefs.commit();
+    }
+
+    public static ArrayList<AnRing> getTempRing(Context context) {
+        ArrayList<AnRing> array = new ArrayList<AnRing>();
+        SharedPreferences pref = context.getSharedPreferences(
+                TEMP_SAVE_PATH, Activity.MODE_PRIVATE);
+        int count = pref.getInt("count", 0);
+        for (int i = 0; i < count; i++) {
+            String id = pref.getString("id_remind" + i, "");
+            String name = pref.getString("name_remind" + i, "");
+            String text = pref.getString("text_remind" + i, "");
+            AnRemind remind = new AnRemind(id, name, text);
+            String id0 = pref.getString("id" + i, "");
+            String name0 = pref.getString("name" + i, "");
+            String text0 = pref.getString("text" + i, "");
+            int hour = pref.getInt("hour" + i, -1);
+            int min = pref.getInt("min" + i, -1);
+            int method = pref.getInt("method" + i, AddTimer.REMIND_DEFAULT);
+            String times = pref.getString("times" + i, "0");
+            AnTimer timer = new AnTimer(id0, name0, text0, hour, min, method);
+            timer.setEnable(pref.getBoolean("enable" + i, true));//默认可用
+            timer.setTimes(times);
+            array.add(new AnRing(remind, timer));
+        }
+        return array;
+    }
+
+    public static void deleteTempRing(Context context, ArrayList<String> del_timer_ids) {
+        ArrayList<AnRing> array = getTempRing(context);
+        String ring_id_temp = "";
+        for (int i = 0; i < array.size(); i++) {
+            ring_id_temp = array.get(i).timer.getId();
+            for (int j = 0; j < del_timer_ids.size(); j++) {//只比较timer_id即可，理论上不会重复
+                if (ring_id_temp.equals(del_timer_ids.get(j))) {
+                    array.remove(i);
+                    del_timer_ids.remove(j);//减少运算量
+                    break;
+                }
+            }
+        }
+        clearTempRing(context);
+        writeTempRing(context, array);
+    }
+
+    public static void clearTempRing(Context context) {
+        SharedPreferences.Editor prefs = context.getSharedPreferences(
+                TEMP_SAVE_PATH, Activity.MODE_PRIVATE).edit();
+        prefs.clear();
+        prefs.commit();
+    }
 
     /////////////////////用药LOG/////////////////////
+
     private static void saveCardFile(Context context, String filepath,
                                      String string) {
         FileOutputStream fos = null;

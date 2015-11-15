@@ -2,9 +2,6 @@ package org.outing.medicine.tools;
 
 import java.util.ArrayList;
 
-/**
- * Created by apple on 15/10/27.
- */
 public class GetStringBetweenComma {
 
     public static String getStrArr(String inString,int number){

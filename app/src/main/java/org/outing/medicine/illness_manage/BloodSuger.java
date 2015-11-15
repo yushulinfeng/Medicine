@@ -15,7 +15,7 @@ import com.github.mikephil.charting.data.LineDataSet;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.chat.Coordinates;
 import org.outing.medicine.tools.chat.ShowChart;
 import org.outing.medicine.tools.connect.Connect;

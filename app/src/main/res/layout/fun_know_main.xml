@@ -2,20 +2,24 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/light_gray_deep"
+    android:background="@drawable/fun_know_bg"
     android:orientation="vertical">
 
     <include layout="@layout/top" />
 
-    <ScrollView
+    <org.outing.medicine.tools.view.SpringScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:paddingTop="5dp">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:tag="相当于顶部padding了5dp" />
 
             <Button
                 android:id="@+id/fun_know_gxy"
@@ -65,7 +69,12 @@
                 android:background="@drawable/btn_5"
                 android:text="-联网获取知识-"
                 android:textSize="@dimen/know_main_btn_size" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:tag="相当于底部padding了5dp" />
         </LinearLayout>
-    </ScrollView>
+    </org.outing.medicine.tools.view.SpringScrollView>
 
 </LinearLayout>

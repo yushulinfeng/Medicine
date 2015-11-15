@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import org.outing.medicine.tools.ToDealZip;
+import org.outing.medicine.tools.utils.ToDealZip;
 import org.outing.medicine.tools.file.FileTool;
 
 import java.io.BufferedInputStream;

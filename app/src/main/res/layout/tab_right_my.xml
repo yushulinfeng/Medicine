@@ -2,18 +2,18 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/tab_center_bg" >
+    android:background="@color/tab_center_bg">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:id="@+id/contact_rl_contact1"
@@ -21,26 +21,26 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/contact_margin"
                 android:layout_weight="1"
-                android:background="@color/light_gray" >
+                android:background="@color/light_gray">
 
                 <ImageView
                     android:id="@+id/contact_iv_contact1"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
-                    android:layout_alignParentBottom="true"
 
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
@@ -49,12 +49,12 @@
                     android:id="@+id/contact_tv_contact1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_relative1"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
-                    android:layout_above="@+id/contact_tv_relative1"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
@@ -65,26 +65,26 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/contact_margin"
                 android:layout_weight="1"
-                android:background="@color/light_gray" >
+                android:background="@color/light_gray">
 
                 <ImageView
                     android:id="@+id/contact_iv_contact2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
-                    android:layout_alignParentBottom="true"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
@@ -92,12 +92,12 @@
                     android:id="@+id/contact_tv_contact2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_relative2"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
-                    android:layout_above="@+id/contact_tv_relative2"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:id="@+id/contact_rl_contact3"
@@ -115,26 +115,26 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/contact_margin"
                 android:layout_weight="1"
-                android:background="@color/light_gray" >
+                android:background="@color/light_gray">
 
                 <ImageView
                     android:id="@+id/contact_iv_contact3"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
-                    android:layout_alignParentBottom="true"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
@@ -142,12 +142,12 @@
                     android:id="@+id/contact_tv_contact3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_relative3"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
-                    android:layout_above="@+id/contact_tv_relative3"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
@@ -158,26 +158,26 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/contact_margin"
                 android:layout_weight="1"
-                android:background="@color/light_gray" >
+                android:background="@color/light_gray">
 
                 <ImageView
                     android:id="@+id/contact_iv_contact4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
-                    android:layout_alignParentBottom="true"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
@@ -185,22 +185,22 @@
                     android:id="@+id/contact_tv_contact4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_relative4"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
-                    android:layout_above="@+id/contact_tv_relative4"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
-        </RelativeLayout>
+            </RelativeLayout>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:id="@+id/contact_rl_contact5"
@@ -208,26 +208,26 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/contact_margin"
                 android:layout_weight="1"
-                android:background="@color/light_gray" >
+                android:background="@color/light_gray">
 
                 <ImageView
                     android:id="@+id/contact_iv_contact5"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
-                    android:layout_alignParentBottom="true"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
@@ -235,12 +235,12 @@
                     android:id="@+id/contact_tv_contact5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_relative5"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
-                    android:layout_above="@+id/contact_tv_relative5"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
@@ -251,26 +251,26 @@
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/contact_margin"
                 android:layout_weight="1"
-                android:background="@color/light_gray" >
+                android:background="@color/light_gray">
 
                 <ImageView
                     android:id="@+id/contact_iv_contact6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/app_name"
-                    android:scaleType="fitCenter"
+                    android:scaleType="fitXY"
                     android:src="@drawable/contact_back" />
 
                 <TextView
                     android:id="@+id/contact_tv_relative6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_relative"
-                    android:layout_alignParentBottom="true"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_relative_text_size" />
 
@@ -278,12 +278,12 @@
                     android:id="@+id/contact_tv_contact6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_above="@+id/contact_tv_relative6"
                     android:layout_gravity="bottom"
-                    android:background="#e08dc6f1"
+                    android:background="@color/main_tab_contact_tv_bg"
                     android:gravity="center"
                     android:maxLines="1"
                     android:text="@string/contact_default"
-                    android:layout_above="@+id/contact_tv_relative6"
                     android:textColor="#e0ffffff"
                     android:textSize="@dimen/contact_text_size" />
             </RelativeLayout>
@@ -293,14 +293,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
             android:orientation="horizontal"
-            android:paddingTop="4dp" >
+            android:paddingTop="4dp">
 
             <Button
                 android:id="@+id/contact_btn_contact1"
@@ -327,7 +327,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/contact_btn_contact3"
@@ -354,7 +354,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="2"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/contact_btn_contact5"

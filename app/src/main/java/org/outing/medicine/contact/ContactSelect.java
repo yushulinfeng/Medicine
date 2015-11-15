@@ -17,7 +17,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.NetTActivity;
+import org.outing.medicine.tools.thread.NetTActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

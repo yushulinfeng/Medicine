@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.alibaba.fastjson.JSONArray;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
@@ -126,10 +126,7 @@ public class DrugCollect extends TActivity {
             @Override
             public void onResponse(String response) {
                 if (response == null) {//暂不处理
-                } else if (response.equals("-4")) {
-                } else if (response.equals("-3")) {
-                } else if (response.equals("-2")) {
-                } else if (response.equals("-1")) {
+                    showToast("网络错误");
                 } else if (response.equals("0")) {
                     //SUCCESS
                     items.remove(click_position);
@@ -143,6 +140,14 @@ public class DrugCollect extends TActivity {
                     //本地
                     DrugTool.deleteCollect(DrugCollect.this, new AnDrug(array.get(click_position).getName(),
                             array.get(click_position).getCommonName(), array.get(click_position).getID()));
+
+                } else {
+                    showToast("删除失败");
+//                    if (response.equals("-4")) {
+//                    } else if (response.equals("-3")) {
+//                    } else if (response.equals("-2")) {
+//                    } else if (response.equals("-1")) {
+//                    }
                 }
             }
         });

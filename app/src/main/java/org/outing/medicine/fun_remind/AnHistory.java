@@ -1,6 +1,7 @@
 package org.outing.medicine.fun_remind;
 
 public class AnHistory {
+    private String id = "";
     private String time = "";
     private String date = "";
     private String text = "";
@@ -9,11 +10,20 @@ public class AnHistory {
     public AnHistory() {
     }
 
-    public AnHistory(String time, String date, String text, String state) {
+    public AnHistory(String id,String time, String date, String text, String state) {
+        this.id = id;
         this.time = time;
         this.date = date;
         this.text = text;
         this.state = state;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTime() {

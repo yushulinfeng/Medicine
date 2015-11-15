@@ -12,7 +12,7 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.dialog.DialogTitleList;
 
 import java.io.File;

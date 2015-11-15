@@ -5,11 +5,11 @@ import android.app.KeyguardManager;
 import android.app.KeyguardManager.KeyguardLock;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.KeyEvent;
 import android.view.View;
@@ -18,18 +18,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.ToastTool;
-import org.outing.medicine.tools.connect.Connect;
-import org.outing.medicine.tools.connect.ConnectDialog;
-import org.outing.medicine.tools.connect.ConnectList;
-import org.outing.medicine.tools.connect.ConnectListener;
-import org.outing.medicine.tools.connect.ServerURL;
+import org.outing.medicine.tools.utils.ToastTool;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
+//////////推迟用药不存log
 @SuppressWarnings("deprecation")
 public class ClockDialog extends Activity implements OnClickListener {
-    private static ConnectList con_list = null;//过渡专用
     public static final int METHOD_NOTE_CLICK = -2;//通知栏触发
     public static final int METHOD_RING = 0, METHOD_VIBRATE = 1, METHOD_R_V = 2, METHOD_NOTE = 3;
     private static final int CLOCK_TIME_OUT = 60 * 1000;//一分钟提醒时间，超时视为拒绝
@@ -54,7 +50,7 @@ public class ClockDialog extends Activity implements OnClickListener {
         if (method >= 0) {
             startRemind();
         } else if (method == METHOD_NOTE_CLICK) {
-            takeMedicine();
+            startTake();
         }
     }
 
@@ -83,6 +79,12 @@ public class ClockDialog extends Activity implements OnClickListener {
         ring = new ClockRing(this);
         if (method != -1) {
             array_now = ClockTool.getRing(this);
+
+            //如果在静音状态，就取消静音并用最小音量响铃
+            AudioManager am = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+            int volume = am.getStreamVolume(AudioManager.STREAM_MUSIC);// Music我的ZTE的Max是13
+            if (volume == 0)
+                am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_RAISE, 0);
         }
     }
 
@@ -95,32 +97,9 @@ public class ClockDialog extends Activity implements OnClickListener {
             public void run() {
                 //一分钟之内没有操作，视为拒绝
                 if (!is_stop)
-                    refuseMedicine();
+                    laterRemind();
             }
         }, CLOCK_TIME_OUT);
-    }
-
-
-    private void takeMedicine() {
-        stopRemind();
-
-        tv_title.setText("请参考列表用药");
-        btn_sure.setText("吃完了");
-        btn_cancel.setVisibility(View.GONE);
-        tv_text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
-        is_taken = true;
-    }
-
-    private void refuseMedicine() {
-        stopRemind();
-        refuseMedicine(this, array_now);// 记录与上传
-        showToast("将在10分钟后提醒");//已拒绝用药/////////怎么写？////////////////////////
-//        finish();
-    }
-
-    private void finishTake() {
-        takeMedicine(this, array_now);// 完成用药记录与上传
-//        finish();
     }
 
     private void startRemind() {
@@ -152,6 +131,73 @@ public class ClockDialog extends Activity implements OnClickListener {
         ring.stopVibrate();
     }
 
+    private void startTake() {
+        stopRemind();
+        tv_title.setText("请参考列表用药");
+        btn_sure.setText("吃完了");
+        btn_cancel.setVisibility(View.GONE);
+        tv_text.setTextSize(TypedValue.COMPLEX_UNIT_SP, 28);
+        is_taken = true;
+    }
+
+    private void finishTake() {
+        AddNetLogTask.ADD(this, array_now, true);// 完成用药记录与上传
+//        saveLogText(true);//暂不存储本地记录
+        //处理10分钟后提醒的项目
+        ArrayList<String> array_temp = new ArrayList<String>();
+        AnTimer timer_temp = null;
+        for (int i = 0; i < array_now.size(); i++) {
+            timer_temp = array_now.get(i).timer;
+            if (timer_temp.getTimes().equals("1"))
+                array_temp.add(timer_temp.getId());
+        }
+        if (array_temp.size() != 0)
+            ClockTool.deleteTempRing(this, array_temp);
+        //关闭
+        finish();
+    }
+
+    private void laterRemind() {//////////////////////////////////////////////测试阶段
+        stopRemind();
+//        saveLogText(false);//暂不存储本地记录
+        showToast("将在10分钟后提醒");
+        //推迟提醒处理
+        AnTimer timer_temp = null;
+        int hour_temp = 0, min_temp = 0;
+        Calendar calendar = Calendar.getInstance();// 时间计算
+        calendar.add(Calendar.MINUTE, 10);//当前时间+10分钟
+        hour_temp = calendar.get(Calendar.HOUR_OF_DAY);
+        min_temp = calendar.get(Calendar.MINUTE);
+        for (int i = 0; i < array_now.size(); i++) {
+            timer_temp = array_now.get(i).timer;
+            timer_temp.setTimes("1");
+            timer_temp.setHour(hour_temp);
+            timer_temp.setMinute(min_temp);
+        }
+        ClockTool.writeTempRing(this, array_now);
+        RemindTool.refreshTimer(this);
+        finish();
+    }
+//
+//    private void saveLogText(boolean is_finish_take) {
+//        if (array_now.size() == 0)
+//            return;
+//        String text_temp = "--总计" + array_now.size() + "种药物--";
+//        for (int i = 0; i < array_now.size(); i++) {//不要引入ringtemp
+//            text_temp += "\n";
+//            text_temp += "\n药品：" + array_now.get(i).remind.getDrugName();
+//            if (!array_now.get(i).remind.getDrugText().equals(""))//可以没有
+//                text_temp += "\n备注：" + array_now.get(i).remind.getDrugText();
+//            text_temp += "\n提醒：" + array_now.get(i).timer.getName();
+//            text_temp += "\n\n";//好看
+//        }
+//        if (is_finish_take)
+//            text_temp = "用户完成用药\n" + text_temp;
+//        else
+//            text_temp = "用户推迟用药\n" + text_temp;
+//        ClockTool.saveLog(this, text_temp);
+//    }
+
     private void initUnlockBright() {
         // 禁用锁屏
         KeyguardManager km = (KeyguardManager) getSystemService(Context.KEYGUARD_SERVICE);// 得到键盘锁管理器对象
@@ -168,6 +214,10 @@ public class ClockDialog extends Activity implements OnClickListener {
         key_guard.disableKeyguard();// 解锁
     }
 
+    private void showToast(String text) {
+        ToastTool.showToast(this, text);
+    }
+
     @Override
     public void onClick(View v) {//已设置点击外部不能退出
         switch (v.getId()) {
@@ -175,23 +225,20 @@ public class ClockDialog extends Activity implements OnClickListener {
                 if (is_taken)
                     finishTake();
                 else
-                    takeMedicine();
+                    startTake();
                 break;
             case R.id.remind_clock_dia_cancel:
-                refuseMedicine();
+                laterRemind();
                 break;
         }
-    }
-
-    private void showToast(String text) {
-        ToastTool.showToast(this, text);
     }
 
     // 屏蔽按键
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) { //当做拒绝处理
-            refuseMedicine();
-            ////////////////////// home不处理，不过有空的话，建议直接禁用。
+            laterRemind();
+            //home不处理，不过有空的话，建议直接禁用。
+            //后来发现，home不能禁用，否则用户遇到问题没有后路。
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -202,86 +249,6 @@ public class ClockDialog extends Activity implements OnClickListener {
         stopRemind();
         key_guard.reenableKeyguard();// 重新启用自动加锁
         super.onDestroy();
-    }
-
-    //
-
-    /**
-     * 完成用药
-     */
-    public void takeMedicine(Context context, ArrayList<AnRing> array) {
-        uploadMedicineState(context, array, true);
-        String log = "用户完成用药\n" + getRingLogText(array);
-        ClockTool.saveLog(context, log);
-        finish();///////////
-    }
-
-    /**
-     * 拒绝用药
-     */
-    public void refuseMedicine(Context context, ArrayList<AnRing> array) {
-        uploadMedicineState(context, array, false);
-        String log = "用户拒绝用药\n" + getRingLogText(array);
-        ClockTool.saveLog(context, log);
-        finish();///////////////////////
-    }
-
-    //////////////////////////////////////////用异步任务吧………………或者………………
-    private void uploadMedicineState(Context context,
-                                     ArrayList<AnRing> array, boolean is_finish) {
-        Log.e("EEE", "EEE ------" + "start");
-        for (int i = 0; i < array.size(); i++) {
-            Log.e("EEE", "EEE ------" + "for");
-            con_list = getHistoryPostText(array.get(i), is_finish);
-            Log.e("EEE", "EEE ------" + "list");
-            Connect.POST(context, ServerURL.Post_Body_Message, new ConnectListener() {
-                @Override
-                public ConnectList setParam(ConnectList list) {
-                    return con_list;
-                }
-
-                @Override
-                public ConnectDialog showDialog(ConnectDialog dialog) {
-                    return null;
-                }
-
-                @Override
-                public void onResponse(String response) {
-                    Log.e("EEE", "EEE ------" + "response");
-                    if (response == null) {//暂不处理
-                    } else if (response.equals("-2")) {
-                    } else if (response.equals("-1")) {
-                    } else if (response.equals("0")) {
-                    }
-                    finish();
-                }
-            });
-            Log.e("EEE", "EEE ------" + "post");
-        }
-    }
-
-    private ConnectList getHistoryPostText(AnRing ring, boolean is_finish) {
-        ConnectList list = new ConnectList();
-        String post_str = ring.remind.getDrugName() + RemindHistory.HIS_SPLITE
-                + (is_finish ? 1 : 0) + RemindHistory.HIS_SPLITE + ring.timer.getTime();
-        list.put("type", "4");
-        list.put("data", post_str);
-        return list;
-    }
-
-    private static String getRingLogText(ArrayList<AnRing> array_now) {
-        if (array_now.size() == 0)
-            return "";
-        String text_temp = "--总计" + array_now.size() + "种药物--";
-        for (int i = 0; i < array_now.size(); i++) {//不要引入ringtemp
-            text_temp += "\n";
-            text_temp += "\n药品：" + array_now.get(i).remind.getDrugName();
-            if (!array_now.get(i).remind.getDrugText().equals(""))//可以没有
-                text_temp += "\n备注：" + array_now.get(i).remind.getDrugText();
-            text_temp += "\n提醒：" + array_now.get(i).timer.getName();
-            text_temp += "\n\n";//好看
-        }
-        return text_temp;
     }
 
 }

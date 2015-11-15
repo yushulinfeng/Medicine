@@ -24,8 +24,8 @@ import org.outing.medicine.fun_tools.WidgetImage;
 import org.outing.medicine.fun_tools.WidgetShow;
 import org.outing.medicine.fun_tools.WidgetTool;
 import org.outing.medicine.main_main.MainTabIndex;
-import org.outing.medicine.start.Login;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.start.login.Login;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
@@ -113,6 +113,11 @@ public class PersonalCenterActivity extends TActivity {
                 AnContact contact = ContactTool.getAnContact(PersonalCenterActivity.this,0 );
                 Log.d("test", "contact" +contact.getName());
                 if (weatherOn) {
+					if(editContact.getText().toString().equals("")){
+                        showToast("请输入紧急联系人电话");
+                        contactButton.setChecked(false);
+                        return;
+                    }
                     WidgetTool.saveWidText(PersonalCenterActivity.this, "紧急联系人电话"+"\n"+editContact.getText().toString());
                     WidgetShow.updatewidget(PersonalCenterActivity.this);
                     wid.showTextOnWallPaper(PersonalCenterActivity.this,  "紧急联系人电话", editContact.getText().toString());

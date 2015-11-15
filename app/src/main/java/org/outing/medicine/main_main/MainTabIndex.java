@@ -16,8 +16,8 @@ import org.outing.medicine.fun_remind.RemindMain;
 import org.outing.medicine.fun_tools.ToolsMain;
 import org.outing.medicine.illness_manage.IllnessManageActivity;
 import org.outing.medicine.personal_center.PersonalCenterActivity;
-import org.outing.medicine.start.Login;
-import org.outing.medicine.start.UserTool;
+import org.outing.medicine.start.login.Login;
+import org.outing.medicine.start.tool.UserTool;
 import org.outing.medicine.tools.connect.ConnectTool;
 
 public class MainTabIndex extends Fragment implements OnClickListener {

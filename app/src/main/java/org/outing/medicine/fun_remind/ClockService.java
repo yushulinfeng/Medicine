@@ -87,6 +87,7 @@ public class ClockService extends Service implements Runnable {
         // 初始化当前提醒项，获取之后最近的提醒项
         if (array.size() == 0)
             return 0;
+        boolean should_temp_clear=false;
         AnRing ring_temp = null, ring_next = null;
         int location_now = hournow * 100 + minnow;
         for (int i = 0; i < array.size(); i++) {
@@ -95,6 +96,8 @@ public class ClockService extends Service implements Runnable {
                 continue;
             } else if (ring_temp.getLocation() == location_now) {
                 array_now.add(ring_temp);
+                if(ring_temp.timer.getTimes().equals("1"))
+                    should_temp_clear=true;
             } else if (ring_temp.getLocation() > location_now) {
                 ring_next = ring_temp;//这个肯定是最近的
                 break;
@@ -102,6 +105,9 @@ public class ClockService extends Service implements Runnable {
         }
         if (ring_next == null) {//最晚的一个闹钟已触发，没有更晚的了
             ring_next = array.get(0);//已确认size != 0。
+        }
+        if(should_temp_clear){//如果加载了单次闹钟的话，就清空单次闹钟临时列表
+            ClockTool.clearTempRing(this);
         }
         //计算下次响铃时间
         int hour = ring_next.timer.getHour(), min = ring_next.timer.getMinute();
@@ -193,6 +199,10 @@ public class ClockService extends Service implements Runnable {
                 array.add(ring_temp);
             }
         }
+        //处理推迟十分钟的闹钟////////////////////////////////////////////////////
+        ArrayList<AnRing> array_temp = ClockTool.getTempRing(this);
+        for (int i = 0; i < array_temp.size(); i++)
+            array.add(array_temp.get(i));
         //按照时间排序从小到大
         if (remind_array.size() != 0)
             Collections.sort(array);
@@ -201,17 +211,17 @@ public class ClockService extends Service implements Runnable {
     private void cancelTimer() {
         // 闹钟取消
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this, ClockService.class);
-        PendingIntent pend = PendingIntent.getService(this, 0, intent, 0);
-        alarm.cancel(pend);
+        Intent int0 = new Intent(this, ClockRecever.class);
+        PendingIntent pend0 = PendingIntent.getBroadcast(this, 0, int0, 0);
+        alarm.cancel(pend0);
     }
 
     private void setTimer(long current_time_millis, int wait_second) {
         if (wait_second == 0) return;//约定等待时间为0，则不设置闹钟
         // 闹钟设定
         AlarmManager alarm = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent int0 = new Intent(this, ClockService.class);
-        PendingIntent pend0 = PendingIntent.getService(this, 0, int0, 0);
+        Intent int0 = new Intent(this, ClockRecever.class);
+        PendingIntent pend0 = PendingIntent.getBroadcast(this, 0, int0, 0);
         if (current_time_millis + (wait_second + TIMEWAIT) * 1000L
                 < System.currentTimeMillis()) {//已经过时，则定明天的闹钟
             wait_second += ONEDAY;

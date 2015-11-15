@@ -27,10 +27,10 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.jsoup.Jsoup;
 import org.outing.medicine.R;
-import org.outing.medicine.tools.NetTActivity;
+import org.outing.medicine.tools.thread.NetTActivity;
 import org.outing.medicine.tools.dialog.DialogTitleList;
-import org.outing.medicine.tools.run.Run;
-import org.outing.medicine.tools.run.RunListener;
+import org.outing.medicine.tools.thread.Run;
+import org.outing.medicine.tools.thread.RunListener;
 
 import java.io.BufferedReader;
 import java.io.File;

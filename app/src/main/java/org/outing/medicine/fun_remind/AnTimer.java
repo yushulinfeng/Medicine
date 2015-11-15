@@ -10,6 +10,7 @@ public class AnTimer {
     private int method = 0;
 
     private boolean enable = true;// 是否可用，便于以后拓展
+    private String times="0";//提醒次数，0为每天，1为单次，其他的暂定为7位0或1字符串
 
     public AnTimer() {
     }
@@ -22,6 +23,7 @@ public class AnTimer {
         id = System.currentTimeMillis() + "";
         text = "";
         enable = true;
+        times="0";
     }
 
     public AnTimer(String id, String name, String text, int hour, int minute, int method) {
@@ -32,6 +34,7 @@ public class AnTimer {
         this.minute = minute;
         this.method = method;
         this.enable = true;
+        this.times="0";
     }
 
     public String getId() {
@@ -88,6 +91,14 @@ public class AnTimer {
 
     public void setEnable(boolean enable) {
         this.enable = enable;
+    }
+
+    public String getTimes() {
+        return times;
+    }
+
+    public void setTimes(String times) {
+        this.times = times;
     }
 
     //获取可显示的时间

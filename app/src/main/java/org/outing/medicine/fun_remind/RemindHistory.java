@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.connect.Connect;
 import org.outing.medicine.tools.connect.ConnectDialog;
 import org.outing.medicine.tools.connect.ConnectList;
@@ -28,6 +28,7 @@ import java.util.Map;
 public class RemindHistory extends TActivity {
     public static final String HIS_SPLITE = ",";
     private ListView list;
+    private Button btn_clear;
     private ArrayList<AnHistory> array;
     private List<Map<String, Object>> items;
     private SimpleAdapter adapter;
@@ -59,7 +60,8 @@ public class RemindHistory extends TActivity {
                 .setPositiveButton("确定", new DialogTitleList.DialogButtonListener() {
                     @Override
                     public void onButtonClick() {
-                        ClockTool.cleanLog(RemindHistory.this);
+//                        ClockTool.cleanLog(RemindHistory.this);//本地不必处理
+                        clearItem();
                     }
                 }).setNegativeButton("取消", null);
     }
@@ -68,13 +70,14 @@ public class RemindHistory extends TActivity {
         show = (TextView) findViewById(R.id.remind_history_tv_show);
         back_show = (TextView) findViewById(R.id.remind_history_tv_back);//背景层
         list = (ListView) findViewById(R.id.remind_history_list);
-        Button btn_add = (Button) findViewById(R.id.remind_history_btn_clear);
-        btn_add.setOnClickListener(new View.OnClickListener() {
+        btn_clear = (Button) findViewById(R.id.remind_history_btn_clear);
+        btn_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clearHistory();
             }
         });
+        btn_clear.setVisibility(View.INVISIBLE);
 
         array = new ArrayList<AnHistory>();
         items = new ArrayList<Map<String, Object>>();
@@ -105,10 +108,13 @@ public class RemindHistory extends TActivity {
     }
 
     private void initListMap() {
-        if (array.size() == 0)
+        if (array.size() == 0) {
             show.setText("用药提醒\n历史记录为空");//////////网络历史记录为空，已加载本地历史
-        else
+            btn_clear.setVisibility(View.INVISIBLE);
+        } else {
             show.setText("");
+            btn_clear.setVisibility(View.VISIBLE);
+        }
 
         items.clear();
         for (int i = 0; i < array.size(); i++) {
@@ -126,13 +132,64 @@ public class RemindHistory extends TActivity {
         adapter.notifyDataSetChanged();
     }
 
+    private void deleteItem() {////////////////////////////////////////////
+        Connect.POST(this, ServerURL.Drop_Body_Message, new ConnectListener() {
+            @Override
+            public ConnectList setParam(ConnectList list) {
+                list.put("id", array.get(delete_index).getId());
+                return list;
+            }
 
-    private void deleteItem() {
+            @Override
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                dialog.config(RemindHistory.this, "正在删除", "请稍候……", true);
+                return dialog;
+            }
 
+            @Override
+            public void onResponse(String response) {
+                if (response == null) {//暂不处理
+                } else if (response.equals("-2")) {
+                } else if (response.equals("-1")) {
+                } else if (response.equals("0")) {//删除成功
+                    array.remove(delete_index);
+                    updateList();
+                    showToast("删除成功");
+                }
+            }
+        });
+    }
+
+    private void clearItem() {///////////////////////////////////////
+        Connect.POST(this, ServerURL.Drop_All_Body_Message, new ConnectListener() {
+            @Override
+            public ConnectList setParam(ConnectList list) {
+                list.put("type", 4);
+                return list;
+            }
+
+            @Override
+            public ConnectDialog showDialog(ConnectDialog dialog) {
+                dialog.config(RemindHistory.this, "正在清空", "请稍候……", true);
+                return dialog;
+            }
+
+            @Override
+            public void onResponse(String response) {
+                if (response == null) {//暂不处理
+                } else if (response.equals("-2")) {
+                } else if (response.equals("-1")) {
+                } else if (response.equals("0")) {//删除成功
+                    array.clear();
+                    updateList();
+                    showToast("清空成功");
+                }
+            }
+        });
     }
 
     private void clickItem(int index) {
-
+        showToast("长按可删除项目");
     }
 
     private void longClickItem() {
@@ -183,10 +240,9 @@ public class RemindHistory extends TActivity {
                 str_temp = item_temp.getString("data");
                 //字符串过渡，因为有""不能直接JSONObject（虽然不用json了，但是保留此句）
                 String[] array_temp = str_temp.split(HIS_SPLITE);
-                his_temp = new AnHistory(array_temp[2],
-                        item_temp.getString("time").substring(0, 10),
-                        array_temp[0],
-                        array_temp[1].equals("1") ? "完成用药" : "推迟用药");
+                his_temp = new AnHistory(item_temp.getString("id"),
+                        array_temp[2], array_temp[3],
+                        array_temp[0], array_temp[1].equals("1") ? "完成用药" : "推迟用药");
                 array.add(his_temp);
             } catch (Exception e) {
                 Log.e("EEE", "EEE-history-ERROR:" + e.getMessage());
@@ -195,7 +251,7 @@ public class RemindHistory extends TActivity {
         updateList();
         //////////
         if (array.size() == 0) {
-            back_show.setText(ClockTool.getLog(this));
+//            back_show.setText(ClockTool.getLog(this));//本地历史就不必显示了
             list.setVisibility(View.GONE);
         } else {
             list.setVisibility(View.VISIBLE);

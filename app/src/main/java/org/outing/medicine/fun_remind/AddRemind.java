@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
-import org.outing.medicine.tools.ToDealBitmap;
+import org.outing.medicine.tools.base.TActivity;
+import org.outing.medicine.tools.utils.ToDealBitmap;
 import org.outing.medicine.tools.dialog.DialogTitleList;
 
 import java.io.File;

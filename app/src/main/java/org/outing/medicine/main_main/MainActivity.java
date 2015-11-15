@@ -1,6 +1,5 @@
 package org.outing.medicine.main_main;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -8,19 +7,24 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.util.DisplayMetrics;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.umeng.update.UmengUpdateAgent;
+
 import org.outing.medicine.R;
-import org.outing.medicine.start.LogoutTask;
+import org.outing.medicine.tools.utils.ToastTool;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
+    private long currentBackPressedTime = 0; // 退出时间
+    private static final int BACK_PRESSED_INTERVAL = 2000; // 退出间隔
     private ViewPager viewpager;
     private FragmentPagerAdapter adapter;
     private List<Fragment> fragment_list = new ArrayList<Fragment>();
@@ -37,23 +41,17 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
     private int current_index;
     // 屏幕的宽度
     private int screen_width;
-    //设置activity,为了以后在其他activity中关闭
-    public static MainActivity instance = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        instance = this;
         initView();
         initTabLine();
         initListener();
-        //设置从ContantAdd直接跳转到联系人
-        Intent intent = getIntent();
-        int page = intent.getIntExtra("page", 0);
-        viewpager.setCurrentItem(page);
 
+        checkNewVersion();
     }
 
 
@@ -172,6 +170,13 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         });
     }
 
+    // //////辅助方法////////
+
+    //检查版本更新(强制弹窗)
+    private void checkNewVersion() {//不必处理返回
+        UmengUpdateAgent.forceUpdate(this);
+    }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -186,10 +191,17 @@ public class MainActivity extends FragmentActivity implements OnClickListener {
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        new LogoutTask(this).execute();// 退出登录
-        super.onDestroy();
+    // 按键处理
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (System.currentTimeMillis() - currentBackPressedTime > BACK_PRESSED_INTERVAL) {
+                currentBackPressedTime = System.currentTimeMillis();
+                ToastTool.showToast(this, "再按一次退出");
+            } else {
+                finish();
+            }
+        }
+        return false;
     }
 
 }

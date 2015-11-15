@@ -15,143 +15,102 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="start|center_vertical"
-                android:text="姓名:  "
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/con_add_et_name"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="3"
-                android:hint="请输入姓名"
-                android:textSize="24sp" />
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <Button
+                <EditText
+                    android:id="@+id/con_add_et_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:hint="姓名"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="28sp" />
+
+                <EditText
+                    android:id="@+id/con_add_et_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:hint="电话"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:singleLine="true"
+                    android:textSize="28sp" />
+            </LinearLayout>
+
+            <org.outing.medicine.tools.view.DrawableButton
                 android:id="@+id/con_add_btn_contact"
-                android:layout_width="40dp"
-                android:layout_marginLeft="5dp"
-                android:layout_height="40dp"
-                android:background="@drawable/btn_contact_add_bg" />
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="80dp"
                 android:layout_height="match_parent"
-                android:gravity="start|center_vertical"
-                android:text="号码: "
-                android:textColor="@color/black"
-                android:textSize="25sp" />
-
-            <EditText
-                android:id="@+id/con_add_et_number"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="3.5"
-                android:hint="输入或通讯录选择"
-                android:inputType="number"
-                android:textSize="24sp" />
-
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/btn_drug_search_outbg"
+                android:drawableTop="@drawable/btn_contact_add_bg"
+                android:text="通讯录\n选取"
+                android:textColor="@drawable/btn_text_black_bg"
+                android:textSize="20sp" />
+            <!--&#13;&#10;-->
         </LinearLayout>
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/con_add_et_relative"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="start|center_vertical"
-                android:text="关系: "
-                android:textColor="@color/black"
-                android:textSize="24sp" />
-
-            <EditText
-                android:id="@+id/con_add_et_relative"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="start"
-                android:layout_weight="3.5"
-                android:hint="请输入与联系人关系关系"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="头像： "
-            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:gravity="start"
+            android:hint="与联系人的关系"
+            android:padding="10dp"
+            android:singleLine="true"
             android:textSize="28sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/con_add_btn_camera"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="拍照"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/con_add_btn_album"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="相册"
-                android:textSize="24sp" />
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/con_add_iv_head"
+        <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:scaleType="fitCenter" />
+            android:layout_margin="10dp"
+            android:layout_weight="1">
 
-        <LinearLayout
+            <ImageView
+                android:id="@+id/con_add_iv_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter" />
+
+            <Button
+                android:id="@+id/con_add_btn_head"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/no_color"
+                android:drawableTop="@drawable/btn_camera_bg"
+                android:gravity="top|center_horizontal"
+                android:text="添加头像"
+                android:textColor="@drawable/btn_text_black_bg"
+                android:textSize="26sp" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/con_add_btn_sure"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal">
+            android:layout_margin="5dp"
+            android:background="@drawable/btn_1"
+            android:padding="5dp"
+            android:text="确定"
+            android:textColor="@color/white"
+            android:textSize="32sp" />
 
-            <Button
-                android:id="@+id/con_add_btn_sure"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="确定"
-                android:textSize="24sp" />
-
-            <Button
-                android:id="@+id/con_add_btn_cancel"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="取消"
-                android:textSize="24sp" />
-        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

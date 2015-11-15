@@ -11,12 +11,13 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 import org.outing.medicine.tools.dialog.DialogTitleList;
 
 public class AddTimer extends TActivity implements View.OnClickListener {
     public static final String[] context_items =
             new String[]{"声音提醒", "震动提醒", "声音与振动", "通知栏提醒"};
+    public static final int REMIND_DEFAULT = 2;
     boolean enable_show_note = false;
     //直接修改这个bool值即可，它是不显示context_items的最后一项。
     //因为注释掉最后一项影响的东西太多。
@@ -25,7 +26,7 @@ public class AddTimer extends TActivity implements View.OnClickListener {
     private View pickerdialog;
     private TimePicker picker;
     private int hour = -1, min = -1;
-    private int remind_method = 2;
+    private int remind_method = REMIND_DEFAULT;
     private DialogTitleList method_dialog;
     private String drug_id, title, timer_id;
     private boolean is_alter = false;
@@ -59,7 +60,7 @@ public class AddTimer extends TActivity implements View.OnClickListener {
         try {
             timer_id = intent.getStringExtra("timer_id");
             title = intent.getStringExtra("title");
-            remind_method = intent.getIntExtra("method", 2);
+            remind_method = intent.getIntExtra("method", REMIND_DEFAULT);
             hour = intent.getIntExtra("hour", -1);
             min = intent.getIntExtra("min", -1);
         } catch (Exception e) {

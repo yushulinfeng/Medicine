@@ -6,7 +6,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import org.outing.medicine.R;
-import org.outing.medicine.tools.TActivity;
+import org.outing.medicine.tools.base.TActivity;
 
 public class KnowMain extends TActivity implements OnClickListener {
     @Override
