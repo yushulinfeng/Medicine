@@ -69,6 +69,7 @@ public class MyLocation extends Activity {
 
     @Override
     protected void onDestroy() {
+
         super.onDestroy();
         //在activity执行onDestroy时执行mMapView.onDestroy()，实现地图生命周期管理
         mMapView.onDestroy();
